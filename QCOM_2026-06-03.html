@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · QCOM · Qualcomm Incorporated</title>
+<style>
+  :root{
+    --bg:#080b12; --panel:#0e1320; --panel2:#11182a; --line:#1e2740;
+    --ink:#d7e0f2; --sub:#7c89a8;
+    --grn:#34e08a; --red:#ff5d6c; --amb:#ffc061; --cyn:#6fd0ff; --vio:#9b8cff;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--mono);
+    font-size:14px;line-height:1.55;padding:28px 18px;
+    background-image:linear-gradient(rgba(110,208,255,.022) 1px,transparent 1px);
+    background-size:100% 3px;}
+  .wrap{max-width:1000px;margin:0 auto}
+  a{color:var(--cyn);text-decoration:none}
+  .sub{color:var(--sub)}
+  b,strong{color:#fff;font-weight:700}
+  .hl{color:var(--amb)} .hg{color:var(--grn)} .hr{color:var(--red)} .hc{color:var(--cyn)}
+
+  .topbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;
+    border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:14px 18px}
+  .tk{font-size:24px;font-weight:700;letter-spacing:1px;color:#fff}
+  .exch{font-size:11px;color:var(--cyn);border:1px solid #234;border-radius:4px;padding:2px 7px}
+  .nm{font-size:13px;color:var(--sub)}
+  .asof{margin-left:auto;font-size:11px;color:var(--sub);text-align:right;line-height:1.5}
+
+  .tldr{display:flex;gap:12px;align-items:flex-start;margin-top:14px;border:1px solid var(--line);
+    border-left:3px solid var(--amb);border-radius:8px;background:var(--panel);padding:14px 18px}
+  .tldr .tag{font-size:10px;color:var(--amb);letter-spacing:1px;padding-top:3px;white-space:nowrap}
+  .tldr .txt{font-size:15px;line-height:1.5;color:#fff}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
+  .pxbox{flex:1 1 240px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:16px 18px}
+  .px{font-size:34px;font-weight:700;color:#fff;letter-spacing:1px}
+  .chg{font-size:13px;color:var(--amb);margin-top:2px}
+  .pxnote{font-size:11px;color:var(--sub);margin-top:8px}
+  .rangebar{margin-top:12px;height:8px;border-radius:4px;background:linear-gradient(90deg,#ff5d6c33,#ffc06133,#34e08a33);position:relative;border:1px solid var(--line)}
+  .rangebar .mk{position:absolute;top:-3px;width:2px;height:12px;background:#fff;border-radius:2px}
+  .rangelab{display:flex;justify-content:space-between;font-size:10px;color:var(--sub);margin-top:5px}
+  .statgrid{flex:1 1 320px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .stat{background:var(--panel);padding:11px 12px}
+  .stat .l{font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+  .stat .v{font-size:17px;color:#fff;margin-top:3px}
+  .stat .v.g{color:var(--grn)} .stat .v.a{color:var(--amb)} .stat .v.r{color:var(--red)}
+
+  section{margin-top:22px;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+  .shd{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--line);background:var(--panel2)}
+  .snum{font-size:12px;color:var(--cyn);font-weight:700}
+  .stt{font-size:14px;font-weight:700;color:#fff;letter-spacing:.5px}
+  .stag{margin-left:auto;font-size:10px;padding:3px 9px;border-radius:4px;border:1px solid currentColor}
+  .stag.g{color:var(--grn)} .stag.r{color:var(--red)} .stag.a{color:var(--amb)}
+  .sbody{padding:16px 18px}
+
+  .key{font-size:14px;line-height:1.5;color:#fff;border-left:2px solid var(--cyn);padding-left:12px;margin-bottom:14px}
+  .pts{list-style:none}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--cyn);font-weight:700}
+  .pts li:last-child{margin-bottom:0}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:8px;padding:13px 14px;background:var(--panel2)}
+  .vc .h{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+  .vc .s{font-size:18px;font-weight:700;margin:5px 0}
+  .vc .d{font-size:11.5px;color:var(--sub);line-height:1.45}
+  .meter{height:6px;border-radius:3px;background:#1a2238;margin:8px 0 2px;overflow:hidden}
+  .meter span{display:block;height:100%}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
+  .mc{background:var(--panel2);padding:12px 14px}
+  .mc .l{font-size:10px;color:var(--sub);text-transform:uppercase}
+  .mc .v{font-size:20px;color:#fff;margin:3px 0}
+  .mc .n{font-size:10px;color:var(--sub)}
+  .mc .v.g{color:var(--grn)} .mc .v.a{color:var(--amb)} .mc .v.r{color:var(--red)}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
+  .ec{background:var(--panel2);padding:10px 12px}
+  .ec .l{font-size:10px;color:var(--sub)}
+  .ec .v{font-size:15px;color:#fff;margin-top:2px}
+  .ec .v.g{color:var(--grn)} .ec .v.r{color:var(--red)} .ec .v.a{color:var(--amb)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .col h4{font-size:12px;padding:9px 13px;letter-spacing:.5px}
+  .col.bull h4{background:#0f2a1c;color:var(--grn);border-bottom:1px solid #1d4a32}
+  .col.bear h4{background:#2a1116;color:var(--red);border-bottom:1px solid #4a1d24}
+  .col ul{list-style:none;padding:11px 13px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:8px;line-height:1.45}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--grn);font-weight:700}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--red);font-weight:700}
+
+  .chartwrap{border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:14px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
+  .lv{background:var(--panel2);padding:10px 12px;text-align:center}
+  .lv .l{font-size:10px;color:var(--sub)}
+  .lv .v{font-size:16px;color:#fff;margin-top:2px}
+  .lv .v.r{color:var(--red)} .lv .v.g{color:var(--grn)} .lv .v.a{color:var(--amb)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px}
+  .cal td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{color:var(--cyn);white-space:nowrap;width:1%}
+
+  footer{margin-top:22px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:16px 18px}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--amb);padding-left:12px;margin-bottom:14px}
+  .src{font-size:11px;color:var(--sub);line-height:1.9;word-break:break-all}
+  .src a{color:var(--cyn)}
+  .blink{display:inline-block;width:8px;height:14px;background:var(--grn);vertical-align:-2px;margin-left:4px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span class="tk">QCOM</span>
+    <span class="exch">NASDAQ</span>
+    <span class="nm">Qualcomm Incorporated</span>
+    <span class="asof">WEEKLY EQUITY REPORT<br>기준 · 2026-06-02 종가 · 작성 06-03</span>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">TL;DR</span>
+    <span class="txt">애플 모뎀 이별 충격 선반영 · 자동차(+38%)·AI PC 성장 논쟁 진행 중 · 주가 이미 애널리스트 목표가 상회. <span class="hl">방향은 핸드셋 회복 속도에 달렸다.</span></span>
+  </div>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$229</div>
+      <div class="chg">▲ 52주 저점 대비 +88%</div>
+      <div class="pxnote">시총 ~$241B · EV ~$252B(추산)</div>
+      <div class="rangebar"><span class="mk" style="left:77.6%"></span></div>
+      <div class="rangelab"><span>$121.99</span><span>현재 ▲ 상단 78%</span><span>$259.92</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">TTM PER</div><div class="v a">~24x</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">~15x</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v">~5.4%</div></div>
+      <div class="stat"><div class="l">ROIC</div><div class="v g">~20%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v a">HOLD</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v r">~$180</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="shd"><span class="snum">00</span><span class="stt">한눈에</span><span class="stag a">논쟁 · 성장 전환기</span></div>
+    <div class="sbody">
+      <div class="verd">
+        <div class="vc">
+          <div class="h">① 기업가치</div>
+          <div class="s hl">논쟁 · 중립</div>
+          <div class="meter"><span style="width:48%;background:var(--amb)"></span></div>
+          <div class="d">EV/EBITDA 15x · 싸진 않음. 애플 모뎀 수익 소멸 반영 시 실질 프리미엄. 애널리스트 평균목표 $180 — 현재가 27% 상회.</div>
+        </div>
+        <div class="vc">
+          <div class="h">② 성장 가능성</div>
+          <div class="s hl">논쟁 · 전환 중</div>
+          <div class="meter"><span style="width:52%;background:var(--amb)"></span></div>
+          <div class="d">자동차 +38%·IoT +9% 가속 vs. 핸드셋 둔화·애플 모뎀 $5.7B 공백. 전환 속도가 핵심 변수.</div>
+        </div>
+        <div class="vc">
+          <div class="h">③ 주가 흐름</div>
+          <div class="s hr">횡보 · 박스권</div>
+          <div class="meter"><span style="width:35%;background:var(--red)"></span></div>
+          <div class="d">$210 지지 ~ $245 저항. 컨센서스 위에서 눌리는 구간. 방향 불확실.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shd"><span class="snum">01</span><span class="stt">기업가치 · VALUATION</span><span class="stag a">논쟁</span></div>
+    <div class="sbody">
+      <div class="mgrid">
+        <div class="mc"><div class="l">TTM PER (GAAP)</div><div class="v a">~24x</div><div class="n">비GAAP 선행 ~17x</div></div>
+        <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">~15x</div><div class="n">10년 중앙값 12.8x</div></div>
+        <div class="mc"><div class="l">FCF (TTM)</div><div class="v">~$12.9B</div><div class="n">FCF 수익률 ~5.4%</div></div>
+        <div class="mc"><div class="l">ROE / ROIC</div><div class="v g">24 / 20%</div><div class="n">자본 효율성 양호</div></div>
+        <div class="mc"><div class="l">애널 평균목표</div><div class="v r">~$180</div><div class="n">현재가 대비 −27%</div></div>
+        <div class="mc"><div class="l">배당 수익률</div><div class="v">~1.5%</div><div class="n">자사주 매입 병행</div></div>
+      </div>
+      <div class="key">현재가는 이미 <b>애널리스트 컨센서스($180)를 27% 상회</b> — 강세론이 이미 가격에 상당부분 반영.</div>
+      <ul class="pts">
+        <li>EV/EBITDA 15x는 10년 중앙값(12.8x) <span class="hr">대비 17% 프리미엄</span>. 자동차 성장 내러티브가 이를 정당화하는지가 논쟁 포인트.</li>
+        <li>FCF ~$12.9B(TTM)은 강하다. 하지만 <span class="hl">애플 모뎀 공백($5.7B/년) 현실화 시</span> FCF 훼손 가능성 존재.</li>
+        <li><b>자사주 매입</b>은 확실한 방어선 — H1 FY26에만 $5.4B 집행, 총 $20B 프로그램 유지.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="shd"><span class="snum">02</span><span class="stt">성장 가능성 · GROWTH</span><span class="stag a">전환기 논쟁</span></div>
+    <div class="sbody">
+      <div class="estrip">
+        <div class="ec"><div class="l">Q2 FY26 매출</div><div class="v a">$10.6B</div></div>
+        <div class="ec"><div class="l">YoY</div><div class="v r">−3%</div></div>
+        <div class="ec"><div class="l">비GAAP EPS</div><div class="v g">$2.65</div></div>
+        <div class="ec"><div class="l">자동차 매출</div><div class="v g">$1.33B</div></div>
+        <div class="ec"><div class="l">자동차 YoY</div><div class="v g">+38%</div></div>
+        <div class="ec"><div class="l">Q3 가이던스</div><div class="v r">$9.6B</div></div>
+      </div>
+      <div class="key">전체 매출은 <b>−3% 역성장</b>이지만 자동차(+38%)·IoT(+9%)는 가속 — "<b>핸드셋 하락 vs. 다각화 성장</b>" 교차 구간.</div>
+      <div class="bb">
+        <div class="col bull">
+          <h4>▲ BULL</h4>
+          <ul>
+            <li><b>자동차 가속</b> — 연환산 $5B 첫 돌파, Q3 +50% YoY 예고. Snapdragon Digital Chassis 수주 잔고 견조.</li>
+            <li><b>AI PC / 온디바이스</b> — Snapdragon X Elite PC 점유율 확대. AI 추론 수요 장기 테마.</li>
+            <li><b>IoT 회복</b> — Q2 +9% YoY, 사이클 반등 초기 국면.</li>
+            <li><b>데이터센터 진출</b> — NVIDIA 대비 차별화 엣지 AI 포지셔닝.</li>
+            <li><b>FCF·자사주</b> — $12.9B FCF + $20B 바이백 → EPS 방어.</li>
+          </ul>
+        </div>
+        <div class="col bear">
+          <h4>▼ BEAR</h4>
+          <ul>
+            <li><b>애플 모뎀 공백</b> — 2027년까지 ~$5.7B 매출 소멸. 자동차가 메울 수 있나?</li>
+            <li><b>Q3 가이던스 실망</b> — 매출 $9.2~10B(YoY −7%), EPS $2.10~2.30 대폭 감소.</li>
+            <li><b>핸드셋 약세</b> — 전체 QCT 매출의 57%, 중국 안드로이드 Q3 바닥 예상 = 불확실.</li>
+            <li><b>컨센서스 괴리</b> — 현재가 이미 목표가 27% 상회 = 추가 상승 여력 제한.</li>
+            <li><b>NVIDIA 경쟁</b> — AI 칩 경쟁 격화로 8.8% 급락 선례.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shd"><span class="snum">03</span><span class="stt">횡보 분석 · PRICE ACTION</span><span class="stag r">박스권</span></div>
+    <div class="sbody">
+      <div class="chartwrap">
+        <svg viewBox="0 0 980 230" style="width:100%;height:auto" role="img" aria-label="QCOM 52주 가격 흐름 개략도와 박스권">
+          <!-- 축 -->
+          <line x1="60" y1="14" x2="60" y2="196" stroke="#1e2740"/>
+          <line x1="60" y1="196" x2="940" y2="196" stroke="#1e2740"/>
+          <!-- y 레이블 -->
+          <text x="52" y="22" fill="#54607e" font-size="11" text-anchor="end" font-family="monospace">$260</text>
+          <text x="52" y="62" fill="#54607e" font-size="11" text-anchor="end" font-family="monospace">$230</text>
+          <text x="52" y="90" fill="#54607e" font-size="11" text-anchor="end" font-family="monospace">$210</text>
+          <text x="52" y="46" fill="#54607e" font-size="11" text-anchor="end" font-family="monospace">$245</text>
+          <text x="52" y="188" fill="#54607e" font-size="11" text-anchor="end" font-family="monospace">$122</text>
+          <!-- 가격 경로 (개략도): 저점 $122 → 반등 → 고점 $260 → 현재 $229 -->
+          <polyline points="70,116  140,140  210,186  290,170  380,140  470,80  560,22  640,30  720,54  790,62  860,58  940,60"
+            fill="none" stroke="#6fd0ff" stroke-width="2"/>
+          <!-- 박스권 영역 $210~$245 (x=700~940) -->
+          <rect x="700" y="44" width="240" height="48" fill="#34e08a10" stroke="#34e08a44" stroke-dasharray="4 3"/>
+          <text x="820" y="36" fill="#34e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $210 – $245</text>
+          <!-- 저항 $245 -->
+          <line x1="700" y1="44" x2="940" y2="44" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="936" y="40" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 $245</text>
+          <!-- 지지 $210 -->
+          <line x1="700" y1="90" x2="940" y2="90" stroke="#34e08a" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="936" y="104" fill="#34e08a" font-size="10" text-anchor="end" font-family="monospace">지지 $210</text>
+          <!-- 현재가 $229 마커 -->
+          <circle cx="940" cy="60" r="4" fill="#ffc061"/>
+          <text x="700" y="14" fill="#7c89a8" font-size="10" font-family="monospace">52W LOW $121.99 · HIGH $259.92</text>
+        </svg>
+        <div class="sub" style="font-size:10px;margin-top:4px">※ 곡선은 흐름 이해용 개략도. 가격 레벨은 실제 데이터 기준.</div>
+      </div>
+      <div class="lvls">
+        <div class="lv"><div class="l">52주 고점</div><div class="v">$259.92</div></div>
+        <div class="lv"><div class="l">저항</div><div class="v r">$245</div></div>
+        <div class="lv"><div class="l">현재가</div><div class="v a">$229</div></div>
+        <div class="lv"><div class="l">지지</div><div class="v g">$210</div></div>
+        <div class="lv"><div class="l">52주 저점</div><div class="v">$121.99</div></div>
+      </div>
+      <div class="key">52주 저점 $122에서 <b>+88% 급반등 후 $210–$245 박스권</b>에서 방향 탐색 중. 컨센서스 목표가($180)는 이미 하방에 있음.</div>
+      <ul class="pts">
+        <li><span class="hg">$245 돌파</span> → 52주 고점 $259.92 재시험, 매크로 개선 + 핸드셋 회복이 전제.</li>
+        <li><span class="hr">$210 이탈</span> → $180대 컨센서스 수렴 가능. 애플 모뎀 우려 재점화 시 발생.</li>
+        <li>방아쇠: ① 중국 안드로이드 Q3 바닥 확인 ② 애플 모뎀 대체 계약 ③ 자동차 수주 잔고 공개.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="shd"><span class="snum">04</span><span class="stt">리스크 &amp; 일정 · RISK &amp; CALENDAR</span></div>
+    <div class="sbody">
+      <table class="cal">
+        <tr><td class="d">2026-07 말</td><td><b>Q3 FY26 실적 발표</b> — 핸드셋 바닥 확인·자동차 +50% 실현 여부가 최대 촉매. EPS 가이던스 $2.10~2.30 달성 필요.</td></tr>
+        <tr><td class="d">2026 연중</td><td><b>애플 모뎀 전환 속도</b> — 2027년 모뎀 공급 0% 전망. 대체 매출원(자동차·IoT) 전환 기간 중 PER 압박 지속 가능.</td></tr>
+        <tr><td class="d">상시</td><td><b>미중 무역 리스크</b> — 매출의 약 60%가 중국 OEM 연계. 추가 수출 제한 / 관세 변동 시 즉각 충격 가능.</td></tr>
+        <tr><td class="d">상시</td><td><b>NVIDIA·ARM 경쟁</b> — AI 칩 영역에서 NVIDIA의 공격적 에지 AI 진출 → QCOM 프리미엄 정당화 어려워질 수 있음.</td></tr>
+        <tr><td class="d">2026 하반기</td><td><b>Snapdragon AI PC 보급률</b> — 마이크로소프트 코파일럿+ PC 생태계 확대 속도가 IoT·PC 세그먼트 성장 결정.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="disc">
+      ⚠ 본 리포트는 투자 자문이 아니며 교육·정보 제공 목적으로만 작성되었습니다. 모든 투자 결정은 독자 본인의 판단과 책임 하에 이루어져야 합니다. 언급된 수치는 공개 자료 기준이며 실시간 데이터와 차이가 있을 수 있습니다. 다음 발행일: <b>2026-06-14 22:00 KST</b> — 종목: INTC (Intel Corporation)
+    </div>
+    <div class="src">
+      SOURCES —
+      <a href="https://finance.yahoo.com/quote/QCOM/" target="_blank">Yahoo Finance · QCOM</a> ·
+      <a href="https://s204.q4cdn.com/645488518/files/doc_financials/2026/q2/FY2026-2nd-Quarter-Earnings-Release.pdf" target="_blank">Qualcomm Q2 FY2026 Earnings Release (SEC)</a> ·
+      <a href="https://futurumgroup.com/insights/qualcomm-q2-fy-2026-earnings-show-data-center-entry-and-auto-strength/" target="_blank">Futurum · Q2 FY2026 분석</a> ·
+      <a href="https://www.heygotrade.com/en/blog/qualcomm-q2-2026-beat-qcom-reset-apple-modem/" target="_blank">HeyGoTrade · Apple Modem Reset</a> ·
+      <a href="https://www.gurufocus.com/term/enterprise-value-to-ebitda/QCOM" target="_blank">GuruFocus · EV/EBITDA</a> ·
+      <a href="https://www.marketbeat.com/stocks/NASDAQ/QCOM/forecast/" target="_blank">MarketBeat · 애널리스트 목표가</a> ·
+      <a href="https://stockanalysis.com/stocks/qcom/statistics/" target="_blank">StockAnalysis · 밸류에이션 지표</a>
+    </div>
+    <div style="font-size:10px;color:var(--sub);margin-top:10px">
+      WEEKLY EQUITY DESK · No.3 · QCOM · 2026-06-03<span class="blink"></span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

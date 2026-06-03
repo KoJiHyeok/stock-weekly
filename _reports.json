@@ -1,9 +1,21 @@
 {
   "site": "WEEKLY EQUITY DESK",
   "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
-  "next_pick": "QCOM",
-  "next_publish": "2026-06-07 22:00 KST",
+  "next_pick": "INTC",
+  "next_publish": "2026-06-14 22:00 KST",
   "reports": [
+    {
+      "no": 3,
+      "ticker": "QCOM",
+      "company": "Qualcomm Incorporated",
+      "date": "2026-06-03",
+      "file": "QCOM_2026-06-03.html",
+      "price": "$229",
+      "tldr": "애플 모뎀 이별 충격 선반영 · 자동차(+38%)·AI 성장 논쟁 · 주가 이미 컨센서스 27% 상회 · $210–$245 박스권",
+      "value": "논쟁",
+      "growth": "전환 중",
+      "trend": "횡보"
+    },
     {
       "no": 2,
       "ticker": "PFE",
