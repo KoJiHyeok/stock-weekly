@@ -6,439 +6,224 @@
 <title>WEEKLY EQUITY · PFE · Pfizer Inc.</title>
 <style>
   :root{
-    --bg:#080b12; --panel:#0e1320; --panel2:#11182a; --line:#1e2740;
-    --ink:#d7e0f2; --sub:#7c89a8;
-    --grn:#34e08a; --red:#ff5d6c; --amb:#ffc061; --cyn:#6fd0ff; --vio:#9b8cff;
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
     --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
-    --sans:-apple-system,"Segoe UI","Noto Sans KR",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font-family:var(--mono);
-    font-size:14px;line-height:1.55;padding:28px 18px;
-    background-image:linear-gradient(rgba(110,208,255,.022) 1px,transparent 1px);
-    background-size:100% 3px;}
-  .wrap{max-width:1000px;margin:0 auto}
-  a{color:var(--cyn);text-decoration:none}
-  .sub{color:var(--sub)}
-  b,strong{color:#fff;font-weight:700}
-  .hl{color:var(--amb)} .hg{color:var(--grn)} .hr{color:var(--red)} .hc{color:var(--cyn)}
-
-  /* ticker bar */
-  .topbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;
-    border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:14px 18px}
-  .tk{font-size:24px;font-weight:700;letter-spacing:1px;color:#fff}
-  .exch{font-size:11px;color:var(--cyn);border:1px solid #234;border-radius:4px;padding:2px 7px}
-  .nm{font-size:13px;color:var(--sub)}
-  .asof{margin-left:auto;font-size:11px;color:var(--sub);text-align:right;line-height:1.5}
-
-  /* TL;DR */
-  .tldr{display:flex;gap:12px;align-items:flex-start;margin-top:14px;border:1px solid var(--line);
-    border-left:3px solid var(--amb);border-radius:8px;background:var(--panel);padding:14px 18px}
-  .tldr .tag{font-size:10px;color:var(--amb);letter-spacing:1px;padding-top:3px;white-space:nowrap}
-  .tldr .txt{font-size:15px;line-height:1.5;color:#fff}
-
-  /* quote row */
-  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
-  .pxbox{flex:1 1 240px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:16px 18px}
-  .px{font-size:34px;font-weight:700;color:#fff;letter-spacing:1px}
-  .chg{font-size:13px;color:var(--sub);margin-top:2px}
-  .pxnote{font-size:11px;color:var(--sub);margin-top:8px}
-  .rangebar{margin-top:12px;height:8px;border-radius:4px;background:linear-gradient(90deg,#ff5d6c33,#ffc06133,#34e08a33);position:relative;border:1px solid var(--line)}
-  .rangebar .mk{position:absolute;top:-3px;width:2px;height:12px;background:#fff;border-radius:2px}
-  .rangelab{display:flex;justify-content:space-between;font-size:10px;color:var(--sub);margin-top:5px}
-  .statgrid{flex:1 1 320px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .stat{background:var(--panel);padding:11px 12px}
-  .stat .l{font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
-  .stat .v{font-size:17px;color:#fff;margin-top:3px}
-  .stat .v.g{color:var(--grn)} .stat .v.a{color:var(--amb)}
-
-  /* sections */
-  section{margin-top:22px;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
-  .shd{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--line);background:var(--panel2)}
-  .snum{font-size:12px;color:var(--cyn);font-weight:700}
-  .stt{font-size:14px;font-weight:700;color:#fff;letter-spacing:.5px}
-  .stag{margin-left:auto;font-size:10px;padding:3px 9px;border-radius:4px;border:1px solid currentColor}
-  .stag.g{color:var(--grn)} .stag.r{color:var(--red)} .stag.a{color:var(--amb)}
-  .sbody{padding:16px 18px}
-
-  /* key takeaway */
-  .key{font-size:14px;line-height:1.5;color:#fff;border-left:2px solid var(--cyn);padding-left:12px;margin-bottom:14px}
-  .pts{list-style:none}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;margin-top:3px;color:var(--sub)}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
   .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
-  .pts li::before{content:"›";position:absolute;left:0;color:var(--cyn);font-weight:700}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
   .pts li:last-child{margin-bottom:0}
-
-  /* verdict cards */
-  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-  .vc{border:1px solid var(--line);border-radius:8px;padding:13px 14px;background:var(--panel2)}
-  .vc .h{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
-  .vc .s{font-size:18px;font-weight:700;margin:5px 0}
-  .vc .d{font-size:11.5px;color:var(--sub);line-height:1.45}
-  .meter{height:6px;border-radius:3px;background:#1a2238;margin:8px 0 2px;overflow:hidden}
-  .meter span{display:block;height:100%}
-
-  /* valuation metric grid */
-  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
-  .mc{background:var(--panel2);padding:12px 14px}
-  .mc .l{font-size:10px;color:var(--sub);text-transform:uppercase}
-  .mc .v{font-size:20px;color:#fff;margin:3px 0}
-  .mc .n{font-size:10px;color:var(--sub)}
-  .mc .v.g{color:var(--grn)} .mc .v.a{color:var(--amb)}
-
-  /* mini earnings strip */
-  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
-  .ec{background:var(--panel2);padding:10px 12px}
-  .ec .l{font-size:10px;color:var(--sub)}
-  .ec .v{font-size:15px;color:#fff;margin-top:2px}
-  .ec .v.g{color:var(--grn)}
-
-  /* bull / bear */
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
   .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:640px){.bb{grid-template-columns:1fr}}
-  .col{border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .col h4{font-size:12px;padding:9px 13px;letter-spacing:.5px}
-  .col.bull h4{background:#0f2a1c;color:var(--grn);border-bottom:1px solid #1d4a32}
-  .col.bear h4{background:#2a1116;color:var(--red);border-bottom:1px solid #4a1d24}
-  .col ul{list-style:none;padding:11px 13px}
-  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:8px;line-height:1.45}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)} .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
   .col li:last-child{margin-bottom:0}
-  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--grn);font-weight:700}
-  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--red);font-weight:700}
-
-  /* technical */
-  .chartwrap{border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:14px;margin-bottom:14px}
-  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
-  .lv{background:var(--panel2);padding:10px 12px;text-align:center}
-  .lv .l{font-size:10px;color:var(--sub)}
-  .lv .v{font-size:16px;color:#fff;margin-top:2px}
-  .lv .v.r{color:var(--red)} .lv .v.g{color:var(--grn)} .lv .v.a{color:var(--amb)}
-
-  /* calendar / risk */
-  .cal{width:100%;border-collapse:collapse;font-size:12.5px}
-  .cal td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
   .cal tr:last-child td{border-bottom:none}
-  .cal .d{color:var(--cyn);white-space:nowrap;width:1%}
-
-  footer{margin-top:22px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:16px 18px}
-  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--amb);padding-left:12px;margin-bottom:14px}
-  .src{font-size:11px;color:var(--sub);line-height:1.9;word-break:break-all}
-  .src a{color:var(--cyn)}
-  .blink{display:inline-block;width:8px;height:14px;background:var(--grn);vertical-align:-2px;margin-left:4px;animation:bl 1.1s steps(1) infinite}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
   @keyframes bl{50%{opacity:0}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- ── TICKER BAR ── -->
-  <div class="topbar">
+  <header>
+    <a class="back" href="index.html">← DESK</a>
     <span class="tk">PFE</span>
     <span class="exch">NYSE</span>
-    <span class="nm">Pfizer Inc.</span>
-    <span class="asof">WEEKLY EQUITY REPORT<br>기준 · 2026-06-01 종가 · 작성 06-03</span>
-  </div>
+    <span class="co">Pfizer Inc.</span>
+    <span class="hmeta">WEEKLY EQUITY · No.02<br>기준 2026·06·01 · 작성 06·03</span>
+  </header>
 
-  <!-- ── TL;DR ── -->
-  <div class="tldr">
-    <span class="tag">TL;DR</span>
-    <span class="txt">선행 PER 8.7배·배당수익률 6.5%로 싸다 · 성장은 논쟁 중(온콜로지 파이프라인 vs 특허 만료) · 그래서 $23–$29 박스권. <span class="hl">재평가 방아쇠는 파이프라인 가시화.</span></span>
-  </div>
-
-  <!-- ── QUOTE ROW ── -->
   <div class="quote">
     <div class="pxbox">
       <div class="px">$26.18</div>
-      <div class="chg">52주 레인지 내 위치: 약 중간</div>
-      <div class="pxnote">시총 $146.1B · EV $196.7B</div>
-      <div class="rangebar">
-        <!-- 위치: ($26.18-$23.06)/($28.75-$23.06) = 54.8% -->
-        <div class="mk" style="left:54.8%"></div>
-      </div>
-      <div class="rangelab"><span>저 $23.06</span><span>현재</span><span>고 $28.75</span></div>
+      <div class="chg">— 52주 레인지 중앙 · 박스권</div>
+      <div class="pxn">시총 $146.1B · EV $196.7B</div>
+      <div class="rbar"><span class="fill" style="width:54.8%"></span><span class="mk" style="left:54.8%"></span></div>
+      <div class="rlab"><span>$23.06</span><span>52W RANGE · 중앙 55%</span><span>$28.75</span></div>
     </div>
     <div class="statgrid">
-      <div class="stat"><div class="l">선행 PER</div><div class="v g">8.7×</div></div>
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">8.7×</div></div>
       <div class="stat"><div class="l">EV/EBITDA</div><div class="v">11.5×</div></div>
-      <div class="stat"><div class="l">FCF 수익률</div><div class="v g">~6.7%</div></div>
-      <div class="stat"><div class="l">배당수익률</div><div class="v g">6.5%</div></div>
-      <div class="stat"><div class="l">ROE</div><div class="v">10.6%</div></div>
-      <div class="stat"><div class="l">ROIC</div><div class="v a">7.4%</div></div>
+      <div class="stat"><div class="l">배당수익률</div><div class="v a">6.5%</div></div>
+      <div class="stat"><div class="l">ROIC</div><div class="v">7.4%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">NEUTRAL</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">$29.19</div></div>
     </div>
   </div>
 
-  <!-- ── SECTION 00: EXECUTIVE SUMMARY ── -->
-  <section>
-    <div class="shd">
-      <span class="snum">00</span>
-      <span class="stt">EXECUTIVE SUMMARY</span>
-      <span class="stag a">NEUTRAL · 매수 관망</span>
-    </div>
-    <div class="sbody">
-      <p class="key">Pfizer는 포스트-COVID 밸류에이션 리셋 이후 싸지만 성장 동력의 방향성이 시장에서 아직 인정받지 못하고 있다. 재평가가 오려면 온콜로지 파이프라인의 가시적 성과가 선행돼야 한다.</p>
-      <div class="verd">
-        <div class="vc">
-          <div class="h">기업가치</div>
-          <div class="s hg">매력적</div>
-          <div class="meter"><span style="width:80%;background:var(--grn)"></span></div>
-          <div class="d">선행 PER 8.7배, 배당 6.5%. 제약 섹터 대비 명백한 할인. COVID 이후 과도한 낙인 효과가 내재.</div>
-        </div>
-        <div class="vc">
-          <div class="h">성장 가능성</div>
-          <div class="s hl">논쟁 중</div>
-          <div class="meter"><span style="width:45%;background:var(--amb)"></span></div>
-          <div class="d">Seagen 온콜로지 자산·신약 22% 성장 vs. 주요 특허 만료·Paxlovid 수익 감소. 결론이 나지 않은 구간.</div>
-        </div>
-        <div class="vc">
-          <div class="h">주가 흐름</div>
-          <div class="s hr">횡보 박스권</div>
-          <div class="meter"><span style="width:30%;background:var(--red)"></span></div>
-          <div class="d">52주 $23–$29 내에서 방향성 부재. 배당이 하방을 지지하나 상단 돌파 촉매 부재.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">선행 PER 8.7배·배당 6.5%로 싸다 · 성장은 논쟁(온콜로지 vs 특허만료) · $23–$29 박스권. <span class="fc">재평가 방아쇠는 파이프라인 가시화.</span></span>
+  </div>
 
-  <!-- ── SECTION 01: VALUATION ── -->
-  <section>
-    <div class="shd">
-      <span class="snum">01</span>
-      <span class="stt">기업가치 · VALUATION</span>
-      <span class="stag g">저평가 구간</span>
-    </div>
-    <div class="sbody">
-      <p class="key">선행 PER 8.7배는 S&amp;P 500 제약 섹터 평균(~16배) 대비 약 46% 할인이다. 배당수익률 6.5%는 10년 국채 대비 실질적 프리미엄을 제공한다.</p>
-      <div class="mgrid">
-        <div class="mc">
-          <div class="l">PER (TTM)</div>
-          <div class="v">19.6×</div>
-          <div class="n">일회성 상각 반영</div>
-        </div>
-        <div class="mc">
-          <div class="l">PER (선행 FY26)</div>
-          <div class="v g">8.7×</div>
-          <div class="n">EPS 가이던스 $2.80–3.00 기준</div>
-        </div>
-        <div class="mc">
-          <div class="l">EV/EBITDA</div>
-          <div class="v">11.5×</div>
-          <div class="n">EV $196.7B 기준</div>
-        </div>
-        <div class="mc">
-          <div class="l">EV/FCF</div>
-          <div class="v a">~20×</div>
-          <div class="n">2024 FCF $9.84B 기준</div>
-        </div>
-        <div class="mc">
-          <div class="l">FCF 수익률</div>
-          <div class="v g">6.7%</div>
-          <div class="n">시총 $146B 대비 2024 FCF</div>
-        </div>
-        <div class="mc">
-          <div class="l">배당 수익률</div>
-          <div class="v g">6.5%</div>
-          <div class="n">$0.42/분기 × 4</div>
-        </div>
-      </div>
-      <ul class="pts">
-        <li>TTM GAAP PER(19.6배)는 Seagen 인수 관련 무형자산 상각 및 구조조정 비용으로 부풀려진 수치. 정상화된 선행 EPS 기준 8.7배가 실질적 평가 기준.</li>
-        <li>ROIC 7.4%는 제약사로서 WACC 대비 미미한 초과 수익이며, 자본 배분 효율성 개선이 재평가의 핵심 변수다.</li>
-        <li>총부채 약 $62B(Seagen $43B 인수 자금)이 재무 유연성을 제약. 그러나 연간 FCF ~$10–14B 규모로 디레버리징 진행 중.</li>
-        <li>분석가 평균 목표가 $29.19(현재 대비 +11.5% 상승 여력). Buy 11명, Sell 3명, 전반적 매수 의견.</li>
-      </ul>
-    </div>
-  </section>
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">NEUTRAL · 매수 관망</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">매력적</div><div class="meter"><span style="width:80%"></span></div><div class="d">선행 PER 8.7배·배당 6.5%. 제약 섹터 대비 명백한 할인.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">논쟁 중</div><div class="meter"><span style="width:45%;background:var(--sub)"></span></div><div class="d">Seagen 온콜로지·신약 +22% vs 특허만료·Paxlovid 감소.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">횡보 · 박스권</div><div class="meter"><span style="width:30%;background:var(--sub)"></span></div><div class="d">$23–$29 방향성 부재. 배당이 하방 지지, 상단 촉매 부재.</div></div>
+  </div>
 
-  <!-- ── SECTION 02: GROWTH ── -->
-  <section>
-    <div class="shd">
-      <span class="snum">02</span>
-      <span class="stt">주가 성장 가능성 · GROWTH OUTLOOK</span>
-      <span class="stag a">논쟁 구간</span>
-    </div>
-    <div class="sbody">
-      <p class="key">Q1 2026 실적은 서프라이즈를 기록했으나 성장의 지속성에 대한 시장의 의구심이 주가 프리미엄 부여를 막고 있다.</p>
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER (FY26)</div><div class="v a">8.7×</div><div class="n">제약 평균 ~16× 대비 −46%</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v">11.5×</div><div class="n">EV $196.7B</div></div>
+    <div class="mc"><div class="l">배당 수익률</div><div class="v a">6.5%</div><div class="n">$0.42/분기 · 커버 1.5×</div></div>
+    <div class="mc"><div class="l">ROIC</div><div class="v">7.4%</div><div class="n">WACC 근접 · 개선 관건</div></div>
+  </div>
+  <div class="key">선행 8.7배는 제약 섹터 평균 대비 <b>약 46% 할인</b>, 배당 6.5%는 국채 대비 실질 프리미엄.</div>
+  <ul class="pts">
+    <li>TTM GAAP PER 19.6배는 <b>Seagen 인수 상각</b>으로 부풀려진 수치 — 정상화 기준은 선행 8.7배.</li>
+    <li>총부채 ~$62B(Seagen $43B)가 부담이나, 연 FCF ~$10–14B로 <span class="fc">디레버리징 진행 중</span>.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">분석가 평균 목표가 <b>$29.19 (+11.5% 여력)</b> · Buy 11 / Sell 3. <b>재평가의 핵심은 자본 배분 효율(ROIC) 개선과 파이프라인 성과</b> — 둘 중 하나라도 확인되면 멀티플 익스팬션 여지.</div></div>
 
-      <!-- Earnings strip -->
-      <div class="estrip">
-        <div class="ec"><div class="l">Q1 2026 매출</div><div class="v">$14.45B</div></div>
-        <div class="ec"><div class="l">YoY 성장률</div><div class="v g">+5%</div></div>
-        <div class="ec"><div class="l">adj. EPS</div><div class="v g">$0.75</div></div>
-        <div class="ec"><div class="l">컨센서스 대비</div><div class="v g">+4.2% 상회</div></div>
-        <div class="ec"><div class="l">FY26 매출 가이던스</div><div class="v">$59.5–62.5B</div></div>
-        <div class="ec"><div class="l">FY26 adj EPS 가이던스</div><div class="v a">$2.80–3.00</div></div>
-      </div>
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">논쟁 중</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">1Q26 매출</div><div class="v a">$14.45B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+5%</div></div>
+    <div class="ec"><div class="l">adj EPS</div><div class="v a">$0.75</div></div>
+    <div class="ec"><div class="l">컨센 대비</div><div class="v">+4.2%</div></div>
+    <div class="ec"><div class="l">FY26 EPS 가이드</div><div class="v">$2.80–3.00</div></div>
+  </div>
+  <div class="key">실적은 <b>서프라이즈</b>했지만, 성장 <b>지속성</b>에 대한 의구심이 프리미엄을 막고 있음.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>신약·인수 +22%</b> — Seagen ADC 항암 파이프라인 본격 기여</li>
+      <li><b>분산 포트폴리오</b> — 온콜로지·면역·항감염으로 단일 특허 의존↓</li>
+      <li><b>배당 하방</b> — 6.5% 수익률, FCF 커버리지 ~1.5×</li>
+      <li><b>멀티플 익스팬션</b> — 8.7배·FCF 6.7%에서 재평가 여지</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>Paxlovid 정상화</b> — COVID 매출 소멸이 톱라인 압박</li>
+      <li><b>특허 절벽</b> — 2025–30 Eliquis 등 만료, 제네릭 잠식</li>
+      <li><b>$43B 부채</b> — Seagen 인수 자금, 재무 유연성 제한</li>
+      <li><b>ROIC ≈ WACC</b> — 자본 창출력에 대한 시장 신뢰 부족</li>
+    </ul></div>
+  </div>
 
-      <!-- Bull / Bear -->
-      <div class="bb">
-        <div class="col bull">
-          <h4>▲ BULL CASE</h4>
-          <ul>
-            <li>신약·인수 제품군 매출 22% 성장(Q1 2026). Seagen의 ADC 항암제 파이프라인이 본격 기여 시작.</li>
-            <li>온콜로지·면역·항감염 3개 치료 영역의 분산 포트폴리오로 단일 특허 의존도 감소.</li>
-            <li>6.5% 배당수익률이 하방 지지. 2024 FCF $9.84B 기록으로 배당 커버리지 충분(~1.5×).</li>
-            <li>선행 PER 8.7배·FCF 6.7% 수익률 → 밸류에이션 재평가 시 상당한 멀티플 익스팬션 여지.</li>
-            <li>체중감량약(GLP-1) 진입 검토 및 mRNA 플랫폼 다각화 가속.</li>
-          </ul>
-        </div>
-        <div class="col bear">
-          <h4>▼ BEAR CASE</h4>
-          <ul>
-            <li>Paxlovid COVID 치료제 매출 정상화 압박 지속. COVID 관련 매출의 급격한 소멸이 톱라인 성장을 억제.</li>
-            <li>2025–2030년 사이 주요 블록버스터 특허 만료(Eliquis 외 다수). 제네릭 잠식이 구조적 헤드윈드.</li>
-            <li>Seagen 인수 $43B 부채가 재무 유연성 제한. 금리 환경에 따라 이자 비용 부담 가중.</li>
-            <li>ROIC 7.4%는 WACC와 거의 동일 수준 → 자본 창출 능력에 대한 시장 신뢰 부족.</li>
-            <li>파이프라인 임상 실패 리스크. 의약품 가격 규제(IRA) 확대 시 마진 압박.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="PFE 52주 박스권 개략도">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="40" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$29</text>
+      <text x="46" y="100" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$26</text>
+      <text x="46" y="160" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$23</text>
+      <rect x="54" y="58" width="856" height="80" fill="rgba(53,224,138,.05)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <polyline points="64,96 150,80 230,92 300,70 370,86 440,104 510,90 580,74 640,98 700,110 760,92 820,84 870,100 905,95" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <line x1="54" y1="58" x2="910" y2="58" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="54" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 27.5–28.75</text>
+      <line x1="54" y1="138" x2="910" y2="138" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="151" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 24.5–25.5</text>
+      <text x="775" y="120" fill="#8590a4" font-size="11" text-anchor="middle" font-family="monospace">현재 $26.18 · 레인지 중앙</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$28.75</div></div>
+    <div class="lv"><div class="l">중간 저항</div><div class="v r">$27.50</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$26.18</div></div>
+    <div class="lv"><div class="l">1차 지지</div><div class="v a">$25.50</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$23.06</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx">상단 <b>$27.5–$28.75 돌파</b>는 파이프라인 촉매·배당 성장 없이는 어려움. 하단 <b class="fc">$24.5–$25.5는 200일선+배당 지지</b>. 전략: <b>하단 근접 분할매수, 상단 저항 차익</b>.</div></div>
 
-  <!-- ── SECTION 03: TECHNICAL ── -->
-  <section>
-    <div class="shd">
-      <span class="snum">03</span>
-      <span class="stt">횡보 분석 · TECHNICAL</span>
-      <span class="stag a">박스권 확인</span>
-    </div>
-    <div class="sbody">
-      <p class="key">52주 $23.06–$28.75 박스권의 정중앙($26.18)에 위치. 상단 저항($27.5–$28.75) 돌파 시도가 여러 차례 실패했으며, 배당 지지선이 $24–$25 구간에 형성돼 있다.</p>
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>IRA 약가 협상</b> — 주요 품목 포함 여부가 장기 마진에 직접 영향(하방 리스크).</li>
+    <li><b>특허 절벽</b> — Eliquis 등 제네릭 진입이 구조적 헤드윈드.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">7월말~8월초</td><td><b>2Q26 실적</b> — 온콜로지 성장률 + 가이던스 중간값 달성 여부. 서프라이즈 시 $28 재테스트 예상</td></tr>
+    <tr><td class="d">하반기</td><td><b>Seagen ADC 데이터</b>(ASCO·ESMO) — 긍정 시 재평가 방아쇠, 실망 시 $25 지지 재테스트</td></tr>
+  </table>
 
-      <!-- Key Levels -->
-      <div class="lvls">
-        <div class="lv"><div class="l">강한 저항 (52주 고점)</div><div class="v r">$28.75</div></div>
-        <div class="lv"><div class="l">중간 저항</div><div class="v r">$27.50</div></div>
-        <div class="lv"><div class="l">현재가</div><div class="v">$26.18</div></div>
-        <div class="lv"><div class="l">1차 지지</div><div class="v a">$25.50</div></div>
-        <div class="lv"><div class="l">200일 이동평균</div><div class="v g">~$24.50</div></div>
-        <div class="lv"><div class="l">52주 저점</div><div class="v g">$23.06</div></div>
-      </div>
-
-      <!-- SVG Schematic Chart -->
-      <div class="chartwrap">
-        <div style="font-size:10px;color:var(--sub);margin-bottom:8px">※ 개략도(schematic) — 실제 캔들 데이터 기반 근사값. 가격 레벨은 실제값 사용.</div>
-        <svg viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:var(--mono)">
-          <!-- Background grid -->
-          <defs>
-            <pattern id="grid" width="82" height="40" patternUnits="userSpaceOnUse">
-              <path d="M82 0 L0 0 0 40" fill="none" stroke="#1e2740" stroke-width="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="820" height="200" fill="#11182a" rx="4"/>
-          <rect width="820" height="200" fill="url(#grid)" rx="4"/>
-
-          <!-- Price mapping: $23.06=180, $28.75=20 → range=5.69, px per $=160/5.69=28.12 -->
-          <!-- $28.75 = y20, $27.50 = y55, $26.18 = y92, $25.50 = y111, $24.50 = y139, $23.06 = y180 -->
-
-          <!-- 저항선 $28.75 -->
-          <line x1="40" y1="20" x2="780" y2="20" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
-          <text x="785" y="24" font-size="9" fill="#ff5d6c">$28.75 저항(52주 고)</text>
-
-          <!-- 중간 저항 $27.50 -->
-          <line x1="40" y1="55" x2="780" y2="55" stroke="#ff5d6c" stroke-width="0.8" stroke-dasharray="4,4" opacity="0.4"/>
-          <text x="785" y="59" font-size="9" fill="#ff5d6c" opacity="0.8">$27.50</text>
-
-          <!-- 현재가 $26.18 -->
-          <line x1="40" y1="92" x2="780" y2="92" stroke="#fff" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
-          <text x="785" y="96" font-size="9" fill="#fff">$26.18 현재</text>
-
-          <!-- 지지 $25.50 -->
-          <line x1="40" y1="111" x2="780" y2="111" stroke="#ffc061" stroke-width="0.8" stroke-dasharray="4,4" opacity="0.5"/>
-          <text x="785" y="115" font-size="9" fill="#ffc061">$25.50</text>
-
-          <!-- 200DMA $24.50 -->
-          <line x1="40" y1="139" x2="780" y2="139" stroke="#34e08a" stroke-width="1" stroke-dasharray="8,4" opacity="0.5"/>
-          <text x="785" y="143" font-size="9" fill="#34e08a">$24.50 200DMA</text>
-
-          <!-- 52주 저점 $23.06 -->
-          <line x1="40" y1="180" x2="780" y2="180" stroke="#34e08a" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
-          <text x="785" y="184" font-size="9" fill="#34e08a">$23.06 저점</text>
-
-          <!-- Price path (schematic curve) -->
-          <!-- 52주 흐름 개략: 저→반등→저항 실패→박스→현재 -->
-          <polyline
-            points="40,180 100,155 160,130 210,115 260,55 310,75 360,95 420,120 480,150 530,115 580,90 630,100 680,92 730,88 780,92"
-            fill="none" stroke="#6fd0ff" stroke-width="2" opacity="0.85"/>
-
-          <!-- 현재 위치 도트 -->
-          <circle cx="780" cy="92" r="4" fill="#6fd0ff"/>
-
-          <!-- 박스권 밴드 영역 -->
-          <rect x="40" y="55" width="740" height="125" fill="#ffc061" opacity="0.03" rx="2"/>
-
-          <!-- X축 레이블 -->
-          <text x="40" y="198" font-size="8" fill="#7c89a8">2025.06</text>
-          <text x="200" y="198" font-size="8" fill="#7c89a8">2025.09</text>
-          <text x="380" y="198" font-size="8" fill="#7c89a8">2025.12</text>
-          <text x="560" y="198" font-size="8" fill="#7c89a8">2026.03</text>
-          <text x="720" y="198" font-size="8" fill="#7c89a8">2026.06</text>
-        </svg>
-      </div>
-
-      <ul class="pts">
-        <li><strong>박스권 상단($27.5–$28.75)</strong>: 여러 차례 시도에서 돌파 실패. 파이프라인 촉매 또는 배당 성장 공시 없이는 돌파 어려울 것.</li>
-        <li><strong>박스권 하단($24.5–$25.5)</strong>: 200일 이동평균선과 배당 지지선이 겹치는 구간. 실질 배당수익률 6.5%가 하방 매수 수요를 형성.</li>
-        <li>현재 $26.18은 레인지 정중앙. 방향성 부재 국면 → 박스권 하단 근접 시 분할 매수, 상단 저항에서 차익실현 전략.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ── SECTION 04: RISK & CATALYST ── -->
-  <section>
-    <div class="shd">
-      <span class="snum">04</span>
-      <span class="stt">리스크 &amp; CATALYST 일정</span>
-      <span class="stag r">주요 이벤트 주시</span>
-    </div>
-    <div class="sbody">
-      <table class="cal">
-        <tr>
-          <td class="d">2026 Q2 실적 발표</td>
-          <td><strong>예상 7월 말–8월 초.</strong> 매출 가이던스 중간값 $3.0B 달성 여부 + 온콜로지 세그먼트 성장률이 관건. 실적 서프라이즈 시 $28 저항 재테스트 예상.</td>
-        </tr>
-        <tr>
-          <td class="d">Seagen ADC 파이프라인 데이터</td>
-          <td>2026년 하반기 주요 학회(ASCO, ESMO)에서 임상 결과 발표 예정. <strong>긍정적 데이터 → 재평가 방아쇠.</strong> 실망 시 $25 지지선 재테스트.</td>
-        </tr>
-        <tr>
-          <td class="d">IRA 약가 협상</td>
-          <td>미국 IRA(인플레이션 감축법) 2차 협상 리스트 발표. Pfizer 주요 품목 포함 여부가 장기 마진에 직접 영향. <span class="hr">부정적 리스크 요인.</span></td>
-        </tr>
-        <tr>
-          <td class="d">특허 만료 일정</td>
-          <td>2025–2027 주요 특허 만료 물결 지속. Eliquis(아픽사반) 미국 특허 만료에 따른 제네릭 진입이 핵심 리스크.</td>
-        </tr>
-        <tr>
-          <td class="d">배당 공시</td>
-          <td>다음 분기 배당 $0.42/주 유지 여부. <strong>배당 삭감 시 하방 지지선 붕괴 위험.</strong> FCF 커버리지($9.84B / 약 $6.7B 배당 총액) 기준 현재는 안전.</td>
-        </tr>
-        <tr>
-          <td class="d">거시 리스크</td>
-          <td>달러 강세 → FX 역풍(글로벌 매출 비중 55%+). 금리 고착화 → 고배당주 가치 상대적 압박.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ── -->
   <footer>
-    <div class="disc">
-      ⚠ 본 리포트는 정보 제공 목적으로만 작성된 주간 자동 생성 리포트이며, 투자 권유·투자 자문·매매 신호가 아닙니다. 수록된 수치는 공개 출처에 기반하며 오류가 있을 수 있습니다. 모든 투자 결정은 독자 본인의 판단과 책임 하에 이루어져야 합니다. 과거 실적은 미래 수익을 보장하지 않습니다.
-    </div>
-    <div class="src">
-      <strong style="color:var(--sub);font-size:10px;letter-spacing:.5px">SOURCES</strong><br>
-      <a href="https://finance.yahoo.com/quote/PFE/">Yahoo Finance · PFE Quote</a><br>
-      <a href="https://www.cnbc.com/2026/05/05/pfizer-pfe-earnings-q1-2026.html">CNBC · Pfizer Q1 2026 Earnings Report (2026-05-05)</a><br>
-      <a href="https://finance.yahoo.com/sectors/healthcare/articles/pfizer-inc-q1-2026-earnings-205435838.html">Yahoo Finance · Pfizer Q1 2026 Earnings Call Summary</a><br>
-      <a href="https://www.macrotrends.net/stocks/charts/PFE/pfizer/free-cash-flow">MacroTrends · Pfizer Free Cash Flow History</a><br>
-      <a href="https://stockanalysis.com/stocks/pfe/">StockAnalysis · PFE Overview &amp; Valuation</a><br>
-      <a href="https://www.morningstar.com/stocks/xnys/pfe/quote">Morningstar · PFE Stock Quote</a><br>
-      <a href="https://simplywall.st/stocks/us/pharmaceuticals-biotech/nyse-pfe/pfizer/future">Simply Wall St · Pfizer Forecast &amp; Analyst Predictions</a><br>
-      <a href="https://s206.q4cdn.com/795948973/files/doc_financials/2026/q1/Q1-2026-PFE-Earnings-Release-FINAL.pdf">Pfizer IR · Q1 2026 Earnings Release (공식 PDF)</a>
-    </div>
-    <div style="margin-top:12px;font-size:11px;color:var(--sub)">
-      다음 발행 · 2026-06-07 (일) 20:00 KST · 다음 종목: <span class="hc">QCOM</span><span class="blink"></span>
-    </div>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-06-01 종가 기준 공개치로 실제와 차이가 있을 수 있습니다. 과거 실적은 미래 수익을 보장하지 않으며, 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://finance.yahoo.com/quote/PFE/">Yahoo Finance</a> · <a href="https://www.cnbc.com/2026/05/05/pfizer-pfe-earnings-q1-2026.html">CNBC 1Q26</a> · <a href="https://www.macrotrends.net/stocks/charts/PFE/pfizer/free-cash-flow">MacroTrends FCF</a> · <a href="https://stockanalysis.com/stocks/pfe/">stockanalysis</a> · <a href="https://simplywall.st/stocks/us/pharmaceuticals-biotech/nyse-pfe/pfizer/future">Simply Wall St</a> · <a href="https://s206.q4cdn.com/795948973/files/doc_financials/2026/q1/Q1-2026-PFE-Earnings-Release-FINAL.pdf">Pfizer IR</a></div>
+    <div class="nextp">다음 발행 · 2026-06-14(일) 22:00 KST · 다음 종목 INTC<span class="blink"></span></div>
   </footer>
 
 </div>
