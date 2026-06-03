@@ -1,0 +1,32 @@
+{
+  "site": "WEEKLY EQUITY DESK",
+  "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
+  "next_pick": "QCOM",
+  "next_publish": "2026-06-07 22:00 KST",
+  "reports": [
+    {
+      "no": 2,
+      "ticker": "PFE",
+      "company": "Pfizer Inc.",
+      "date": "2026-06-03",
+      "file": "PFE_2026-06-03.html",
+      "price": "$26.18",
+      "tldr": "선행 PER 8.7배·배당 6.5%로 싸다 · 성장은 논쟁(온콜로지 vs 특허만료) · $23–$29 박스권",
+      "value": "매력적",
+      "growth": "논쟁 중",
+      "trend": "횡보"
+    },
+    {
+      "no": 1,
+      "ticker": "PYPL",
+      "company": "PayPal Holdings, Inc.",
+      "date": "2026-06-03",
+      "file": "PYPL_2026-06-03.html",
+      "price": "$44.53",
+      "tldr": "싸다(PER 8.5배·FCF 13%) · 성장은 멈췄다(EPS 보합) · 그래서 박스권",
+      "value": "저평가",
+      "growth": "정체",
+      "trend": "횡보"
+    }
+  ]
+}
