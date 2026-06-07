@@ -5,6 +5,18 @@
   "next_publish": "2026-06-14 22:00 KST",
   "reports": [
     {
+      "no": 4,
+      "ticker": "CTSH",
+      "company": "Cognizant Technology Solutions Corp.",
+      "date": "2026-06-07",
+      "file": "CTSH_2026-06-07.html",
+      "price": "$53.40",
+      "tldr": "선행 PER 9.4배·EV/EBITDA 6.4배로 싸다 · AI가 위협이냐 기회냐 성장 논쟁(대형딜 TCV +70%) · YTD −34% 후 $51–$56 박스권",
+      "value": "저평가",
+      "growth": "논쟁",
+      "trend": "횡보"
+    },
+    {
       "no": 3,
       "ticker": "QCOM",
       "company": "Qualcomm Incorporated",

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · CTSH · Cognizant Technology Solutions</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  /* header */
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  /* quote */
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  /* tldr */
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  /* section label */
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  /* verdict */
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  /* metric grid */
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  /* key line + bullets + forecast */
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  /* earnings strip */
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  /* bull/bear */
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  /* technical */
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  /* calendar */
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">CTSH</span>
+    <span class="exch">NASDAQ</span>
+    <span class="co">Cognizant Technology Solutions Corp.</span>
+    <span class="hmeta">WEEKLY EQUITY · No.04<br>기준 2026·06·05 · 작성 06·07</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$53.40</div>
+      <div class="chg">▼ 52주 고점 대비 −39% · YTD −34%</div>
+      <div class="pxn">시총 $25.3B · EV $24.9B · 순현금 $0.4B</div>
+      <div class="rbar"><span class="fill" style="width:19%"></span><span class="mk" style="left:19%"></span></div>
+      <div class="rlab"><span>$45.48</span><span>52W RANGE · 하단 19%</span><span>$87.03</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">9.4×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">6.4×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">9.8%</div></div>
+      <div class="stat"><div class="l">ROIC</div><div class="v">15.0%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">BUY</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$72.5</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">싸다(선행 PER 9.4배·EV/EBITDA 6.4배·FCF 9.8%) · AI가 위협이냐 기회냐 성장 논쟁 · YTD −34% 급락 후 $51~$56 박스권 다지기. <span class="fc">재평가 방아쇠 = AI 수주의 매출 전환.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 저평가 + AI 논쟁</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">저평가 (강)</div><div class="meter"><span style="width:84%"></span></div><div class="d">선행 PER 9.4×, 5년 중앙값 16.7× 대비 −28%. GF Value $83 대비 −36%.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">논쟁 · 분기점</div><div class="meter"><span style="width:56%;background:var(--sub)"></span></div><div class="d">대형딜 TCV +70%로 수주는 사상 최대. 그러나 Q2 가이던스 보수적.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">횡보 · 박스권</div><div class="meter"><span style="width:22%;background:var(--sub)"></span></div><div class="d">$50.9 지지 ~ $56.1 저항(50일선). 200일선 $69은 한참 위.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">9.4×</div><div class="n">5년 중앙값 16.7×</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">6.4×</div><div class="n">EV/FCF 10.1×</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">$2.47B</div><div class="n">FCF 수익률 9.8%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">15 / 15%</div><div class="n">순현금 $0.4B · D/E 0.07</div></div>
+  </div>
+  <div class="key">현재 가격엔 <b>"AI가 IT서비스 매출을 잠식한다"</b>는 비관 시나리오가 상당 부분 선반영.</div>
+  <ul class="pts">
+    <li>연 <span class="fc">$2.47B 잉여현금</span>을 EV/EBITDA 6.4배에 거래 — 순현금 $0.4B·부채비율 0.07로 재무 견실.</li>
+    <li><b>2026 자사주 $2B</b>(기존 $1B → 2배 상향) + <b>$500M ASR</b>로 주식수 감소 → EPS 방어. 주주수익률 ~4.7%.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">멀티플이 <b class="fc">5년 중앙값(16.7배)으로만 회귀해도</b> 상당한 재평가 여지 — 분석가 평균 목표가 $72.5는 현재가 대비 <b class="fc">+36%</b>. <b>단, AI 디플레이션이 매출·인력 단가를 구조적으로 깎으면 '싼 데는 이유가 있다'가 정당화된다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">논쟁 · 분기점</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">1Q26 매출</div><div class="v a">$5.41B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+5.8%</div></div>
+    <div class="ec"><div class="l">Adj EPS</div><div class="v a">$1.40</div></div>
+    <div class="ec"><div class="l">대형딜 TCV</div><div class="v a">+70%</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v" style="color:var(--down)">하락</div></div>
+  </div>
+  <div class="key">실적·수주는 <b>비트</b>(사상 최대 부킹)했지만 시장은 <b>보수적 Q2 가이던스·AI 불확실성</b>에 반응 — "AI가 적이냐 동지냐" 논쟁.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>사상 최대 수주</b> — 대형딜 TCV +70% YoY, 7개 대형딜 · 최근 최고 부킹</li>
+      <li><b>"AI 브리지" 수요</b> — 기업의 AI 생산성 전환 수요·헬스케어 행정 $4T TAM (Ravi Kumar S CEO)</li>
+      <li><b>AI 파트너십 확장</b> — Anthropic Claude(Travelport)·Aston Martin F1·ServiceNow·Secure AI</li>
+      <li><b>마진 확대 가이드</b> — 조정 OPM 15.9~16.1%(+10~30bp), FY26 EPS +7~9%</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>AI 디플레이션</b> — 코딩·운영 자동화가 35만 인력 기반 매출 잠식 우려</li>
+      <li><b>Q2 보수적</b> — 재량적 지출 둔화 'near-term caution' 명시</li>
+      <li><b>컨센 줄하향</b> — Citi $51·Wedbush $56·Morgan Stanley $63 등 PT 하향</li>
+      <li><b>약한 기술적</b> — 공매도 ~10%(float)·200일선($69) 한참 아래 하락추세</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="CTSH 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$87</text>
+      <text x="46" y="142" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$53</text>
+      <text x="46" y="169" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$45</text>
+      <polyline points="64,42 130,36 200,54 270,72 340,66 410,92 480,114 550,132 610,146 670,152 720,140 780,148 840,138 905,141" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="600" y="129" width="310" height="18" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="755" y="124" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $50.9–$56.1</text>
+      <line x1="600" y1="129" x2="910" y2="129" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="125" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 56.10 (50일선)</text>
+      <line x1="600" y1="147" x2="910" y2="147" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="159" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 50.90</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 87.03</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$87.03</div></div>
+    <div class="lv"><div class="l">저항(50일선)</div><div class="v r">$56.10</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$53.40</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$50.90</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$45.48</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$56.1(50일선) 돌파 시</b> → 다음 매물대 $66, 이어 200일선 $69·평균 목표가 $72.5. <b style="color:var(--down)">$50.9 이탈 시</b> → 52주 저점 $45.48 재시험 가능. 방아쇠: <b class="fc">AI 수주의 매출 전환</b> · Q2 재량지출 회복 · $2B 자사주 지지.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>가치함정</b> — AI가 라이트사이징(인력 단가·딜 규모 축소)으로 전개되면 저평가가 정당화되지 않음.</li>
+    <li><b>통합 리스크</b> — Astreya $600M 인수·잦은 워크포스 전환 비용이 마진 개선을 상쇄할 위험.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">6/5 (완료)</td><td><b>Cognizant AI Forum</b> — 키노트·AI 빌더 전략 공개 (시장 반응·후속 코멘트 확인)</td></tr>
+    <tr><td class="d">7월 말</td><td><b>2Q26 실적</b> — 재량지출 회복 여부·부킹 지속·AI 매출 전환·조정 OPM 추이</td></tr>
+    <tr><td class="d">분기 중</td><td>$2B 2026 자사주(+$500M ASR) 집행 · Astreya 통합 진척</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-06-05 종가 기준 공개치로 실제와 차이가 있을 수 있으며, 일부 지표는 반올림되었습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://stockanalysis.com/stocks/ctsh/statistics/">stockanalysis</a> · <a href="https://www.gurufocus.com/news/8897223/a-look-at-cognizant-technology-solutions-corp-ctsh-after-35-decline-gf-value-8338-vs-price-5514">GuruFocus GF Value</a> · <a href="https://www.fool.com/earnings/call-transcripts/2026/04/29/cognizant-ctsh-q1-2026-earnings-transcript/">Motley Fool 1Q26</a> · <a href="https://www.prnewswire.com/news-releases/cognizant-increases-2026-share-repurchase-target-by-1-billion-to-2-billion-302774305.html">PRNewswire 자사주</a> · <a href="https://stockanalysis.com/stocks/ctsh/forecast/">SA Forecast</a></div>
+    <div class="nextp">다음 발행 · 2026-06-14(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
