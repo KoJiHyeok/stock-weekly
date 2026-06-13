@@ -1,0 +1,18 @@
+{
+  "system": "weekly-us-stock-report",
+  "market": "US",
+  "design": "terminal-dark-single-green",
+  "style_template_file": "PYPL_2026-06-03.html",
+  "covered_tickers": ["PYPL", "PFE", "QCOM", "CTSH"],
+  "current_pick": null,
+  "last_published_no": 4,
+  "last_published": "CTSH (2026-06-07)",
+  "next_publish": "2026-06-14 22:00 KST",
+  "deploy": {
+    "host": "GitHub Pages",
+    "repo": "KoJiHyeok/stock-weekly",
+    "upload_url": "https://github.com/KoJiHyeok/stock-weekly/upload/main",
+    "site_url": "https://kojihyeok.github.io/stock-weekly/"
+  },
+  "note": "발행 완료 종목을 covered_tickers에 누적. 다음 종목은 주중 스크리너가 결정(발굴 중). repo가 단일 진실원. 다음 발행은 No.05."
+}
