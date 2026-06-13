@@ -15,10 +15,11 @@ ROUTINE ②: 주간 발행 (일 22:00 KST, cron 0 22 * * 0)
 
 [STEP 5 — 마감] 발행 TICKER 를 _state.json covered_tickers 에 추가, current_pick 비움. README.md·PROJECT.md "다룬 종목/현황"에 한 줄 반영.
 
-[STEP 6 — 배포(git)]
+[STEP 6 — 배포(git) · 반드시 main 직접 반영]
   git add -A
   git commit -m "publish: {TICKER} {date}"
-  git push
-push 충돌 시 git pull --rebase 후 재시도. GitHub Pages 가 자동 빌드한다(브라우저 업로드 불필요). 끝에 한 줄: 발행 종목·thesis·다음 일정 보고.
+  git pull --rebase origin main
+  git push origin HEAD:main
+새 브랜치/PR로 남기지 말 것(위 `git push origin HEAD:main` 로 main 직접 반영). push 충돌 시 `git pull --rebase origin main` 후 재시도. GitHub Pages 가 자동 빌드한다(브라우저 업로드 불필요). 끝에 한 줄: 발행 종목·thesis·다음 일정 보고.
 
 확보불가 항목은 "N/A". 데이터 지어내지 말 것.

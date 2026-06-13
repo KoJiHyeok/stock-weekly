@@ -16,7 +16,9 @@ ROUTINE ①: 일별 5종목 스크리너 (월~토 22:00 KST, cron 0 22 * * 1-6)
 [STEP 3 — 적재 & 커밋] composite 최고 종목을 그날의 픽으로. _candidates.json 의 candidates[] 에 추가: {date, ticker, company, price, value, growth, range, composite, thesis, screened:[5개 티커]}. 그 다음:
   git add _candidates.json
   git commit -m "screener: {date} {TICKER} ({composite})"
-  git push
+  git pull --rebase origin main
+  git push origin HEAD:main
 끝에 한 줄: "오늘의 후보: TICKER(composite NN) · 스크리닝: A,B,C,D,E".
 
-데이터를 지어내지 말 것. 근거 기반 채점, 확보 어려운 항목은 보수적으로. push 충돌 시 `git pull --rebase` 후 재시도.
+중요: 변경사항을 반드시 main 브랜치에 직접 반영하라(새 브랜치/PR로 남기지 말 것 — 위 `git push origin HEAD:main`). push 충돌 시 `git pull --rebase origin main` 후 재시도.
+데이터를 지어내지 말 것. 근거 기반 채점, 확보 어려운 항목은 보수적으로.

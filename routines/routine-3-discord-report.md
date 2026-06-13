@@ -32,7 +32,7 @@ HTTP 200/204 면 성공(?wait=true 붙이면 본문 확인 가능). 실패 시 1
 [STEP 6 — 복기 로그 & 커밋] _review-log.md(없으면 "# 주간 예측 복기 로그") 끝에 append:
   ## {오늘} · {지난주 TICKER}
   - 예측: … / 결과: … ({±%}) / 원인: … / 교훈: …
-  그 다음: git add _review-log.md && git commit -m "review: {date} {TICKER}" && git push (충돌 시 pull --rebase 재시도).
+  그 다음(반드시 main 직접 반영): git add _review-log.md && git commit -m "review: {date} {TICKER}" && git pull --rebase origin main && git push origin HEAD:main (새 브랜치/PR 금지; 충돌 시 git pull --rebase origin main 재시도).
 
 [STEP 7 — 보고] 한 줄: "디스코드 전송 {성공/실패} · 복기 {TICKER}({±%}) · 전체 N종목".
 
