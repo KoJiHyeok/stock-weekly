@@ -2,8 +2,20 @@
   "site": "WEEKLY EQUITY DESK",
   "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
   "next_pick": "발굴 중 (주중 스크리닝으로 결정)",
-  "next_publish": "2026-06-14 22:00 KST",
+  "next_publish": "2026-06-21 22:00 KST",
   "reports": [
+    {
+      "no": 5,
+      "ticker": "PDD",
+      "company": "PDD Holdings Inc.",
+      "date": "2026-06-14",
+      "file": "PDD_2026-06-14.html",
+      "price": "$87.96",
+      "tldr": "메가캡 e커머스 최저 EV/EBITDA 5.7배 · 딥 트랜스포메이션(매출 +11% vs 순이익 −15%) · 52주 최하단 바닥 탐색",
+      "value": "저평가",
+      "growth": "논쟁",
+      "trend": "바닥 탐색"
+    },
     {
       "no": 4,
       "ticker": "CTSH",
