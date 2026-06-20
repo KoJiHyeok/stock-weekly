@@ -63,5 +63,18 @@
       "thesis": "EV/EBITDA 8.12x(소프트웨어 동종 10년 중앙값 25~35x 대비 67~77% 할인)·FCF수익률 ~12.5%(FY2026 연환산 FCF $11-12B / 시총 $88B) — 기업용 SaaS 중 역사적 최저 밸류에이션 구간. 52주 박스권($190.12~$392.58) 절대 최하단(현재 $194.14, 52주 저점 $190.12 대비 +2.1%, 고점 대비 -51%, 52주 -48%) 재탐색. 성장 논쟁이 핵심: 생성형 AI(ChatGPT 이미지·Midjourney·Sora·Canva AI)의 크리에이티브 시장 민주화로 Adobe 구독 이탈·가격 압력 우려 vs. Adobe Firefly 300억+ 생성 이미지 돌파·Creative Cloud/Document Cloud/Experience Cloud 기업 전환 비용 높은 구독 점착성·Q2 FY2026(6/11 발표) beat-and-raise 확인(FY2026 매출 가이던스 $25.9-26.1B·non-GAAP EPS $23.3-23.5 상향) — 'AI 무기화 수익화 vs AI 피해' 전형적 성장 논쟁. CFO Dan Durn 6/15 Marvell 이직으로 단기 불확실성 증폭→저점 추가 하방 형성. 학습 반영: ①CTSH 교훈 — 미검증 촉매 아님; Q2 FY2026 실적 beat-and-raise로 thesis 검증 완료 ②PDD 교훈 — 실적 쇼크 없음; AI 경쟁 리스크는 비정량적이어 이중 계량 리스크 해당 안 됨. 리스크: 생성형 AI 크리에이티브 도구 경쟁 가속(Canva·Figma AI)으로 ARR 해지율 상승; CFO 공백기 FY2027 가이던스 불확실성; Hold 컨센서스 다수(17Buy/33Hold/2Sell). (대안: TTD 76 — 52주 절대 저점 0.2%($19.10 근접)·forward PE 10.79·adj EBITDA 마진 30%·Q2 가이던스 $750M, 단 매출 성장 25%→12% 둔화·그로스마진 74% 8분기 최저·EPS 12.5% 미달; SNAP 65 — 14% from low·adj EBITDA +116%·Snap+ 구독 성장, 단 GAAP 적자·TikTok 경쟁·Hold 컨센서스(43인); SWK 60 — forward PE 14.53·EV/EBITDA 13.36·$1.8B CAM 매각 촉매·그로스마진 35% 회복 목표·18인 Buy, 단 52주 중간 구간(49%) — 박스권 조건 미충족; DHI 57 — PE 14.47·주택 공급부족 장기 수혜, 단 Q2 EPS -11% YoY·금리 민감도·38% from low.)",
       "screened": ["ADBE", "TTD", "SNAP", "SWK", "DHI"]
     }
+  ,
+    {
+      "date": "2026-06-20",
+      "ticker": "CMCSA",
+      "company": "Comcast Corporation",
+      "price": 24.50,
+      "value": 10,
+      "growth": 7,
+      "range": 9,
+      "composite": 88,
+      "thesis": "EV/EBITDA 4.81x(10년 중앙값 ~9x 대비 47% 할인)·선행PER 6.76x(10년 평균 ~16x 대비 58% 할인)·FCF수익률 ~15.6%(연환산 FCF ~$15.6B / 시총 ~$98B) — 미국 대형 미디어/케이블 중 역사적 최저 밸류에이션 구간. 52주 박스권($23.13~$36.66) 절대 최하단(현재 $24.50, 저점 $23.13 대비 +5.9%, 52주 고점 대비 -33%). 성장 논쟁이 핵심: T-Mobile·Verizon FWA(고정무선인터넷)·AT&T/Frontier 광케이블 경쟁으로 Xfinity 브로드밴드 가입자 구조적 이탈 우려 vs. 모바일(Xfinity Mobile 9.7M 가입자, Q1 순증 435K·YoY 가속)·기업광대역·스피드 업그레이드 수요·Peacock 스트리밍·NBCUniversal IP로 FCF 견조 유지 — '케이블 구조적 침식 vs. 통신+미디어 복합 플랫폼 FCF 방어' 전형적 논쟁. Q1 2026 실적: Revenue $31.46B(예상 상회)·Adj EBITDA $7.93B·FCF $3.9B(분기 FCF 규모 이 주 후보 중 최대); 브로드밴드 이탈 -65K(YoY -117K 개선, 최악 시나리오 이미 일부 반영 신호); 실적 beat 후 주가 오히려 -13% 추가 하락(공포 과잉 매도) → 저점 재탐색. 애널리스트 평균 목표가 $32.40(현재 대비 +32%). 학습 반영: ①CTSH교훈 — Q1 beat 확인·미검증 미래 촉매 없음 ②PDD교훈 — 브로드밴드 이탈 수치 공시(이중 리스크 일부 정량화됨)·실적 쇼크 없음 — 두 실패 패턴 해당 안 됨. 리스크: FWA 이탈 가속으로 브로드밴드 ARPU·가입자 동시 하락·Peacock 누적 손실·순부채 ~$86B(레버리지 ~2.7x EBITDA) 금리 민감도. (대안: GPN 84 — 선행PER 4.85x·EV/EBITDA 9~11x(10년 중앙값 19.37x 대비 43~53% 할인)·52주 저점 +8.8%·Q1 Adj EPS $2.96 +10% YoY 비트·Worldpay 통합 'ahead of plan'·Genius 신규 계약 YoY 2배·목표가 $94.92(+39%), GAAP 손실 vs adj 강세 논쟁; CE 68 — 선행PER 7.45x·EV/EBITDA 11.99x·근저점 추정, 단 Debt/EBITDA 10.52x(업종 중앙값의 5배) 극단 레버리지·FCF $700-800M 가이던스 미검증; SWKS 61 — 선행PER 13.04x·EV/EBITDA 8.94x·FCF $740M, 단 52주 저점 대비 +35%(박스권 중간 구간)·Apple 매출 집중·Hold 컨센서스 25인; BAX 61 — 선행PER 8.07x·Vantive 분사 후 병원제품 재구축, 단 부채 $10.31B·52주 위치 불분명·성장 촉매 제한.)",
+      "screened": ["CMCSA", "GPN", "CE", "SWKS", "BAX"]
+    }
   ]
 }
