@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · CMCSA · Comcast Corporation</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  /* header */
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  /* quote */
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  /* tldr */
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  /* section label */
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  /* verdict */
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  /* metric grid */
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  /* key line + bullets + forecast */
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  /* earnings strip */
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  /* bull/bear */
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  /* technical */
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  /* calendar */
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">CMCSA</span>
+    <span class="exch">NASDAQ</span>
+    <span class="co">Comcast Corporation</span>
+    <span class="hmeta">WEEKLY EQUITY · No.06<br>기준 2026·06·20 · 작성 06·21</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$24.50</div>
+      <div class="chg">▼ 52주 고점 대비 −33%</div>
+      <div class="pxn">시총 ~$98B · EV ~$184B · 순부채 ~$86B</div>
+      <div class="rbar"><span class="fill" style="width:10.1%"></span><span class="mk" style="left:10.1%"></span></div>
+      <div class="rlab"><span>$23.13</span><span>52W RANGE · 하단 10%</span><span>$36.66</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">6.76×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">4.81×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">~15.6%</div></div>
+      <div class="stat"><div class="l">배당 수익률</div><div class="v">5.4%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$32.40</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">EV/EBITDA 역대 최저 4.81배·FCF 수익률 15.6% — 싸다. Peacock Q2 첫 흑자 전환 목전·브로드밴드 손실 4년 만에 첫 YoY 개선 vs. FWA·광케이블 구조적 위협 성장 논쟁. 52주 최하단 10% 바닥 탐색. <span class="fc">재평가 방아쇠는 Q2 실적(7월 하순) — Peacock 흑자 + 브로드밴드 안정화 동시 검증이 관건.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 극단 저평가 가치주</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc">
+      <div class="h">① 기업가치</div>
+      <div class="s" style="color:var(--acc)">저평가 (극강)</div>
+      <div class="meter"><span style="width:95%"></span></div>
+      <div class="d">EV/EBITDA 4.81×(10년 중앙값 ~9× 대비 47% 할인)·선행PER 6.76×·FCF수익률 ~15.6%. 대형 미디어·케이블 역사적 최저.</div>
+    </div>
+    <div class="vc">
+      <div class="h">② 성장 가능성</div>
+      <div class="s">논쟁</div>
+      <div class="meter"><span style="width:50%;background:var(--sub)"></span></div>
+      <div class="d">Peacock Q2 첫 흑자·무선 분기 기록 vs. 브로드밴드 구조적 이탈 지속. '플랫폼 전환 성공 vs. 핵심 사업 침식' 논쟁.</div>
+    </div>
+    <div class="vc">
+      <div class="h">③ 주가 흐름</div>
+      <div class="s" style="color:var(--down)">바닥 탐색</div>
+      <div class="meter"><span style="width:10%;background:var(--down)"></span></div>
+      <div class="d">52주 저점 +5.9%. Q1 실적 beat 후 오히려 −13% 추가 하락. 공포가 펀더멘털을 앞서는 구간.</div>
+    </div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">극단 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">4.81×</div><div class="n">10년 중앙값 ~9×</div></div>
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">6.76×</div><div class="n">10년 평균 ~16×</div></div>
+    <div class="mc"><div class="l">EV/FCF</div><div class="v a">8.34×</div><div class="n">FCF수익률 ~15.6%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">21 / 11%</div><div class="n">자본효율 양호</div></div>
+  </div>
+  <div class="key">시장은 <b>"브로드밴드 구조적 붕괴"</b> 시나리오를 가격에 이미 반영 — 그 시나리오가 현실이 되어도 <span class="fc">연 $15B+ FCF는 단기 소멸하지 않는다.</span></div>
+  <ul class="pts">
+    <li>연간 잉여현금흐름(FCF) <span class="fc">~$15.6B(Q1 $3.9B × 4 환산)</span>, 시총 $98B 대비 수익률 ~15.6% — 배당 $1.32/주(5.4%)만으로도 대형주 최상위권.</li>
+    <li>2025년 주주환원 합계 <b>$11.7B</b>(배당 $4.9B + 자사주 $6.8B). Q1 2026만 배당 $1.2B + 자사주 $1.3B = $2.5B 집행. 주가 하락 시 자동으로 매입 단가 하락 → 장기 EPS 부스터.</li>
+    <li>EV/EBITDA 4.81×는 통신·미디어 역사적 저점 수준 — <b>Versant Media 스핀오프(2025) 후에도</b> 코어 사업 EBITDA $37.4B(2025 FY)은 건재.</li>
+  </ul>
+  <div class="fcast">
+    <div class="ft">전망 · OUTLOOK</div>
+    <div class="fx"><b class="fc">Peacock 흑자 전환(Q2 확인) + 브로드밴드 손실 추세 안정화</b>가 동시 검증되면 <b class="fc">EV/EBITDA 6~7× 복귀 시나리오</b> → 주가 $34~$42 상방 (분석가 평균 목표 $32.40). <b style="color:var(--down)">단, 브로드밴드 이탈 재가속 시 현 멀티플 정당화 불가 — FCF 훼손 리스크.</b></div>
+  </div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">논쟁 · 플랫폼 전환 중</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">1Q26 매출</div><div class="v a">$31.5B</div></div>
+    <div class="ec"><div class="l">YoY(프로포마)</div><div class="v a">+10.9%</div></div>
+    <div class="ec"><div class="l">Adj EPS</div><div class="v a">$0.79</div></div>
+    <div class="ec"><div class="l">Q1 FCF</div><div class="v a">$3.9B</div></div>
+    <div class="ec"><div class="l">Peacock 구독</div><div class="v a">46M</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v" style="color:var(--down)">−13%</div></div>
+  </div>
+  <div class="key">컨센서스 상회($0.79 vs $0.73 예상)했지만 시장은 <b>Q2 브로드밴드 ARPU 추가 압박</b> 경고에 반응 — 공포가 펀더멘털을 앞서는 구간.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>Peacock Q2 첫 흑자 전환</b> — Matt Strauss NBCUniversal 회장(2026-06-02 Evercore 콘퍼런스): "I'm proud to share we will be profitable in Q2." Mike Cavanagh 사장도 Q1 콜서 확인. 6년 누적 손실이 수익 기여로 전환. Q1 매출 $2.0B(+71% YoY·사상 첫 $2B 돌파)·유료 구독자 46M(+12% YoY)</li>
+      <li><b>Xfinity Mobile 분기 기록 경신</b> — Q1 순증 435K(사상 최대), 총 9.7M 회선·브로드밴드 침투율 16%. 목표는 20%+로 상당한 성장 여력 잔존</li>
+      <li><b>브로드밴드 손실 4년 만에 첫 YoY 개선</b> — Q1 -65K(전년동기 -183K 대비 100K+ 개선). 브로드밴드 연결 볼륨도 4년 만에 YoY 증가 전환</li>
+      <li><b>스포츠·이벤트 IP 독점력</b> — NBA·동계올림픽(밀라노-코르티나)·슈퍼볼이 Q1 Peacock 광고 기록 경신. NBCUniversal의 장기 스포츠 중계권은 복제 불가 해자</li>
+      <li><b>자사주 매입 의지 확인</b> — Q1 $1.3B 집행. 주가 하락 = 자동 매입 단가 하락 → 장기 주당 가치 강화</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>브로드밴드 구조적 이탈 지속</b> — 2025년 연간 -711K. T-Mobile·Verizon FWA + AT&T/Frontier 광케이블 + Starlink 3중 경쟁. Q2 ARPU 추가 하락 경영진 직접 예고</li>
+      <li><b>핵심 매출원 ARPU 하락 궤도</b> — 경쟁 심화에 따른 프로모 가격 확대로 ARPU 단가 하락 구조 진입. Scotiabank 목표가 하향($35.25→$34)이 이 우려를 반영</li>
+      <li><b>순부채 ~$86B(레버리지 ~2.7× EBITDA)</b> — 금리 민감도 높음. EBITDA 하락 시 레버리지 배수 상승 → 부채 비용 부담 심화</li>
+      <li><b>Peacock Q1 EBITDA 손실 -$432M</b> — 올림픽·슈퍼볼 특수 비용 포함이나 구조적 손실 지속 여부는 Q2 검증 필요. 흑자 전환 실패 시 신뢰 훼손</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">바닥 탐색</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="CMCSA 52주 가격 개략도와 바닥 탐색 구간">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$37</text>
+      <text x="46" y="94" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$30</text>
+      <text x="46" y="140" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$25</text>
+      <text x="46" y="162" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$23</text>
+      <!-- 52-week declining price path: high ~$36.66 → current ~$24.50 -->
+      <polyline points="64,52 155,25 245,44 335,71 425,111 515,131 580,145 640,155 700,159 760,152 820,148 870,145 905,145" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <!-- Bottom range box: ~$23.13 to ~$25.20 -->
+      <rect x="630" y="139" width="280" height="20" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="770" y="133" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">바닥 탐색 구간 $23.13–$25.20</text>
+      <!-- Resistance at $25.20 -->
+      <line x1="630" y1="139" x2="910" y2="139" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="135" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 $25.20</text>
+      <!-- Support/52W low at $23.13 -->
+      <line x1="630" y1="159" x2="910" y2="159" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="157" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지/52W 저점 $23.13</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH $36.66</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$36.66</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$25.20</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$24.50</div></div>
+    <div class="lv"><div class="l">지지/52W 저점</div><div class="v a">$23.13</div></div>
+    <div class="lv"><div class="l">분석가 목표가</div><div class="v">~$32.40</div></div>
+  </div>
+  <div class="fcast">
+    <div class="ft">전망 · 시나리오</div>
+    <div class="fx"><b class="fc">$25.20 돌파 시</b> → 다음 저항 $28~$30(단기 이평선 구간). <b class="fc">7월 하순 Q2 실적에서 Peacock 흑자 + 브로드밴드 이탈 완화 동시 확인 시</b> → EV/EBITDA 재평가 트리거, 분석가 목표가 $32.40 방향성 열림. <b style="color:var(--down)">$23.13 이탈 시</b> → 전례 없는 영역 진입, $20~$22 구간 재시험 가능성. 주요 방아쇠: Q2 브로드밴드 순가입자·Peacock adj EBITDA·ARPU 방향.</div>
+  </div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>FWA·광케이블 가속 위험</b> — T-Mobile·Verizon FWA 점유율 확대 + Starlink 가격 인하 시 브로드밴드 이탈 재가속 → EBITDA 하락 → 레버리지 배수 상승 악순환.</li>
+    <li><b>Peacock 흑자 실패</b> — Q2 흑자 전환이 지연되면 경영진 가이던스 신뢰 훼손, 멀티플 재평가 촉매 소멸.</li>
+    <li><b>순부채 ~$86B</b> — 금리 상승·신용 스프레드 확대 시 이자비용 압박, 배당·자사주 여력 축소 우려.</li>
+    <li><b>NBCUniversal 광고 경기 민감도</b> — 경기침체 시 TV·디지털 광고 매출 급감. 유니버설 테마파크 방문객 수요도 소비 경기 연동.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">7월 하순</td><td><b>Q2 2026 실적</b> — Peacock adj EBITDA 흑자 달성 여부(명시적 경영진 약속 검증) · 브로드밴드 순가입자·ARPU 방향 · 2026 연간 가이던스 재확인</td></tr>
+    <tr><td class="d">2H 2026</td><td>Xfinity Mobile 무료→유료 전환 가속(현 16%→목표 20%+) · 브로드밴드 connect volume 반등 유무 · 자사주 매입 규모 유지 여부</td></tr>
+    <tr><td class="d">연중</td><td>FWA 지역 커버리지 확장 속도 · AT&T Fiber/Frontier 광케이블 구축 완료 지역 · NBCUniversal 광고 단가 트렌드 · 순부채 감소 궤도 확인</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-06-20 종가 기준 공개치로 실제와 차이가 있을 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://www.cmcsa.com/news-releases/news-release-details/comcast-reports-1st-quarter-2026-results">Comcast IR Q1 2026</a> · <a href="https://stockanalysis.com/stocks/cmcsa/statistics/">StockAnalysis</a> · <a href="https://www.cnbc.com/2026/04/23/comcast-cmcsa-earnings-q1-2026.html">CNBC Q1 2026</a> · <a href="https://realscreen.com/2026/04/23/peacock-hits-46-million-paid-subs-in-q1-expected-to-turn-a-profit-in-q2/">RealScreen Peacock Q2</a> · <a href="https://www.tikr.com/blog/comcast-has-fallen-33-from-its-high-peacock-turning-profitable-in-q2-could-be-the-turning-point">TIKR 분석</a> · <a href="https://tickeron.com/blogs/comcast-cmcsa-navigating-broadband-pressures-amid-a-12-monthly-decline-12266/">Tickeron 기술적 분석</a></div>
+    <div class="nextp">다음 발행 · 2026-06-28(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>

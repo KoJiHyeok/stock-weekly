@@ -6,6 +6,7 @@
 
 | No. | 티커 | 회사 | 발행일 | 한 줄 thesis |
 |-----|------|------|--------|-------------|
+| 06 | CMCSA | Comcast Corporation | 2026-06-21 | EV/EBITDA 4.81× 역대 최저 · Peacock Q2 흑자 전환 vs. FWA 구조적 위협 논쟁 · 52주 최하단 10% 바닥 탐색 |
 | 05 | PDD | PDD Holdings (Pinduoduo/Temu) | 2026-06-14 | EV/EBITDA 5.7× 최저 · 딥 트랜스포메이션 성장 논쟁 · 52주 최하단 바닥 탐색 |
 | 04 | CTSH | Cognizant Technology Solutions | 2026-06-07 | 선행 PER 9.4배 · AI 위협/기회 논쟁 · $51–$56 박스권 |
 | 03 | QCOM | Qualcomm | 2026-06-03 | 애플 모뎀 이별 선반영 · 자동차/AI 전환 논쟁 · $210–$245 박스권 |

@@ -1,9 +1,21 @@
 {
   "site": "WEEKLY EQUITY DESK",
   "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
-  "next_pick": "발굴 중 (주중 스크리닝으로 결정)",
-  "next_publish": "2026-06-21 22:00 KST",
+  "next_pick": "발굴 중",
+  "next_publish": "2026-06-28 22:00 KST",
   "reports": [
+    {
+      "no": 6,
+      "ticker": "CMCSA",
+      "company": "Comcast Corporation",
+      "date": "2026-06-21",
+      "file": "CMCSA_2026-06-21.html",
+      "price": "$24.50",
+      "tldr": "EV/EBITDA 역대 최저 4.81배·FCF 수익률 15.6% · Peacock Q2 첫 흑자 전환 목전 · 브로드밴드 손실 4년 만에 첫 YoY 개선 vs. FWA 구조적 위협 · 52주 최하단 10% 바닥 탐색",
+      "value": "극단 저평가",
+      "growth": "논쟁",
+      "trend": "바닥 탐색"
+    },
     {
       "no": 5,
       "ticker": "PDD",
