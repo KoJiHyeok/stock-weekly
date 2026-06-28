@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · ADBE · Adobe Inc.</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  /* header */
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  /* quote */
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  /* tldr */
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  /* section label */
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  /* verdict */
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  /* metric grid */
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  /* key line + bullets + forecast */
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  /* earnings strip */
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  /* bull/bear */
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  /* technical */
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  /* calendar */
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">ADBE</span>
+    <span class="exch">NASDAQ</span>
+    <span class="co">Adobe Inc.</span>
+    <span class="hmeta">WEEKLY EQUITY · No.07<br>기준 2026·06·27 · 작성 06·28</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$202.73</div>
+      <div class="chg">▼ 52주 고점 대비 −48% · YTD −38%</div>
+      <div class="pxn">시총 $80.6B · EV ~$79B</div>
+      <div class="rbar"><span class="fill" style="width:6.2%"></span><span class="mk" style="left:6.2%"></span></div>
+      <div class="rlab"><span>$190.12</span><span>52W RANGE · 하단 6%</span><span>$392.58</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">8.3×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">8.12×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">12.7%</div></div>
+      <div class="stat"><div class="l">ROE / ROIC</div><div class="v">63% / 61%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">$282</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">Q2 매출 +13%·AI ARR 3배 돌파·$25B 자사주 vs CEO·CFO 동시 공백·AI 네이티브 잠식 — 52주 최하단 6% 극단 저평가 구간. <span class="fc">재평가 방아쇠는 리더십 불확실성 해소.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">극단 저평가 · 리더십 논쟁</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc">
+      <div class="h">① 기업가치</div>
+      <div class="s" style="color:var(--acc)">극단 저평가</div>
+      <div class="meter"><span style="width:88%"></span></div>
+      <div class="d">선행 P/E 8.3×·EV/EBITDA 8.1×·FCF 수익률 12.7% — 소프트웨어 섹터 역대 최저 밸류에이션.</div>
+    </div>
+    <div class="vc">
+      <div class="h">② 성장 가능성</div>
+      <div class="s">AI 가속 · 논쟁</div>
+      <div class="meter"><span style="width:50%;background:var(--sub)"></span></div>
+      <div class="d">Q2 +13% YoY·AI ARR 3배 달성 vs CEO·CFO 이중 공백·Firefly 무료화 역풍.</div>
+    </div>
+    <div class="vc">
+      <div class="h">③ 주가 흐름</div>
+      <div class="s">바닥 탐색</div>
+      <div class="meter"><span style="width:12%;background:var(--sub)"></span></div>
+      <div class="d">52주 최하단 6% · RSI 23 극단 과매도. 기술적 반등 여지 잠재.</div>
+    </div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">극단 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">8.3×</div><div class="n">소프트웨어 섹터 ~25× 대비 67% 할인</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">8.12×</div><div class="n">동종 중앙값 14.4× 대비 44% 할인</div></div>
+    <div class="mc"><div class="l">FCF (TTM)</div><div class="v">$10.3B</div><div class="n">FCF 수익률 12.7%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">63% / 61%</div><div class="n">초고수익 자본 구조 유지</div></div>
+  </div>
+  <div class="key">크리에이티브 소프트웨어 절대 강자를 <b>EV/FCF 7.7배·선행 P/E 8.3배</b>에 거래 — 10년 역사상 최저 밸류에이션 구간.</div>
+  <ul class="pts">
+    <li><b>$25B 자사주 매입</b>(2026-04-21 신설·2030년 만기): TTM FCF $10.3B으로 약 2.4년분 — 주주환원 복리 구조.</li>
+    <li><b>ROE 63%·ROIC 61%</b> 유지하며 역대 최저 밸류에이션 — "성장 없는 쇠퇴" 시나리오가 이미 가격에 반영됨.</li>
+    <li>총 ARR <b>$27.1B</b>·FY2026 전사 매출 가이던스 $26.5~26.6B — 구독 기반 수익 가시성 우수.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx"><b class="fc">CEO 후계자 공식 발표 + Q3 AI ARR 가속 확인</b> 시 → EV/EBITDA 10~12×(역사적 저점 밴드) 재평가 여지. 현재 8.1×에서 10×으로만 회복돼도 <b>내재 업사이드 약 +23%</b>. <b>단, 리더십 공백이 장기화하거나 Firefly 무료화로 ARR 성장이 꺾이면 이 논리는 재점검이 필요하다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">AI 가속 · 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">Q2 FY26 매출</div><div class="v a">$6.62B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+13%</div></div>
+    <div class="ec"><div class="l">비GAAP EPS</div><div class="v a">$5.96</div></div>
+    <div class="ec"><div class="l">AI-First ARR</div><div class="v a">$500M+</div></div>
+    <div class="ec"><div class="l">발표 후 반응</div><div class="v" style="color:var(--down)">−5.7%</div></div>
+  </div>
+  <div class="key">실적은 컨센서스를 <b>상회</b>하고 가이던스도 올렸지만 시장은 <b>CEO·CFO 동시 이탈</b>과 Firefly 무료화 전환에 역반응 — "성장이냐 잠식이냐" 논쟁 지속.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>Q2 실적 검증 완료</b> — 매출 $6.62B(+13% YoY·컨센 $6.46B 상회)·비GAAP EPS $5.96(+18% YoY)</li>
+      <li><b>AI-first ARR >$500M</b> — 전년 대비 3배·Firefly 실사용 가속 확인</li>
+      <li><b>FY2026 가이던스 상향</b> — 매출 $26.5~26.6B·비GAAP EPS $24.35~24.45</li>
+      <li><b>$25B 자사주 매입</b>(2026~2030) — FCF 복리 주주환원·주식수 감소→EPS 방어</li>
+      <li><b>RSI 23 극단 과매도</b> — 기술적 단기 반등 여지 충분</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>CEO 나라옌 퇴임(후계 미정)</b> + CFO 던 사임(6/15) → 전략 연속성·리더십 이중 공백</li>
+      <li><b>Firefly 무료화</b> → 단기 ARR 희석·유료 전환율 하락 우려</li>
+      <li><b>마진 압축</b> — GAAP 운영마진 33.8%(−210bps YoY)·비GAAP 44.5%(−290bps QoQ)</li>
+      <li><b>AI 네이티브 경쟁</b>(Midjourney·Runway·Canva) — Creative Cloud 구독 잠식 가속</li>
+      <li><b>어닝 비트에도 주가 −5.7%</b> — 시장 신뢰 회복에 추가 시간 필요</li>
+    </ul></div>
+  </div>
+  <div class="fcast"><div class="ft">성장 전망</div><div class="fx">FY2026 비GAAP EPS 가이던스 <b class="fc">$24.35~24.45</b>(현 주가 P/E 8.3×). <b class="fc">AI ARR이 2026 H2에 $750M~$1B 궤도 진입 시</b> 구독 성장 논쟁 해소·재평가 가능. 반면 Firefly 무료화 전략이 ARR 목표를 하회하거나 CEO 공백이 M&amp;A·제품 로드맵 지연으로 이어지면 성장 논쟁 장기화.</div></div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">52주 최하단 바닥 탐색</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="ADBE 52주 가격 개략도 — 고점 $392에서 현재 $202까지 하락 후 바닥 탐색">
+      <line x1="54" y1="22" x2="54" y2="178" stroke="#1c2433"/>
+      <line x1="54" y1="178" x2="910" y2="178" stroke="#1c2433"/>
+      <text x="46" y="27" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$393</text>
+      <text x="46" y="150" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$220</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$190</text>
+      <polyline points="64,24 150,32 220,50 290,72 360,96 430,116 500,134 570,148 640,158 700,165 760,169 800,171 840,167 870,163 905,162" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="690" y="146" width="220" height="28" fill="rgba(53,224,138,.07)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="800" y="141" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">바닥 탐색 $190–$225</text>
+      <line x1="690" y1="171" x2="910" y2="171" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="168" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 190.12</text>
+      <line x1="640" y1="148" x2="910" y2="148" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="144" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 220</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH $392.58</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$392.58</div></div>
+    <div class="lv"><div class="l">50일 이동평균</div><div class="v r">$242</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$220</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$202.73</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$200</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$190.12</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$220 돌파 시</b> → 50일 이동평균($242)·단기 매물대 $240~245 도전. <b style="color:var(--down)">$190 이탈 시</b> → 52주 저점 하향 돌파·기술적 바닥 탐색 재개. <b class="fc">방아쇠:</b> CEO 후계자 공식 발표·Q3 AI ARR 가속 확인·비GAAP 운영마진 반등.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>이중 리더십 공백</b> — CEO 후계자 미정 + CFO 임시 체제. 전략 연속성 불확실성 장기화 시 멀티플 추가 압박.</li>
+    <li><b>Firefly 무료화 역풍</b> — ARR 희석·구독 캐니발라이제이션이 현실화 시 성장 논리 재검토 필요.</li>
+    <li><b>AI 네이티브 가속</b> — Midjourney·Runway·Canva의 무료·저가 공세 확대 시 Creative Cloud ARPU 하락.</li>
+    <li><b>마진 추가 하락</b> — 비GAAP 운영마진(현재 44.5%)이 42% 이하로 떨어지면 FCF 복리 논리 약화.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">2026-09월(예정)</td><td><b>Q3 FY2026 실적 발표</b> — AI ARR 궤도($750M+ 목표)·비GAAP 마진 회복·CEO 후계자 발표 동반 여부 주시</td></tr>
+    <tr><td class="d">2026-10월</td><td><b>Adobe MAX 연례 행사</b> — AI 신제품·Firefly 로드맵·구독 전략 공개 예정</td></tr>
+    <tr><td class="d">2026-04~2030</td><td><b>$25B 자사주 매입</b> 지속 — FCF $10.3B 기반 매입 속도·주식수 감소 모니터링</td></tr>
+    <tr><td class="d">상시</td><td><b>CEO 후계자 발표</b> — David Wadhwani(디지털 미디어 대표) 유력·공식 발표 시 불확실성 해소 트리거</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-06-27 종가 기준 공개치로 실제와 차이가 있을 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://stockanalysis.com/stocks/adbe/statistics/">StockAnalysis 통계</a> · <a href="https://www.businesswire.com/news/home/20260611677110/en/Adobe-Reports-Record-Q2-Results">BusinessWire Q2 보도자료</a> · <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000109/adbeex991q226.htm">SEC 8-K Q2 FY26</a> · <a href="https://www.gurufocus.com/news/8809462/adobe-adbe-announces-25b-buyback-shares-rise-25-in-premarket">GuruFocus $25B 자사주</a> · <a href="https://www.cnbc.com/2026/03/12/adobe-ceo-shantanu-narayen-step-down.html">CNBC CEO 퇴임</a> · <a href="https://tickeron.com/blogs/adobe-adbe-delivers-strong-q2-fy2026-results-with-13-revenue-growth-and-raised-guidance-14114/">Tickeron Q2 분석</a> · <a href="https://www.marketbeat.com/stocks/NASDAQ/ADBE/forecast/">MarketBeat 컨센서스</a></div>
+    <div class="nextp">다음 발행 · 2026-07-05(일) 22:00 KST · 다음 종목: 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
