@@ -2,8 +2,20 @@
   "site": "WEEKLY EQUITY DESK",
   "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
   "next_pick": "발굴 중",
-  "next_publish": "2026-06-28 22:00 KST",
+  "next_publish": "2026-07-05 22:00 KST",
   "reports": [
+    {
+      "no": 7,
+      "ticker": "ADBE",
+      "company": "Adobe Inc.",
+      "date": "2026-06-28",
+      "file": "ADBE_2026-06-28.html",
+      "price": "$202.73",
+      "tldr": "Q2 매출 +13%·AI ARR 3배 돌파·$25B 자사주 vs CEO·CFO 동시 공백·AI 네이티브 잠식 · 52주 최하단 6% 극단 저평가 바닥 탐색",
+      "value": "극단 저평가",
+      "growth": "AI 가속·논쟁",
+      "trend": "바닥 탐색"
+    },
     {
       "no": 6,
       "ticker": "CMCSA",
