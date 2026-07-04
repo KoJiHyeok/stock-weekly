@@ -2,8 +2,20 @@
   "site": "WEEKLY EQUITY DESK",
   "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
   "next_pick": "발굴 중",
-  "next_publish": "2026-07-05 22:00 KST",
+  "next_publish": "2026-07-12 22:00 KST",
   "reports": [
+    {
+      "no": 8,
+      "ticker": "GILD",
+      "company": "Gilead Sciences, Inc.",
+      "date": "2026-07-04",
+      "file": "GILD_2026-07-04.html",
+      "price": "$131.27",
+      "tldr": "HIV +10%·Yeztugo 가이던스 $1B 상향 vs $11.5B 온콜로지 베팅으로 FY26 EPS 손실 전환 · 8/27 BIC/LEN PDUFA · 6월 조정 후 52주 중하단 반등 시도",
+      "value": "저평가",
+      "growth": "가속·논쟁",
+      "trend": "반등 시도"
+    },
     {
       "no": 7,
       "ticker": "ADBE",
