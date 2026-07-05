@@ -5,6 +5,18 @@
   "next_publish": "2026-07-12 22:00 KST",
   "reports": [
     {
+      "no": 9,
+      "ticker": "DEO",
+      "company": "Diageo plc (ADR)",
+      "date": "2026-07-05",
+      "file": "DEO_2026-07-05.html",
+      "price": "$82.16",
+      "tldr": "Q3 유기적 매출 +0.3% 서프라이즈 vs 북미 -9.4%·테킬라 급감 지속 · 배당 반토막 후 CEO 데이브 루이스 $500M Accelerate 구조조정 · 8/6 FY26 실적+전략데이 · 5년 평균 대비 -37% 밸류 디스카운트",
+      "value": "저평가",
+      "growth": "논쟁",
+      "trend": "박스권·저점 다지기"
+    },
+    {
       "no": 8,
       "ticker": "GILD",
       "company": "Gilead Sciences, Inc.",

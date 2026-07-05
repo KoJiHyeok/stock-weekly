@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · DEO · Diageo plc</title>
+<style>
+:root{
+--bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+--ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+--acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+--sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+--mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+a{color:inherit;text-decoration:none}
+b{font-weight:500;color:#fff}
+.mono{font-family:var(--mono)}
+
+/* header */
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+.back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+.back:hover{color:var(--acc)}
+.tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+.exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+.co{font-size:13px;color:var(--sub)}
+.hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+/* quote */
+.quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+.pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+.px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+.chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+.pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+.rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+.rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+.rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+.rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+.statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stat{background:var(--surf);padding:12px 13px}
+.stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+.stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+.stat .v.a{color:var(--acc)}
+
+/* tldr */
+.tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+.tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+.tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+/* section label */
+.sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+.sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+.sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+.sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+.sec .rule{flex:1;height:1px;background:var(--line)}
+
+/* verdict */
+.verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+.vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+.vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+.vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+.meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+.meter span{display:block;height:100%;background:var(--acc)}
+
+/* metric grid */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mc{background:var(--surf);padding:13px 15px}
+.mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+.mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+.mc .v.a{color:var(--acc)}
+.mc .n{font-size:10.5px;color:var(--sub)}
+
+/* key line + bullets + forecast */
+.key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+.pts{list-style:none;margin-top:4px}
+.pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+.pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+.pts li:last-child{margin-bottom:0}
+.fc{color:var(--acc);font-weight:500}
+.fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+.fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+.fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+.fcast .fx b{color:#fff}
+
+/* earnings strip */
+.estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+.ec{background:var(--surf);padding:11px 13px}
+.ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+.ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+.ec .v.a{color:var(--acc)}
+
+/* bull/bear */
+.bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:620px){.bb{grid-template-columns:1fr}}
+.col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+.col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.col.bull h4{color:var(--acc)}
+.col.bear h4{color:var(--down)}
+.col ul{list-style:none;padding:12px 14px}
+.col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+.col li:last-child{margin-bottom:0}
+.col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+.col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+/* technical */
+.chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+.lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+.lv{background:var(--surf);padding:11px 12px;text-align:center}
+.lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+.lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+.lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+/* calendar */
+.cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+.cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.cal tr:last-child td{border-bottom:none}
+.cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+.disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+.src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+.src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+.nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+.blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+<a class="back" href="index.html">← DESK</a>
+<span class="tk">DEO</span>
+<span class="exch">NYSE</span>
+<span class="co">Diageo plc (ADR)</span>
+<span class="hmeta">WEEKLY EQUITY · No.09<br>기준 2026·07·02 · 작성 07·05</span>
+</header>
+
+<div class="quote">
+<div class="pxbox">
+<div class="px">$82.16</div>
+<div class="chg" style="color:var(--acc)">▲ +4.4% (7/2 종가) · 3/24 저점 대비 +13.4%</div>
+<div class="pxn">시총 ~$50.0B · EV ~$71.7B · 52주 고점 대비 −29.4%</div>
+<div class="rbar"><span class="fill" style="width:22.1%"></span><span class="mk" style="left:22.1%"></span></div>
+<div class="rlab"><span>$72.45</span><span>52W RANGE · 하단 22%</span><span>$116.41</span></div>
+</div>
+<div class="statgrid">
+<div class="stat"><div class="l">선행 PER</div><div class="v a">13.0×</div></div>
+<div class="stat"><div class="l">EV/EBITDA</div><div class="v a">11.3×</div></div>
+<div class="stat"><div class="l">FCF 수익률</div><div class="v a">5.0%</div></div>
+<div class="stat"><div class="l">ROE / ROIC</div><div class="v">20 / 10%</div></div>
+<div class="stat"><div class="l">컨센서스</div><div class="v a">BUY</div></div>
+<div class="stat"><div class="l">평균 목표가</div><div class="v">~$103</div></div>
+</div>
+</div>
+
+<div class="tldr">
+<span class="t">TL;DR</span>
+<span class="x">Q3 유기적 매출 +0.3%로 예상 상회했지만 북미 −9.4%·테킬라 두 자릿수 급감은 여전 — 배당 반토막·신임 CEO 데이브 루이스의 $500M Accelerate 구조조정 vs 5년 평균 대비 −37% 밸류 디스카운트. <span class="fc">1차 방아쇠는 8/6 FY26 실적+전략데이.</span></span>
+</div>
+
+<div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">COMPOSITE 77 · 주간후보 6종 중 1위</span><span class="rule"></span></div>
+<div class="verd">
+<div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">저평가</div><div class="meter"><span style="width:75%"></span></div><div class="d">선행 PER 13.0배 — 자체 5년 평균 20.6배 대비 −37% 할인. EV/EBITDA 11.3배.</div></div>
+<div class="vc"><div class="h">② 성장 가능성</div><div class="s">논쟁</div><div class="meter"><span style="width:55%;background:var(--sub)"></span></div><div class="d">Q3 유기적 +0.3% 서프라이즈 vs 북미·테킬라·중국 구조적 침체 지속.</div></div>
+<div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 · 반등 시도</div><div class="meter"><span style="width:30%;background:var(--sub)"></span></div><div class="d">3월 저점($72.45) 이후 저점 다지기. 52주 하단 22% 지점.</div></div>
+</div>
+
+<div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가</span><span class="rule"></span></div>
+<div class="mgrid">
+<div class="mc"><div class="l">선행 PER</div><div class="v a">13.0×</div><div class="n">TTM PER 18.95× · 5년 평균 20.6배</div></div>
+<div class="mc"><div class="l">EV/EBITDA</div><div class="v a">11.3×</div><div class="n">EV/FCF 27.9×(TTM, 일회성 압박 반영)</div></div>
+<div class="mc"><div class="l">잉여현금흐름</div><div class="v">$2.51B</div><div class="n">FCF수익률 5.0%(TTM) · FY26 가이던스 $3.0B(≈6%)</div></div>
+<div class="mc"><div class="l">ROE / ROIC</div><div class="v">20 / 10%</div><div class="n">WACC 4.2% 대비 스프레드 유지</div></div>
+</div>
+<div class="key">현재 멀티플엔 <b>"북미·테킬라 구조적 침체가 영구화된다"</b>는 비관 시나리오가 상당 부분 선반영 — 5년 평균 PER 대비 -37% 할인은 저평가 근거로는 명확하나, TTM FCF는 Accelerate 구조조정 현금비용·SAP 전환 재고 적재 등 일회성 요인으로 일시 압박된 상태.</div>
+<ul class="pts">
+<li>순부채 <span class="fc">$21.7B</span>, 레버리지 3.4배(조정 EBITDA 기준) — 목표 레인지 2.5~3.0배(FY28)까지 여전히 상회.</li>
+<li><b>Accelerate 절감 프로그램</b> 연 $500M 목표 중 상반기 40% 집행, 연간 목표 달성률 ~50%로 상향.</li>
+<li><b>배당 반토막</b> — 중간배당 40.5¢→20¢, 배당성향 정책 30~50%로 재정비, 연간 최소배당 $0.50 공약(구체적 신규 수익률은 8/6 최종배당 확정 후 검증 필요).</li>
+</ul>
+<div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">컨센서스 Buy · 평균 목표가 <b>~$103(범위 $100~$116)</b>. FY27 이후 <b class="fc">FCF가 가이던스 수준($3B대)으로 정상화</b>되고 레버리지가 목표 레인지에 진입하면 EV/FCF·EV/EBITDA 동시 재평가 여지. <b>단, 북미 수요 둔화가 구조적으로 고착되면 5년 평균 대비 할인은 계속 정당화된다.</b></div></div>
+
+<div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">논쟁</span><span class="rule"></span></div>
+<div class="estrip">
+<div class="ec"><div class="l">H1 FY26 매출</div><div class="v" style="color:var(--down)">$10.46B</div></div>
+<div class="ec"><div class="l">YoY(유기적)</div><div class="v" style="color:var(--down)">−2.8%</div></div>
+<div class="ec"><div class="l">조정 EPS</div><div class="v">95.3¢</div></div>
+<div class="ec"><div class="l">Q3 유기적</div><div class="v a">+0.3%</div></div>
+<div class="ec"><div class="l">북미 유기적</div><div class="v" style="color:var(--down)">−9.4%</div></div>
+</div>
+<div class="key">H1은 매출·이익·배당 모두 <b>후퇴</b>했지만, 5/6 발표된 Q3 트레이딩 업데이트는 유기적 매출 <b>+0.3%로 컨센서스 우려를 상회</b> — "구조적 침체 vs 저점 통과" 논쟁의 핵심 분기점.</div>
+<div class="bb">
+<div class="col bull"><h4>▲ BULL</h4><ul>
+<li><b>Q3 서프라이즈</b> — 유기적 매출 +0.3%(물량 +0.4%), 유럽·LAC·아프리카가 북미 부진 상쇄, 부활절 시기·월드컵 사전 발주 효과</li>
+<li><b>Accelerate 정상 집행</b> — 연 $500M 절감 중 상반기 40% 실행, FY 목표 상향(~50%)</li>
+<li><b>내부자 매수</b> — 6월 존 맨조니 이사회 의장 등 임원진 자사주 매입(2001 주식인센티브 플랜)</li>
+<li><b>가격 전략 전환</b> — 신임 CEO 데이브 루이스, 테킬라 가격 인하 등 수요 회복 조치 착수</li>
+</ul></div>
+<div class="col bear"><h4>▼ BEAR</h4><ul>
+<li><b>북미 붕괴</b> — 매출 38% 비중 지역이 유기적 -9.4%, 美 스피릿 -15.4%(디플리션 대비도 더 나쁜 재고축소 동반)</li>
+<li><b>테킬라 프랜차이즈 훼손</b> — 카사미고스 출하 -31%·디플리션 -23%, 돈훌리오 카테고리·전체 스피릿 점유 하락</li>
+<li><b>중국 스피릿 H1 -56%</b> — 아시아퍼시픽 부진 지속, GLP-1·건강트렌드와는 별개의 지역별 수요 리스크</li>
+<li><b>배당 반토막</b> — 현금흐름 자신감 훼손 시그널, 레버리지 3.4배로 목표 상회 지속</li>
+</ul></div>
+</div>
+
+<div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권 · 저점 다지기</span><span class="rule"></span></div>
+<div class="chart">
+<svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="DEO 52주 가격 개략도와 박스권">
+<line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+<line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+<text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$116</text>
+<text x="46" y="141" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$82</text>
+<text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$72</text>
+<polyline points="64,50 140,30 210,60 280,84 350,104 420,118 480,145 540,165 600,170 660,158 720,148 780,143 820,139 860,142 905,137" fill="none" stroke="#35e08a" stroke-width="2"/>
+<rect x="660" y="120" width="245" height="26" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+<text x="782" y="115" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">저점 다지기 $79.5–$85.0</text>
+<line x1="660" y1="120" x2="905" y2="120" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="908" y="116" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 85.0</text>
+<line x1="660" y1="146" x2="905" y2="146" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="908" y="160" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 79.5</text>
+<text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 116.41 · 3/24 저점 72.45 이후 반등 시도</text>
+</svg>
+<div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값(52주 고저·최근 매물대 기준).</div>
+</div>
+<div class="lvls">
+<div class="lv"><div class="l">52주 고점</div><div class="v">$116.41</div></div>
+<div class="lv"><div class="l">저항 (매물대)</div><div class="v r">$85.00</div></div>
+<div class="lv"><div class="l">현재가</div><div class="v a">$82.16</div></div>
+<div class="lv"><div class="l">지지 (매물대)</div><div class="v a">$79.50</div></div>
+<div class="lv"><div class="l">52주 저점</div><div class="v">$72.45</div></div>
+</div>
+<div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$85 돌파 시</b> → 1~2월 급락 이전 매물대 $92~95 재시험, 이후 평균 목표가 <b>$100~103대</b> 수렴 시도. <b style="color:var(--down)">$79.5 이탈 시</b> → 6월 저점 $76대, 추가 이탈이면 3월 저점 $72.45 재확인. 방아쇠: <b>8/6 FY26 실적+전략데이</b>(배당정책 최종 확정·North America 턴어라운드 1차 검증).</div></div>
+
+<div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+<ul class="pts" style="margin-bottom:14px">
+<li><b>가치함정 가능성</b> — 북미 -9.4%·테킬라 두 자릿수 감소가 다음 분기에도 지속되면 "저평가"가 아니라 "구조적 재평가"로 확정.</li>
+<li><b>EABL 매각 지연 리스크</b> — 동아프리카 브루어리(EABL) 지분 $23억 아사히 매각이 케냐 법원 복수 소송(소수주주·계약분쟁)에 발목, 2026년 하반기 완료 목표가 지연되면 부채감축 계획 차질.</li>
+</ul>
+<table class="cal">
+<tr><td class="d">8/6 (확정)</td><td><b>FY26 연간실적 + 전략데이</b> — 데이브 루이스 취임 후 첫 종합 전략 발표, 배당정책 최종 확정, 북미·테킬라 회복 조치 효과 1차 검증</td></tr>
+<tr><td class="d">진행 중</td><td>EABL/아사히 $23억 매각 — 케냐 법원 소송 다수 진행, 2026년 하반기 완료 목표</td></tr>
+<tr><td class="d">진행 중</td><td>테킬라(카사미고스·돈훌리오) 가격 인하·재고 정상화 — 다음 분기 디플리션 반등 여부가 관건</td></tr>
+</table>
+
+<footer>
+<div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-07-02 종가 기준 공개치로 실제와 차이가 있을 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+<div class="src">SOURCES · <a href="https://stockanalysis.com/stocks/deo/statistics/">stockanalysis 통계</a> · <a href="https://www.diageo.com/en/news-and-media/press-releases/2026/2026-interim-results-half-year-ended-31-december-2025">Diageo H1 FY26 실적발표</a> · <a href="https://www.diageo.com/en/news-and-media/press-releases/2026/diageo-issues-fiscal-26-q3-trading-statement">Diageo Q3 FY26 트레이딩 업데이트</a> · <a href="https://www.thedrinksbusiness.com/2026/02/diageo-halves-dividend-as-new-ceo-sir-dave-lewis-plots-shake-up/">배당 반토막(the drinks business)</a> · <a href="https://www.thespiritsbusiness.com/2026/05/diageo-us-spirits-sales-suffer-15-4-drop-in-q3/">美 스피릿 -15.4%(The Spirits Business)</a> · <a href="https://www.thedrinksbusiness.com/2026/07/diageo-sale-of-east-african-breweries-is-on-the-rocks/">EABL 매각 리스크</a> · <a href="https://www.gurufocus.com/news/8943824/diageo-plc-deo-stock-up-44-and-still-undervalued-gf-score-64100">GuruFocus 7/2 시세</a></div>
+<div class="nextp">다음 발행 · 2026-07-12(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+</footer>
+
+</div>
+</body>
+</html>

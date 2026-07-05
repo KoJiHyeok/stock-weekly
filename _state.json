@@ -3,10 +3,10 @@
   "market": "US",
   "design": "terminal-dark-single-green",
   "style_template_file": "PYPL_2026-06-03.html",
-  "covered_tickers": ["PYPL", "PFE", "QCOM", "CTSH", "PDD", "CMCSA", "ADBE", "GILD"],
+  "covered_tickers": ["PYPL", "PFE", "QCOM", "CTSH", "PDD", "CMCSA", "ADBE", "GILD", "DEO"],
   "current_pick": null,
-  "last_published_no": 8,
-  "last_published": "GILD (2026-07-04)",
+  "last_published_no": 9,
+  "last_published": "DEO (2026-07-05)",
   "next_publish": "2026-07-12 22:00 KST",
   "deploy": {
     "host": "GitHub Pages",
@@ -14,5 +14,5 @@
     "upload_url": "https://github.com/KoJiHyeok/stock-weekly/upload/main",
     "site_url": "https://kojihyeok.github.io/stock-weekly/"
   },
-  "note": "발행 완료 종목을 covered_tickers에 누적. 다음 종목은 주중 스크리너가 결정(발굴 중). repo가 단일 진실원. 다음 발행은 No.09."
+  "note": "발행 완료 종목을 covered_tickers에 누적. 다음 종목은 주중 스크리너가 결정(발굴 중). repo가 단일 진실원. 다음 발행은 No.10."
 }

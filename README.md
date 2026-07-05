@@ -6,6 +6,7 @@
 
 | No. | 티커 | 회사 | 발행일 | 한 줄 thesis |
 |-----|------|------|--------|-------------|
+| 09 | DEO | Diageo plc (ADR) | 2026-07-05 | 선행 PER 13.0×, 5년 평균 대비 -37% 할인 · Q3 유기적 매출 +0.3% 서프라이즈 vs 북미 -9.4%·테킬라 급감 논쟁 · 배당 반토막 후 CEO 데이브 루이스 Accelerate 구조조정 · 8/6 FY26 실적+전략데이 |
 | 08 | GILD | Gilead Sciences | 2026-07-04 | 베이스 선행 PER 15.2×·FCF $10.2B, HIV +10%·Yeztugo $1B 상향 vs $11.5B 온콜로지 IPR&D로 FY26 EPS 손실 전환 논쟁 · 8/27 BIC/LEN PDUFA · 52주 중하단 반등 시도 |
 | 07 | ADBE | Adobe Inc. | 2026-06-28 | 선행 P/E 8.3×·EV/EBITDA 8.1×·FCF 수익률 12.7% 극단 저평가 vs CEO·CFO 동시 공백·AI 네이티브 잠식 논쟁 · 52주 최하단 6% 바닥 탐색 |
 | 06 | CMCSA | Comcast Corporation | 2026-06-21 | EV/EBITDA 4.81× 역대 최저 · Peacock Q2 흑자 전환 vs. FWA 구조적 위협 논쟁 · 52주 최하단 10% 바닥 탐색 |
