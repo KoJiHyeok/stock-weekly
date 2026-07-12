@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-07-12 22:00 KST",
+"next_publish": "2026-07-19 22:00 KST",
 "reports": [
+{
+"no": 11,
+"ticker": "CHTR",
+"company": "Charter Communications, Inc.",
+"date": "2026-07-12",
+"file": "CHTR_2026-07-12.html",
+"price": "$130.73",
+"tldr": "PER 4배·EV/EBITDA 5.6배 케이블 업종 역대 최저권 vs 인터넷 가입자 순감 악화·1Q FCF -25% · 콕스 인수 FCC 승인 완료(모바일 1,200만+회선·연 $500M 시너지) vs 레버리지 확대 · 7/24 2Q26 실적 · 52주 저점권($124.05) 다지기",
+"value": "극단 저평가",
+"growth": "전환 시도·논쟁",
+"trend": "저점권 다지기"
+},
 {
 "no": 10,
 "ticker": "UPS",
