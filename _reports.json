@@ -98,7 +98,9 @@
 "tldr": "선행 PER 9.4배·EV/EBITDA 6.4배로 싸다 · AI가 위협이냐 기회냐 성장 논쟁(대형딜 TCV +70%) · YTD −34% 후 $51–$56 박스권",
 "value": "저평가",
 "growth": "논쟁",
-"trend": "횡보"
+"trend": "횡보",
+"predicted_range": {"low": 50.9, "high": 56.1},
+"outcome": {"as_of": "2026-07-15", "price": 43.18, "return_pct": -19.1, "verdict": "실패", "note": "박스 하단 붕괴 — 밸류트랩"}
 },
 {
 "no": 3,
@@ -110,7 +112,9 @@
 "tldr": "애플 모뎀 이별 충격 선반영 · 자동차(+38%)·AI 성장 논쟁 · 주가 이미 컨센서스 27% 상회 · $210–$245 박스권",
 "value": "논쟁",
 "growth": "전환 중",
-"trend": "횡보"
+"trend": "횡보",
+"predicted_range": {"low": 210, "high": 245},
+"outcome": {"as_of": "2026-07-15", "price": 177.98, "return_pct": -22.3, "verdict": "실패", "note": "박스 하단 $210 붕괴"}
 },
 {
 "no": 2,
@@ -122,7 +126,9 @@
 "tldr": "선행 PER 8.7배·배당 6.5%로 싸다 · 성장은 논쟁(온콜로지 vs 특허만료) · $23–$29 박스권",
 "value": "매력적",
 "growth": "논쟁 중",
-"trend": "횡보"
+"trend": "횡보",
+"predicted_range": {"low": 23, "high": 29},
+"outcome": {"as_of": "2026-07-15", "price": 24.82, "return_pct": -5.2, "verdict": "적중", "note": "6주간 박스 유지"}
 },
 {
 "no": 1,
@@ -134,7 +140,9 @@
 "tldr": "싸다(PER 8.5배·FCF 13%) · 성장은 멈췄다(EPS 보합) · 그래서 박스권",
 "value": "저평가",
 "growth": "정체",
-"trend": "횡보"
+"trend": "횡보",
+"predicted_range": {"low": 43.8, "high": 45.2},
+"outcome": {"as_of": "2026-07-15", "price": 55.52, "return_pct": 24.7, "verdict": "부분적중", "note": "Stripe·Advent $60.50 인수 제안으로 상방 이탈 — 저평가 논지 입증"}
 }
 ]
 }
