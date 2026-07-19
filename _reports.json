@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-07-19 22:00 KST",
+"next_publish": "2026-07-26 22:00 KST",
 "reports": [
+{
+"no": 12,
+"ticker": "NFLX",
+"company": "Netflix, Inc.",
+"date": "2026-07-19",
+"file": "NFLX_2026-07-19.html",
+"price": "$69.14",
+"tldr": "2Q26 실적 후 장중 -12%·52주 신저가 $65.65 · 트레일링 PER 22배(5년평균 41배 대비 -46% 할인) vs 3Q 매출가이던스 컨센서스 하회·시청참여 정체·공시 투명성 축소 논쟁 · 10/20 3Q26 실적(추정) · 52주 최하단 6.6% 바닥 탐색",
+"value": "저평가",
+"growth": "감속·논쟁",
+"trend": "붕괴 후 바닥 탐색"
+},
 {
 "no": 11,
 "ticker": "CHTR",
