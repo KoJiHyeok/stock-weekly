@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · MAT · Mattel</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  /* header */
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  /* quote */
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  /* tldr */
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  /* section label */
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  /* verdict */
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  /* metric grid */
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  /* key line + bullets + forecast */
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  /* earnings strip */
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  /* bull/bear */
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  /* technical */
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  /* calendar */
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">MAT</span>
+    <span class="exch">NASDAQ</span>
+    <span class="co">Mattel, Inc.</span>
+    <span class="hmeta">WEEKLY EQUITY · No.13<br>기준 2026·07·24 · 작성 07·26</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$14.30</div>
+      <div class="chg">▼ 52주 신저가($12.73, 7/9) 이후 다지기 · 고점 대비 −36%</div>
+      <div class="pxn">시총 ~$4.2B · EV ~$6.0B(추정, 소스 간 편차 있음)</div>
+      <div class="rbar"><span class="fill" style="width:16.1%"></span><span class="mk" style="left:16.1%"></span></div>
+      <div class="rlab"><span>$12.73</span><span>52W RANGE · 하단 16%</span><span>$22.48</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">트레일링 PER</div><div class="v a">~8.5×</div></div>
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">~11.7×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">~6.6×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v">~10%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$17.3</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">선행 PER 11.7배·EV/EBITDA 6.6배로 완구업종 대비 저평가 + Southeastern Asset Management(지분 4%+)의 이사회 매각·비상장화 압박. <span class="fc">마진 압박·FCF -42%·골드만삭스 Sell 하향(PT $12) 논쟁 속, 8/4 2Q26 실적이 다음 방아쇠.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">저점 다지기 · 액티비스트 상황</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">저평가 (온건)</div><div class="meter"><span style="width:64%"></span></div><div class="d">선행 PER 11.7배·EV/EBITDA 6.6배로 완구업종 평균 대비 할인. 단, ROIC·EV/EBITDA 등 소스 간 편차 있음.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">논쟁 · 압박</div><div class="meter"><span style="width:45%;background:var(--sub)"></span></div><div class="d">Hot Wheels +17% 견인 vs Dolls -11%·마진 -460bp. FY26 가이던스는 완만한 3~6% 매출성장.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">저점권 다지기</div><div class="meter"><span style="width:16%;background:var(--sub)"></span></div><div class="d">7/9 52주 신저가 $12.73 직상단에서 좁은 박스 형성 중.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">트레일링 PER</div><div class="v a">~8.5×</div><div class="n">TTM, 소스 편차 8.3~12.5×</div></div>
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">~11.7×</div><div class="n">FY26 조정 EPS 가이던스 기준</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">~6.6×</div><div class="n">EV/FCF ~10.8×</div></div>
+    <div class="mc"><div class="l">ROE</div><div class="v">~18%</div><div class="n">ROIC는 소스 간 부호까지 상충(-7%~+11%)</div></div>
+  </div>
+  <div class="key">배당은 2017년 중단 후 <b>9년째 미지급</b> — 저평가 논지는 배당이 아닌 <b>멀티플 재평가·M&amp;A 옵션</b>에 의존.</div>
+  <ul class="pts">
+    <li>선행 PER 11.7배는 완구업종 평균 대비 할인 구간이나, <span class="fc">트레일링 PER은 소스별로 8.3~12.5배까지 벌어져</span> 단일 지표 의존은 위험.</li>
+    <li><b>TTM FCF $3.35억</b>으로 전년동기($5.82억) 대비 -42% 급감 — 저평가가 밸류트랩인지, 일시적 관세 충격인지가 핵심 쟁점.</li>
+    <li>Southeastern Asset Management(8년 이상 보유, 지분 4%+)가 5/7 공개서한으로 <b>매각·비상장화 등 전략적 대안 검토</b>를 이사회에 공식 요구 — 회사측 반응은 "주주가치 제고 지속 노력" 수준의 원론적 답변에 그쳐, 구체적 전략 검토 착수 여부는 미확인.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">밸류에이션 자체는 완구업종 내 저평가 구간이나, <b>PYPL 사례처럼 극단적 저평가+액티비스트 압박이 실제 M&amp;A로 이어질 상방 테일</b>이 존재. <b>단, 회사가 이사회 차원의 공식 전략 검토를 개시했다는 확인은 아직 없어, 저평가가 정당한 밸류트랩으로 남을 위험도 병존한다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">논쟁 · 마진 압박</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">1Q26 매출</div><div class="v a">$862M</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+4%</div></div>
+    <div class="ec"><div class="l">GAAP EPS</div><div class="v">$0.20</div></div>
+    <div class="ec"><div class="l">조정 EPS</div><div class="v" style="color:var(--down)">-$0.20</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v a">소폭 상승</div></div>
+  </div>
+  <div class="key">1분기 <b>매출·EPS 모두 컨센서스 상회</b>(매출 $8.62억 vs 컨센서스 $8.09억)했으나, <b>총이익률이 관세·환율·물가 영향으로 -460bp(49.4%→44.9%)</b> 하락한 구조적 문제는 해소되지 않음.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>Hot Wheels +17%</b> 글로벌 빌링스 — 차량 카테고리가 핵심 성장엔진 유지</li>
+      <li><b>Southeastern 액티비스트 압박</b> — 매각·비상장화·Hasbro 결합 등 전략적 대안 공개 요구(5/7)</li>
+      <li><b>CEO 자사주 매수</b> — Ynon Kreiz가 2/12 실적쇼크 직후 65,000주($15.53/주) 매입, 저점 확신 신호</li>
+      <li><b>FY26 가이던스 상향 재확인</b> — 조정영업이익 $5.8~6.3억·조정EPS $1.27~1.39(2월 저점 가이던스 대비 소폭 상향)</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>마진 압박 지속</b> — 총이익률 -460bp, 관세發 원가 부담이 구조적 리스크로 지속</li>
+      <li><b>FCF -42%</b> — TTM $3.35억(전년 $5.82억), 저평가의 질적 기반이 약화</li>
+      <li><b>골드만삭스 Sell 하향</b> — 7/9 Neutral→Sell(PT $15→$12), 같은 날 52주 신저가 경신과 겹침</li>
+      <li><b>Dolls -11%</b> — 바비 부진 지속, Fisher-Price도 감소(American Girl은 보합)</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag">저점권 다지기</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="MAT 52주 가격 개략도와 저점권 다지기">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$22.48</text>
+      <text x="46" y="100" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$17.6</text>
+      <text x="46" y="167" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$12.73</text>
+      <polyline points="64,120 140,105 220,88 300,50 350,25 420,60 480,90 540,112 600,132 650,148 700,158 740,168 780,150 830,148 870,146 905,146" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="780" y="137" width="125" height="21" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="842" y="132" fill="#35e08a" font-size="10" text-anchor="middle" font-family="monospace">다지기 박스 $13.50–$14.90</text>
+      <line x1="700" y1="158" x2="740" y2="168" stroke="#ff5d6c" stroke-width="1.5"/>
+      <text x="695" y="182" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">7/9 신저가·골드만 Sell 하향</text>
+      <line x1="350" y1="25" x2="350" y2="18" stroke="#8590a4"/>
+      <text x="350" y="14" fill="#8590a4" font-size="10" text-anchor="middle" font-family="monospace">2/10 52W HIGH · 익일 실적쇼크 -25%</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점(2/10)</div><div class="v">$22.48</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$14.90</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$14.30</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$13.50</div></div>
+    <div class="lv"><div class="l">52주 저점(7/9)</div><div class="v">$12.73</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$14.90 돌파 시</b> → 다음 매물대 $17~18(분석가 평균 목표가 $17.3 부근). <b style="color:var(--down)">$13.50 이탈 시</b> → 52주 저점 $12.73 재시험 가능. 방아쇠: 8/4 2Q26 실적의 마진 개선 여부·Southeastern 요구에 대한 이사회 구체적 반응·관세 리스크 완화 속도.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>밸류트랩 리스크</b> — 관세發 마진 압박이 추가 지속되면 저평가가 정당화되지 않고 하방이 이어질 수 있음.</li>
+    <li><b>액티비스트 무산 리스크</b> — Southeastern의 요구를 이사회가 받아들이지 않고 흐지부지될 경우 재평가 촉매 소멸.</li>
+    <li><b>증권소송 조사</b> — Schall(3/10)·Pomerantz(2/26) 법무법인이 2월 실적쇼크 관련 허위·오도 진술 여부를 조사 중, 집단소송으로 발전 시 재무·평판 부담.</li>
+    <li><b>소비심리·경쟁</b> — 완구업 전반 소비 위축, Hasbro 대비 디지털/게이밍 IP 수익화 열위.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">2026-08-04(화) 장마감 후</td><td><b>2Q26 실적</b> — 마진 개선 여부·FY26 가이던스 유지/변경·Hot Wheels 모멘텀 지속 여부가 핵심 변수</td></tr>
+    <tr><td class="d">진행 중</td><td>Southeastern Asset Management의 전략적 대안 요구에 대한 이사회 대응 상황 모니터링</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-07-24 종가 기준 공개치로, 소스 간 편차(종가 $14.24~$14.37, 시가총액 $3.9~4.8B, 트레일링 PER 8.3~12.5배, ROIC -7%~+11% 등)가 있어 교차검증했으나 실제와 차이가 있을 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://www.businesswire.com/news/home/20260507690358/en/Southeastern-Asset-Management-Issues-Open-Letter-Calling-on-Mattel-to-Explore-Strategic-Alternatives">BusinessWire · Southeastern 공개서한</a> · <a href="https://www.stocktitan.net/news/MAT/mattel-comments-on-letter-from-southeastern-asset-dukfni8lg7cg.html">StockTitan · Mattel 답변</a> · <a href="https://www.gurufocus.com/news/8612603/insider-buying-ynon-kreiz-acquires-65000-shares-of-mattel-inc-mat">GuruFocus · CEO 자사주 매수</a> · <a href="https://www.tradingview.com/news/tradingview:701c01caba77f:0-mattel-1q-2026-revenue-862-17m-net-income-61-03m-eps-0-2-10-q-summary/">TradingView · 1Q26 실적</a> · <a href="https://www.stocktitan.net/news/MAT/mattel-announces-second-quarter-2026-financial-results-and-wv36iy7bllmg.html">StockTitan · 2Q26 실적일 확정</a> · <a href="https://www.gurufocus.com/term/pettm/MAT">GuruFocus · PER</a> · <a href="https://stockinvest.us/stock/MAT">StockInvest · 기술적 분석</a> · <a href="https://www.themarketsdaily.com/2026/07/25/mattel-inc-nasdaqmat-given-average-rating-of-hold-by-analysts.html">TheMarketsDaily · 애널리스트 컨센서스</a></div>
+    <div class="nextp">다음 발행 · 2026-08-02(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
