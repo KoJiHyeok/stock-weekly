@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · F · Ford Motor Company</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  /* header */
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  /* quote */
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  /* tldr */
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  /* section label */
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  /* verdict */
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  /* metric grid */
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  /* key line + bullets + forecast */
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  /* earnings strip */
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  /* bull/bear */
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  /* technical */
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  /* calendar */
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">F</span>
+    <span class="exch">NYSE</span>
+    <span class="co">Ford Motor Company</span>
+    <span class="hmeta">WEEKLY EQUITY · No.14<br>기준 2026·07·31 · 작성 08·02</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$14.68</div>
+      <div class="chg">▼ 52주 고점 대비 −17% · 실적발표 후 급등분(+5.1%) 반납 중</div>
+      <div class="pxn">시총 ~$58.9B · EV ~$188B(포드크레딧 금융부채 포함 추정치, 왜곡 유의)</div>
+      <div class="rbar"><span class="fill" style="width:56.3%"></span><span class="mk" style="left:56.3%"></span></div>
+      <div class="rlab"><span>$10.68</span><span>52W RANGE · 저점 대비 +37%</span><span>$17.78</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">9.3×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v">N/A</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">~11%(추정)</div></div>
+      <div class="stat"><div class="l">ROE / ROIC</div><div class="v">−18.3% / 0.9%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$15.6</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">2Q 서프라이즈로 EBIT·FCF 가이던스 상향 + 애널 업그레이드 2건(Citi·Jefferies) vs GAAP 순손실 $13억(EV 재편 상각)·관세 $20억·신규 리콜이 겹쳐 실적발표 랠리 반납. <span class="fc">$15.73 재돌파가 다음 방아쇠.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 전환기 가치주</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">완만한 저평가</div><div class="meter"><span style="width:66%"></span></div><div class="d">선행PER 9배대로 업종 평균(~14배) 대비 할인이나, GAAP 지표는 상각으로 왜곡.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">논쟁 · 상향 리비전</div><div class="meter"><span style="width:60%;background:var(--sub)"></span></div><div class="d">EBIT·FCF 가이던스 상향 vs GAAP 손실·관세·리콜 겹침.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 재형성 초기</div><div class="meter"><span style="width:42%;background:var(--sub)"></span></div><div class="d">실적 급등분 반납, $14.05~$15.73 신규 박스 형성 중.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">완만한 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">9.3×</div><div class="n">업종 중앙값 ~13.9× 대비 할인(6월 기준, 참고치)</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v">N/A</div><div class="n">소스간 14.7~235배로 극단 편차(파이낸스 부채 왜곡)</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">$6.0~7.0B</div><div class="n">FY26 가이던스(상향) · 수익률 ~11%(추정)</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">−18.3 / 0.9%</div><div class="n">TTM GAAP, $42억 EV재편 상각 반영</div></div>
+  </div>
+  <div class="key">표면적 저PER 매력은 있으나 GAAP 지표는 대규모 일회성 상각으로 크게 왜곡돼 있어, <b>"저평가"보다 "전환기 가격"</b>으로 해석하는 편이 정확함.</div>
+  <ul class="pts">
+    <li>배당수익률 <span class="fc">~4.1%</span>(연 $0.60) · 배당성향 낮은 편(~23~37%, 소스 편차)으로 지속 여력 있음.</li>
+    <li>동종 대형 완성차 GM(선행PER ~6.6배)보다는 오히려 비싼 편 — 업종 전체가 저평가 국면이라 F만의 극단적 할인은 아님.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">$60~70억 FCF 가이던스가 현실화되면 FCF수익률 ~11%대로 재평가 여지가 있으나, <b>관세비용($20억)·EV부문 손실($40억)이 가이던스 상향분을 계속 잠식하면 저PER의 정당성은 약해진다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">상향 리비전 · 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">2Q26 매출</div><div class="v a">$48.3B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v">−4%</div></div>
+    <div class="ec"><div class="l">조정 EPS</div><div class="v a">$0.42</div></div>
+    <div class="ec"><div class="l">GAAP 순손실</div><div class="v" style="color:var(--down)">$1.3B</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v" style="color:var(--down)">급등 후 반납</div></div>
+  </div>
+  <div class="key">실적은 <b>서프라이즈</b>(조정EPS $0.42 vs 컨센서스 $0.35)였지만, $42억 특별상각發 GAAP 손실과 7월 소매판매 부진·신규 리콜이 겹치며 발표 당일 +5.1% 랠리를 반납 — <b>"진짜 턴어라운드냐 vs 상각 위의 착시냐"</b> 논쟁.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>가이던스 동반 상향</b> — FY26 조정EBIT $100~110억, FCF $60~70억으로 상향</li>
+      <li><b>연속 애널 업그레이드</b> — 7/27 Jefferies(Hold→Buy, PT $17.50), 7/29 Citi(Neutral→Buy, PT $20) — F시리즈 생산 모멘텀·알루미늄 공급 개선·보증충당금 감소 근거</li>
+      <li><b>Model e 손실 축소</b> — $9.19억로 YoY $4.1억 개선, Ford Pro·Blue는 흑자 기조 유지</li>
+      <li><b>Ford Credit 안정적 기여</b> — 세전이익 $7.57억(+$1.12억 YoY)</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>대규모 특별상각</b> — BlueOval SK 배터리 JV 재편 $36억 + EV 프로그램 취소 $5억, 총 $42억發 GAAP 순손실 $13억 — EV 전략 후퇴 신호</li>
+      <li><b>7월 소매판매 부진 + 신규 리콜</b> — 미국 소매판매 −10%YoY, 변속기 파킹기구 결함 리콜(74.1만대)이 겹치며 실적 랠리 반납</li>
+      <li><b>관세 비용 부담 상향</b> — 원자재(알루미늄·철강) ~$20억 + 순 IEEPA ~$10억(2026)</li>
+      <li><b>Model e 손익분기 지연</b> — 연손실 ~$40억 지속, 목표 시점 2029년으로 후퇴</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스 재형성</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="F 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$18</text>
+      <text x="46" y="90" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$14</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$11</text>
+      <polyline points="64,120 150,150 230,170 300,140 370,95 440,50 510,22 580,70 640,115 700,108 760,111 820,65 870,92 905,87" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="700" y="65" width="205" height="35" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="800" y="60" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">신규 박스 $14.05–$15.73</text>
+      <line x1="700" y1="65" x2="905" y2="65" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="61" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 15.73</text>
+      <line x1="700" y1="100" x2="905" y2="100" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="112" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 14.05</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 17.78</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$17.78</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$15.73</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$14.68</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$14.05</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$10.68</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$15.73 재돌파 시</b> → 52주 고점 $17.78 재도전 가능(Citi 목표가 $20까지 추가 여력). <b style="color:var(--down)">$14.05 이탈 시</b> → 실적 발표 전 박스 하단($13.50대)·나아가 52주 저점 $10.68 재시험 가능. 방아쇠: 8월 소매판매 지표·리콜 비용 확정·3분기 실적(추정 10월 하순, 미확정).</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>밸류트랩 우려</b> — GAAP 손실이 반복되거나 Model e 손실이 가이던스($40억)를 초과하면 '저평가' 논거가 무색해짐.</li>
+    <li><b>관세·리콜 비용</b> — 원자재 관세($20억)와 리콜 비용이 EBIT·FCF 가이던스 상향분을 잠식하면 하방 위험.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">8/3~8/24</td><td>리콜 소유자 통지 발송(변속기 파킹기구 8/3~ · 브롱코 배선 8/24~) — 비용·평판 영향 모니터링</td></tr>
+    <tr><td class="d">8월 말(추정)</td><td>BlueOval SK Glendale, KY 공장 노조 결성 투표 — UAW 조직화 확대 여부</td></tr>
+    <tr><td class="d">10월 하순(추정, 미확정)</td><td><b>3Q26 실적</b> — 관세 비용 안착 여부·Model e 손실 추이·F시리즈 모멘텀 지속 확인</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-07-31 종가 기준 공개치로 실제와 차이가 있을 수 있으며, 일부 밸류에이션 지표(EV/EBITDA 등)는 소스간 편차가 커 N/A로 표기했습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://fordauthority.com/2026/07/ford-stock-value-analysis-performance-july-27-july-31-2026/">Ford Authority (주간 시세)</a> · <a href="https://www.cnbc.com/2026/07/28/ford-motor-f-earnings-q2-2026.html">CNBC 2Q26 실적</a> · <a href="https://www.investing.com/news/stock-market-news/citi-upgrades-ford-to-buy-on-improving-fseries-momentum-lifts-pt-to-20-4820074">Investing.com (Citi 업그레이드)</a> · <a href="https://stockanalysis.com/stocks/f/forecast/">StockAnalysis (컨센서스)</a> · <a href="https://www.gurufocus.com/term/forward-pe-ratio/F">GuruFocus (밸류에이션)</a> · <a href="https://www.detroitnews.com/story/business/autos/ford/2026/07/11/unifor-ford-bargaining-deadline/90885626007/">Detroit News (Unifor 협상)</a></div>
+    <div class="nextp">다음 발행 · 2026-08-09(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>

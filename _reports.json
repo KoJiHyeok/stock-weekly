@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-08-02 22:00 KST",
+"next_publish": "2026-08-09 22:00 KST",
 "reports": [
+{
+"no": 14,
+"ticker": "F",
+"company": "Ford Motor Company",
+"date": "2026-08-02",
+"file": "F_2026-08-02.html",
+"price": "$14.68",
+"tldr": "2Q26 조정EPS $0.42 서프라이즈로 FY26 EBIT($100~110억)·FCF($60~70억) 가이던스 동반 상향 + Citi·Jefferies 연속 업그레이드(PT $20·$17.50) vs $42억 EV재편 상각發 GAAP 순손실 $13억·관세 $20억·신규 리콜(74.1만대) 겹치며 실적발표 랠리(+5.1%) 반납 · 10월 하순(추정) 3Q26 실적 · $14.05~$15.73 신규 박스권 형성 초기",
+"value": "완만한 저평가",
+"growth": "상향 리비전·논쟁",
+"trend": "박스 재형성 초기"
+},
 {
 "no": 13,
 "ticker": "MAT",
