@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-08-09 22:00 KST",
+"next_publish": "2026-08-16 22:00 KST",
 "reports": [
+{
+"no": 15,
+"ticker": "STZ",
+"company": "Constellation Brands, Inc.",
+"date": "2026-08-09",
+"file": "STZ_2026-08-09.html",
+"price": "$135.88",
+"tldr": "Q1 FY27 맥주부문 +2%·조정EPS $3.43 서프라이즈로 가이던스 유지($11.20~11.90) vs 히스패닉 소비자 위축(美 맥주매출 절반 비중)·멕시코 25% 관세·2026 USMCA 재검토 리스크로 Barclays·BofA·Deutsche Bank 목표가 잇단 하향 · 10/1 Q2 FY27 실적(월드컵 특수 반영 여부) · $128~136 박스권 상단 재시험",
+"value": "저평가",
+"growth": "재가속·구조적 역풍 논쟁",
+"trend": "박스권 상단 시험"
+},
 {
 "no": 14,
 "ticker": "F",

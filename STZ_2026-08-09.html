@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · STZ · Constellation Brands</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">STZ</span>
+    <span class="exch">NYSE</span>
+    <span class="co">Constellation Brands, Inc.</span>
+    <span class="hmeta">WEEKLY EQUITY · No.15<br>기준 2026·08·07 · 작성 08·09</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$135.88</div>
+      <div class="chg">▼ 52주 고점 대비 −22%</div>
+      <div class="pxn">시총 $23.4B · EV $34.9B</div>
+      <div class="rbar"><span class="fill" style="width:19.7%"></span><span class="mk" style="left:19.7%"></span></div>
+      <div class="rlab"><span>$126.45</span><span>52W RANGE · 하단 20%</span><span>$174.32</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">11.8×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">10.5×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">7.1%</div></div>
+      <div class="stat"><div class="l">ROIC</div><div class="v">12.0%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">매수 우세</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$180</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">싸다(PER 11.8배·배당 3.0%) + 맥주부문 재가속(+2%) vs 히스패닉 소비 위축·관세 리스크로 목표가 하향 행렬. <span class="fc">10/1 Q2 실적이 박스권 탈출의 열쇠.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 저평가 배당주</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">저평가</div><div class="meter"><span style="width:76%"></span></div><div class="d">선행 PER 11.8배·EV/EBITDA 10.5배, 10년 평균 대비 할인.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">논쟁 · 구조적 역풍</div><div class="meter"><span style="width:46%;background:var(--sub)"></span></div><div class="d">맥주 +2% 재가속 vs 히스패닉 소비 위축.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 상단 시험</div><div class="meter"><span style="width:35%;background:var(--sub)"></span></div><div class="d">$128~$136 반복, 52주 저점 인근 다지기.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">11.8×</div><div class="n">트레일링 ~12.0×</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">10.5×</div><div class="n">EV/FCF 19.8×</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">$1.6~1.7B</div><div class="n">FCF 수익률 7.1%(FY27 가이던스)</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">22.6 / 12.0%</div><div class="n">자본수익성 견조</div></div>
+  </div>
+  <div class="key">현재 가격엔 <b>"히스패닉 소비 위축이 구조적"</b>이라는 비관 시나리오가 상당 부분 반영돼 있음.</div>
+  <ul class="pts">
+    <li>연 <span class="fc">$1.6~1.7B 잉여현금흐름</span>을 ROE 22.6%로 굴리는 회사를 EV/EBITDA 10.5배에 거래.</li>
+    <li><b>$4.0B 자사주 프로그램</b>(잔여 $2.75B) + <b>배당수익률 3.0%</b>(분기 $1.03) — FY26 한 해 $1.6B+ 주주환원.</li>
+    <li>2025년 와인·스피릿 저수익 브랜드 매각 완료 — 잔존 브랜드는 카테고리 평균을 상회하는 유기적 성장.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">맥주부문 점유율 확대와 월드컵 특수(6~7월 개최)가 Q2 실적에서 확인되고 히스패닉 소비가 반등하면 <b>저PER 재평가 여지</b>가 있음. <b>단, 관세·USMCA 리스크가 현실화되면 이 논리는 무너진다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">재가속 · 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">1Q FY27 매출</div><div class="v a">$2.43B</div></div>
+    <div class="ec"><div class="l">맥주 YoY</div><div class="v a">+2%</div></div>
+    <div class="ec"><div class="l">조정EPS</div><div class="v a">$3.43</div></div>
+    <div class="ec"><div class="l">FY27 가이던스</div><div class="v">$11.20~11.90</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v a">+2.6%(프리마켓)</div></div>
+  </div>
+  <div class="key">실적은 <b>비트</b>하고 가이던스도 <b>유지</b>했지만 반응은 <b>"덤덤"</b> — 히스패닉 소비 위축이라는 구조적 변수가 여전히 논쟁의 중심.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>맥주 재가속</b> — 1Q 매출 +2%, 가격·물량·트래킹채널 점유율 동반 개선</li>
+      <li><b>2026 FIFA 월드컵 특수</b> — 히스패닉 커뮤니티·소셜 모임 수요 견인, Q2(10/1 발표)에 반영 예상</li>
+      <li><b>강력한 주주환원</b> — 자사주 $2.75B 잔여 + 배당 3.0%</li>
+      <li><b>포트폴리오 정리 완료</b> — 저수익 와인·스피릿 브랜드 매각 후 잔존 브랜드 유기적 성장</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>히스패닉 소비 위축</b> — 美 맥주매출의 절반 비중, 이민단속·생활비 부담으로 지출 축소(회사 자체 인정)</li>
+      <li><b>관세 리스크</b> — 멕시코산 25% 관세 전면 적용 시 EPS 최대 $3.00~3.75 훼손 추정, 알루미늄 50% 관세로 연 $20M 마진 압박</li>
+      <li><b>USMCA 재검토</b> — 2026년 협정 재검토, 모델로(전량 멕시코 생산) 무관세 지위 불확실성</li>
+      <li><b>목표가 하향 행렬</b> — Barclays·BofA·Deutsche Bank·Freedom Broker 등 다수 하향</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="STZ 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$174</text>
+      <text x="46" y="100" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$150</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$126</text>
+      <polyline points="64,58 130,75 195,100 260,150 325,140 390,125 455,106 520,95 585,82 650,95 715,120 750,111 790,132 830,141 865,135 905,127" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="700" y="127" width="205" height="19" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="802" y="122" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $128–$136</text>
+      <line x1="700" y1="111" x2="905" y2="111" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="107" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 142.70</text>
+      <line x1="700" y1="146" x2="905" y2="146" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="144" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 128.00</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 174.32</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$174.32</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$142.70</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$135.88</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$128.00</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$126.45</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$142.70 돌파 시</b> → 다음 매물대 $150~161(최근 하향된 애널 목표가 저점). <b style="color:var(--down)">$128 이탈 시</b> → 52주 저점 $126.45 재시험 가능. 방아쇠: 10/1 Q2(FY27) 실적(월드컵 특수 반영 여부) · 히스패닉 소비 회복세 · 관세/USMCA 협상 진전.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>가치함정</b> — 히스패닉 소비 위축이 일시적 아닌 구조적 추세로 굳어지면 저PER가 정당화되지 않음.</li>
+    <li><b>관세·USMCA 훼손</b> — 멕시코산 맥주 무관세 지위가 흔들리면 마진·EPS 논리 자체가 붕괴.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">8/13(목)</td><td>분기 배당 지급 — 주당 $1.03</td></tr>
+    <tr><td class="d">10/1(목)</td><td><b>Q2 FY27 실적</b>(컨센서스 EPS $3.61) — 월드컵 특수 반영·히스패닉 소비 회복·관세 마진 영향 확인</td></tr>
+    <tr><td class="d">2026년 중</td><td>USMCA 재검토 협상 진행 — 멕시코산 맥주 무관세 지위 향방</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-08-07 기준 공개치로 실제와 차이가 있을 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://www.macrotrends.net/stocks/charts/STZ/constellation-brands-inc/pe-ratio">MacroTrends</a> · <a href="https://finance.yahoo.com/markets/stocks/articles/constellation-brands-q1-fiscal-2027-121700468.html">Yahoo Finance 1Q FY27</a> · <a href="https://www.stocktitan.net/news/STZ/constellation-brands-reports-first-quarter-fiscal-2027-financial-cdx8o21lq60j.html">StockTitan 1Q FY27</a> · <a href="https://www.cnbc.com/2025/04/10/modelo-owner-constellation-says-trump-immigration-policy-hitting-beer-sales.html">CNBC(히스패닉 소비)</a> · <a href="https://finance.yahoo.com/news/why-mexico-trump-tariffs-could-hammer-this-beer-giant-172053291.html">Yahoo Finance(관세 리스크)</a></div>
+    <div class="nextp">다음 발행 · 2026-08-16(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
