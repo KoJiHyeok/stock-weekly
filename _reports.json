@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-08-16 22:00 KST",
+"next_publish": "2026-08-23 22:00 KST",
 "reports": [
+{
+"no": 16,
+"ticker": "CI",
+"company": "The Cigna Group",
+"date": "2026-08-16",
+"file": "CI_2026-08-16.html",
+"price": "$278.40",
+"tldr": "선행 PER 9.7배·EV/EBITDA 7.5배로 10년 중앙값 대비 큰 폭 할인 vs 2Q26 어닝비트·가이던스 상향(조정EPS 최소 $30.45)에도 메디컬코스트비율 상승(83.2%→84.5%)·PBM 이익 감소·2027 ACA 개별시장 철수(11개주 36.9만명)로 Jefferies·Raymond James 연속 하향 · 10/29 3Q26 실적 · $262~304 박스권 중단부",
+"value": "저평가",
+"growth": "혼재·논쟁",
+"trend": "박스권 중단부"
+},
 {
 "no": 15,
 "ticker": "STZ",

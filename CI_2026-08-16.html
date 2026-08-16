@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · CI · The Cigna Group</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">CI</span>
+    <span class="exch">NYSE</span>
+    <span class="co">The Cigna Group</span>
+    <span class="hmeta">WEEKLY EQUITY · No.16<br>기준 2026·08·10 · 작성 08·16</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$278.40</div>
+      <div class="chg">▼ 52주 고점 대비 −11.7% · 8/13 장중 $271~273 추가 하락 관찰</div>
+      <div class="pxn">시총 약 $77.0B · EV 약 $97B(부채 $34.0B·현금 $6.3B 반영)</div>
+      <div class="rbar"><span class="fill" style="width:51.2%"></span><span class="mk" style="left:51.2%"></span></div>
+      <div class="rlab"><span>$239.51</span><span>52W RANGE · 중단 51%</span><span>$315.41</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">9.7×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">7.5×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">10.3%</div></div>
+      <div class="stat"><div class="l">ROE / ROIC</div><div class="v">16 / 7%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">BUY</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$343</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">싸다(선행 PER 9.7배·EV/EBITDA 7.5배, 10년 중앙값 대비 -18~-40%) · 성장은 논쟁이다(Evernorth 스페셜티 +22% vs 메디컬코스트비율 84.5%·PBM 이익 감소) · 그래서 $262~304 박스권 중단부. <span class="fc">10/29 3Q26 실적이 재평가 방아쇠.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 저평가 논쟁주</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">저평가 (강)</div><div class="meter"><span style="width:82%"></span></div><div class="d">선행 PER 10년 중앙값 16.2배 → 9.7배. EV/EBITDA 10년 중앙값 대비 약 18% 할인.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">혼재 · 논쟁</div><div class="meter"><span style="width:58%;background:var(--sub)"></span></div><div class="d">2Q26 어닝비트+가이던스 상향 vs 메디컬코스트비율 상승·PBM 전환 비용.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 중단부</div><div class="meter"><span style="width:51%;background:var(--sub)"></span></div><div class="d">$261.9 지지 ~ $304.3 저항, 폭 약 16%.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">9.7×</div><div class="n">10년 중앙값 16.2×</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">7.5×</div><div class="n">EV/FCF 13.0×</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">$7.7B</div><div class="n">FCF 수익률 10.3%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">16 / 7%</div><div class="n">부채비율(D/E) 약 73%</div></div>
+  </div>
+  <div class="key">현재 가격엔 <b>"ACA 철수·PBM 모델 전환 리스크가 상당 부분 선반영"</b>된 상태.</div>
+  <ul class="pts">
+    <li>FY26 영업FCF 가이던스 <span class="fc">약 $9B(하반기 집중)</span> 대비 EV/FCF 13.0배 — 헬스케어 플랜 업종 평균 대비 여전한 할인.</li>
+    <li>분기 배당 <b>$1.56(연 $6.24, 수익률 2.24%)</b> + 신규 <b>$5B 자사주 매입</b> 승인으로 주주환원 지속.</li>
+    <li>배당수익률 2.24%는 통계적으로 매력적이나, ROIC 7%대는 인수(Express Scripts 등)로 쌓인 부채 부담을 반영.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">메디컬코스트 트렌드가 가이던스 범위(83.7~84.7%) 안에서 안정 확인되면 <b>EV/EBITDA 9배대(10년 중앙값)로 재평가 여지</b> — 목표가 컨센서스(~$343) 상단과 부합. <b>단, 트렌드가 가이던스를 이탈하면 이 논리는 무너진다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">혼재 · 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">2Q26 매출</div><div class="v a">$71.7B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+6.8%</div></div>
+    <div class="ec"><div class="l">조정 EPS</div><div class="v a">$7.78</div></div>
+    <div class="ec"><div class="l">MCR</div><div class="v" style="color:var(--down)">84.5%</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v" style="color:var(--down)">하락</div></div>
+  </div>
+  <div class="key">실적은 <b>어닝비트+가이던스 상향</b>이었지만 시장은 <b>메디컬코스트비율 상승(83.2%→84.5%)</b>에 반응 — 전형적 "sell the news".</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>Evernorth 스페셜티 가속</b> — Specialty & Care Services 세전조정이익 +22%(바이오시밀러·스페셜티 제네릭 채택 가속)</li>
+      <li><b>Cigna Healthcare 견조</b> — 매출 +10%, 세전조정이익 +17%(2Q26)</li>
+      <li><b>가이던스 상향</b> — FY26 조정EPS "최소 $30.45"(기존 대비 +$0.10), Goldman은 목표가 $340→$352 상향</li>
+      <li><b>신임 CEO 체제</b> — Brian Evanko(7/1 취임, 전 President·COO)가 ACA 철수 등 포트폴리오 규율 강조</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>메디컬코스트 상승</b> — Cigna Healthcare MCR 84.5%(전년 83.2%), 3Q는 계절적으로 소폭 추가 상승 전망</li>
+      <li><b>PBM 이익 감소</b> — Pharmacy Benefit Services 세전조정이익 $609M으로 하락(대형 고객 갱신·신규 'Signature' 리베이트프리 모델 투자 부담)</li>
+      <li><b>ACA 철수</b> — 2027년 오픈롤먼트부터 11개주 약 36.9만명 개별시장 가입자 이탈(2025년 대비 가입자 -17%)</li>
+      <li><b>애널리스트 하향</b> — Jefferies(Buy→Hold, PT $336→$307, 2027년 실적 역풍 우려)·Raymond James(Strong Buy→Outperform, PT $350→$320, 단기 촉매 부재) 연속 하향</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="CI 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$315</text>
+      <text x="46" y="98" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$278</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$240</text>
+      <polyline points="64,150 150,120 230,60 300,40 370,55 440,80 510,70 580,50 640,58 700,90 760,86 820,98 870,95 905,100" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="640" y="70" width="270" height="42" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="775" y="65" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $261.9–$304.3</text>
+      <line x1="640" y1="76" x2="910" y2="76" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="72" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 304.25</text>
+      <line x1="640" y1="106" x2="910" y2="106" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="120" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 261.92</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 315.41</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$315.41</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$304.25</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$278.40</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$261.92</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$239.51</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$304.25 돌파 시</b> → 목표가 컨센서스(~$343) 방향 재평가 여지. <b style="color:var(--down)">$261.92 이탈 시</b> → 52주 저점 $239.51 재시험 가능. 방아쇠: 10/29 3Q26 실적 메디컬코스트 트렌드 확인 · ACA 전환 진행 상황 · PBM 'Signature' 모델 수익성.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>메디컬코스트 이탈</b> — MCR이 가이던스 상단(84.7%)을 넘으면 저평가 논리가 가치함정으로 전환될 수 있음.</li>
+    <li><b>ACA·PBM 이중 전환</b> — 개별시장 철수와 리베이트프리 모델 투자가 동시에 진행 중, 단기 이익 변동성 확대 가능.</li>
+    <li><b>정책 리스크</b> — PBM 규제·ACA 보조금 관련 입법 변화는 확정되기 전까지 상시 불확실성 요인.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">10/29(목)</td><td><b>3Q26 실적</b>(장전, 추정) — 메디컬코스트비율 추이·Evernorth Signature 모델 수익성·ACA 전환 비용 가이던스</td></tr>
+    <tr><td class="d">4Q26~2027</td><td>2027년 개별시장(ACA) 오픈롤먼트 — 11개주 약 36.9만명 가입자 전환 지원</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-08-10 종가 및 공개 자료 기준이며 소스 간 오차·실시간 변동으로 실제와 차이가 있을 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://www.sec.gov/Archives/edgar/data/0001739940/000173994026000065/ci-20260630.htm">SEC 10-Q (2Q26)</a> · <a href="https://www.sec.gov/Archives/edgar/data/1739940/000114036126003768/ef20064751_ex99-1.htm">SEC 8-K (2Q26 실적)</a> · <a href="https://www.gurufocus.com/term/forward-pe-ratio/CI">GuruFocus Forward PE</a> · <a href="https://www.gurufocus.com/term/ev2fcf/CI">GuruFocus EV/FCF</a> · <a href="https://finance.yahoo.com/healthcare/articles/cigna-group-ci-q2-2026-210352247.html">Yahoo Finance 2Q26 실적 하이라이트</a> · <a href="https://finance.yahoo.com/healthcare/articles/raymond-james-cuts-cigna-outperform-150453590.html">Raymond James 하향</a> · <a href="https://www.forbes.com/sites/brucejapsen/2026/04/30/cigna-plans-to-exit-obamacare-in-2027-affecting-369000-with-coverage/">Forbes ACA 철수</a> · <a href="https://www.prnewswire.com/news-releases/the-cigna-group-announces-president--coo-brian-evanko-to-succeed-david-m-cordani-as-chief-executive-officer-302702404.html">CEO 승계 발표</a></div>
+    <div class="nextp">다음 발행 · 2026-08-23(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
