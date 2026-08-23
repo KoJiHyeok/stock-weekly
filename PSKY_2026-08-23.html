@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · PSKY · Paramount Skydance</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--acc);margin-top:3px}
+  .chg.dn{color:var(--down)}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">PSKY</span>
+    <span class="exch">NASDAQ</span>
+    <span class="co">Paramount Skydance Corporation</span>
+    <span class="hmeta">WEEKLY EQUITY · No.17<br>기준 2026·08·21 · 작성 08·23</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$10.35</div>
+      <div class="chg">▲ 전일대비 +0.58% · 52주 고점 대비 −50.4%</div>
+      <div class="pxn">시총 약 $11.3B · EV 약 $21.6B(현금 $3.3B·총부채 $13.6B, 2Q26말 기준)</div>
+      <div class="rbar"><span class="fill" style="width:20.6%"></span><span class="mk" style="left:20.6%"></span></div>
+      <div class="rlab"><span>$7.62</span><span>52W RANGE · 하단 20.6%</span><span>$20.86</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER(FY26E)</div><div class="v a">~17.3×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA(FY26E)</div><div class="v a">~5.6×</div></div>
+      <div class="stat"><div class="l">FCF 수익률(E)</div><div class="v">~3.4%</div></div>
+      <div class="stat"><div class="l">ROE / ROIC</div><div class="v">−0.8 / 7.8%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD·약세 우위</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$12(범위 $2~$20)</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">실적은 빠르게 좋아지고 있다(EBITDA +27%·스튜디오 흑자전환) vs 워너브라더스디스커버리 $1,110억 인수가 반독점 재판(2027-03)에 발이 묶여 밸런스시트·CNN 매각까지 걸린 상태. <span class="fc">싼 EV/EBITDA는 딜 리스크가 해소돼야 빛을 본다.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">고위험·고변동 턴어라운드</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s">완만한 저평가</div><div class="meter"><span style="width:60%"></span></div><div class="d">FY26 가이던스 EBITDA 기준 EV/EBITDA 5.6배로 미디어 업종 대비 할인, 단 트레일링 지표는 합병 회계로 왜곡.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s" style="color:var(--acc)">강한 논쟁</div><div class="meter"><span style="width:70%"></span></div><div class="d">스트리밍·스튜디오 흑자전환·시너지 확대 vs WBD 딜 리스크·고금리 부채.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 · 저점권 반등</div><div class="meter"><span style="width:70%"></span></div><div class="d">52주 저점권에서 최근 30일 +23% 반등, $10.1~$11.3 박스 형성 중.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">완만한 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER(FY26E)</div><div class="v a">~17.3×</div><div class="n">FY27E 기준 ~13.3×</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">~5.6×(FWD) / 8.65×(TTM 벤더)</div><div class="n">TTM은 합병 스텁 기간 왜곡</div></div>
+    <div class="mc"><div class="l">잉여현금흐름(FY26E)</div><div class="v">~$0.38~0.39B</div><div class="n">FCF전환율 목표 10%+(EBITDA 대비)</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">−0.8 / 7.8%</div><div class="n">TTM 순손실로 ROE(-), ROIC은 플러스</div></div>
+  </div>
+  <div class="key">현재 가격엔 <b>"딜 리스크가 완전히 해소되지 않는다"</b>는 시나리오가 상당 부분 반영돼 있음.</div>
+  <ul class="pts">
+    <li>TTM 기준 순손실(EPS −$0.63)로 <span class="fc">트레일링 PER은 의미 없음(N/A)</span> — 2Q26 GAAP diluted EPS는 $0.04로 흑자 전환 조짐.</li>
+    <li>배당 연 $0.20(분기 $0.05), 수익률 약 1.9% — 인컴 매력은 크지 않음.</li>
+    <li>순부채/EBITDA가 여전히 높아(총부채 $13.6B) 2027년 말 투자등급 회복이 목표 — 그 전까지는 밸류에이션 디스카운트가 구조적으로 남을 가능성.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">FY26 가이던스 EBITDA($3.8~3.9B) 기준으로는 <b>업종 대비 뚜렷한 할인(EV/EBITDA ~5.6배)</b>이나, 이는 시너지·딜 성사를 전제로 한 낙관 시나리오에 가깝다. <b>WBD 딜이 좌초되거나 지연되면 할인 근거(성장 스토리)도 함께 흔들린다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">강한 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">2Q26 매출</div><div class="v a">$6.913B</div></div>
+    <div class="ec"><div class="l">조정EBITDA</div><div class="v a">$1.099B</div></div>
+    <div class="ec"><div class="l">YoY(EBITDA)</div><div class="v a">+27%</div></div>
+    <div class="ec"><div class="l">P+ 구독자</div><div class="v">81.6M(+2M QoQ)</div></div>
+    <div class="ec"><div class="l">발표 후 30일</div><div class="v a">+23%</div></div>
+  </div>
+  <div class="key">실적 자체는 <b>거의 전 부문 개선</b> — 시장의 초점은 실적이 아니라 <b>WBD 딜의 승인 여부</b>로 이동한 상태.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>스튜디오 흑자전환</b> — 조정EBITDA $36M 흑자(전년 적자), 2026년 극장 라인업 8→15편 확대</li>
+      <li><b>스트리밍 성장 지속</b> — Paramount+ 매출 +9%(DTC 부문 $2.47B), 구독자 6개 분기 연속 순증</li>
+      <li><b>시너지 상향</b> — 연말 런레이트 효율화 목표 $2.5B→$2.7B, 총 시너지 목표 $3B+</li>
+      <li><b>가이던스 상향</b> — FY26 EBITDA $3.8~3.9B·FCF전환율 5%→10%+로 동반 상향</li>
+      <li><b>딜 완주 의지</b> — CNN 매각까지 검토하며 반독점 이슈 해소에 적극적</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>반독점 재판 확정</b> — 2027-03-02~03-19 12일 재판, 그때까지 딜 불확실성 지속</li>
+      <li><b>티킹피 부담</b> — 10/1부터 하루 약 $700만(분기 약 $6.5억)씩 WBD 주주에 지급</li>
+      <li><b>파기 시 위약금</b> — 2027년 6월까지 미해결 시 WBD에 $70억 지급 가능성</li>
+      <li><b>고금리 부채·코버넌트</b> — Arete는 이 부담을 이유로 Sell·목표가 $2까지 하향</li>
+      <li><b>경영 리스크</b> — 사장 Jeff Shell 4월 소송發 사임 후 후임 미확정, 리더십 공백</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권 · 저점권</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="PSKY 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$21</text>
+      <text x="46" y="146" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$11</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$8</text>
+      <polyline points="64,34 150,58 230,84 300,110 370,130 440,148 510,158 580,163 640,160 700,150 760,144 820,140 870,142 905,140" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="700" y="136" width="210" height="20" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="805" y="132" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $10.10–$11.30</text>
+      <line x1="700" y1="140" x2="910" y2="140" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="136" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 11.30</text>
+      <line x1="700" y1="156" x2="910" y2="156" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="154" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 10.10</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 20.86</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값. 52주 고점은 딜 발표 초기 낙관 구간, 이후 재판·티킹피 리스크 부각으로 장기 하락 후 저점권 다지기 중.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$20.86</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$11.30</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$10.35</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$10.10</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$7.62</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$11.30 돌파 시</b> → 다음 매물대 $13~14권(7월 저점 이후 반등 고점대) 재시험 가능. <b style="color:var(--down)">$10.10 이탈 시</b> → 더 넓은 수요대 $8.62까지, 심하면 52주 저점 $7.62 재시험 가능. 방아쇠: WBD 재판 관련 절차적 뉴스(중간 판결·화해 협상)·CNN 매각 진행 상황·3Q26 실적(추정 11월 초).</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>딜 좌초 리스크</b> — 반독점 재판(2027-03)에서 불리한 판결 시 $1,110억 WBD 인수 자체가 무산될 수 있음.</li>
+    <li><b>재무 부담 누적</b> — 10/1부터 하루 약 $700만 티킹피가 쌓이고, 2027년 6월까지 미해결 시 최대 $70억 위약금 리스크.</li>
+    <li><b>리더십 공백</b> — 사장직 공석 상태가 장기화되면 조직 안정성에 대한 우려가 재부각될 수 있음.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">2026-09-15(경)</td><td>분기 배당 $0.05 지급 예정(배당락 기준일 관련 확인 필요)</td></tr>
+    <tr><td class="d">2026-10-01~</td><td><b>WBD 티킹피 발생 개시</b> — 딜 미완료 시 하루 약 $700만 누적</td></tr>
+    <tr><td class="d">2026-11월 초(추정)</td><td>3Q26 실적 발표 — 스트리밍·스튜디오 흑자 기조 지속 여부, CNN 매각 진행 상황</td></tr>
+    <tr><td class="d">2027-03-02~03-19</td><td><b>WBD 인수 반독점 재판</b>(연방법원, 12일간) — 딜 향방을 가르는 최대 이벤트</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-08-21 종가 및 공개된 2Q26(2026-08-04 발표) 실적 기준으로, 소스 간 편차가 있는 항목(EPS 서프라이즈 규모, 일부 벤더의 트레일링 밸류에이션 지표 등)은 보수적으로 처리하거나 병기했습니다. 실제와 차이가 있을 수 있으며, 특히 WBD 인수 관련 사안은 소송·규제 진행에 따라 빠르게 변동할 수 있습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://stockanalysis.com/stocks/psky/statistics/">stockanalysis</a> · <a href="https://www.gurufocus.com/term/mktcap/PSKY">GuruFocus</a> · <a href="https://www.fool.com/earnings/call-transcripts/2026/08/12/paramount-skydance-psky-q2-2026-earnings-call-transcript/">Motley Fool 2Q26 실적콜</a> · <a href="https://variety.com/2026/tv/news/paramount-warner-bros-antitrust-trial-date-march-2027-1236827843/">Variety(재판일정)</a> · <a href="https://www.aljazeera.com/economy/2026/8/12/paramount-skydance-mulls-cnn-sale-amid-antitrust-merger-challenge">Al Jazeera(CNN 매각)</a> · <a href="https://www.benzinga.com/quote/PSKY/analyst-ratings">Benzinga(애널리스트)</a></div>
+    <div class="nextp">다음 발행 · 2026-08-30(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>

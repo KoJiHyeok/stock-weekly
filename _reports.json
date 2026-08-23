@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-08-23 22:00 KST",
+"next_publish": "2026-08-30 22:00 KST",
 "reports": [
+{
+"no": 17,
+"ticker": "PSKY",
+"company": "Paramount Skydance Corporation",
+"date": "2026-08-23",
+"file": "PSKY_2026-08-23.html",
+"price": "$10.35",
+"tldr": "실적은 빠르게 좋아지고 있다(2Q26 조정EBITDA +27%·스튜디오 흑자전환·시너지 목표 $2.5B→$2.7B 상향) vs 워너브라더스디스커버리 $1,110억 인수가 반독점 재판(2027-03-02~19)에 발이 묶여 티킹피(일 약 $700만)·CNN 매각 검토까지 겹친 상태 · 11월 초(추정) 3Q26 실적 · $10.10~$11.30 박스권 저점 반등 시도",
+"value": "완만한 저평가",
+"growth": "강한 논쟁",
+"trend": "박스권·저점권 반등"
+},
 {
 "no": 16,
 "ticker": "CI",
