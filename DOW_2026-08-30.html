@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · DOW · Dow Inc.</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">DOW</span>
+    <span class="exch">NYSE</span>
+    <span class="co">Dow Inc.</span>
+    <span class="hmeta">WEEKLY EQUITY · No.18<br>기준 2026·08·28 · 작성 08·30</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$30.50</div>
+      <div class="chg" style="color:var(--sub)">- 52주 고점 대비 −28.6% · 저점 대비 +47.7%</div>
+      <div class="pxn">시총 ~$21.9B · EV ~$38.4B(추정 순부채 ~$16.5B)</div>
+      <div class="rbar"><span class="fill" style="width:44.6%"></span><span class="mk" style="left:44.6%"></span></div>
+      <div class="rlab"><span>$20.65</span><span>52W RANGE · 44.6%</span><span>$42.74</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">10.6×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA(TTM)</div><div class="v">14.5×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">~7.3%</div></div>
+      <div class="stat"><div class="l">ROIC</div><div class="v">10.9%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD 우세</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$35.7</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">선행 PER 10.6배로 업종 대비 -45% 할인 vs 2Q26 폭발적 반등(EBITDA $2.3B·EPS $1.44 서프라이즈)에도 신용등급 2회 연속 강등·배당 반토막 잔존. <span class="fc">$28~$34 박스권 중하단에서 사이클 저점 통과 여부를 시험 중.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 사이클 반등 논쟁</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">완만한 저평가</div><div class="meter"><span style="width:70%"></span></div><div class="d">선행 PER 10.6배(업종 -45%)는 싸나, TTM EV/EBITDA는 트레일링 부진 분기 잔존으로 10년 중앙값보다 오히려 높음.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">반등 조짐 · 논쟁</div><div class="meter"><span style="width:58%;background:var(--sub)"></span></div><div class="d">2Q26 폴리에틸렌 가격 반등으로 급반전 vs 3Q26 가이던스는 QoQ 마진 압축.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 · 중하단</div><div class="meter"><span style="width:52%;background:var(--sub)"></span></div><div class="d">6~8월 $28~$34 박스, 8/25 매크로發 -4.1%로 하단 근접 재시험 중.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">완만한 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">10.6×</div><div class="n">화학업종 중앙값 19.4× 대비 -45%</div></div>
+    <div class="mc"><div class="l">EV/EBITDA(TTM)</div><div class="v">14.5×</div><div class="n">자체 10년 중앙값 9.7× 대비 +49%(왜곡 가능성)</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">~$1.6B(TTM)</div><div class="n">FCF 수익률 시총 대비 ~7.3%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">0%대·소스편차 / 10.9%</div><div class="n">2025년 손실분기 잔존으로 ROE 왜곡</div></div>
+  </div>
+  <div class="key">"선행 실적 기준으론 싸지만, 최근 1년 실적 기준으론 아직 싸다고 말하기 이르다"는 <b>이중적 밸류에이션</b> 구도.</div>
+  <ul class="pts">
+    <li>선행 PER 10.6배·배당수익률 약 4.6%로 절대 밸류는 매력적이나, TTM EV/EBITDA 14.5배는 2025년 사이클 저점 분기들이 아직 분모(EBITDA)에 남아있어 <span class="fc">왜곡 폭이 큰 구간</span>.</li>
+    <li>신용등급은 2025년(Baa1→Baa2, BBB→변동 없음)과 2026년 2월(S&amp;P BBB→BBB-, Moody's Baa2→Baa3)에 걸쳐 <b>2단계 연속 강등</b>, 양사 모두 부정적 전망(negative outlook) 유지 — 밸류 디스카운트의 상당 부분이 레버리지 리스크 프리미엄으로 설명됨.</li>
+    <li>배당은 2025년 3분기 분기 $0.70→$0.35로 50% 삭감된 이후 4개 분기째 $0.35로 유지(연 $1.40, 8/31 배당락·9/11 지급 예정) — 삭감 이후 안정화 국면.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">2Q26처럼 <b>가격 반등이 이어지면</b> TTM EBITDA가 빠르게 정상화되며 EV/EBITDA 14.5배의 "왜곡"이 해소, 실질 밸류 재평가 여지 — 단, <b class="fc">이는 아직 확정된 시나리오가 아니라 3Q26 실적으로 검증해야 할 가설</b>이며, 반대로 가격이 재하락하면 밸류트랩으로 판명될 수 있다.</div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">반등 조짐 · 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">2Q26 매출</div><div class="v a">$12.1B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+20%</div></div>
+    <div class="ec"><div class="l">조정EPS</div><div class="v a">$1.44</div></div>
+    <div class="ec"><div class="l">영업EBITDA</div><div class="v">$2.3B</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v" style="color:var(--acc)">소폭 상승</div></div>
+  </div>
+  <div class="key">2Q26은 <b>폴리에틸렌 가격 반등(중동 공급 충격)</b>이 만든 극적 턴어라운드 — 그러나 회사 스스로도 3Q엔 되돌림을 가이던스로 명시.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>턴어라운드 확인</b> — 2Q26 조정EPS $1.44, 컨센서스($1.25 안팎) 대비 +15%大 서프라이즈, 전년동기 GAAP $(0.42) 적자에서 극적 전환</li>
+      <li><b>자체 구조조정 가속</b> — "Transform to Outperform" 2026년 자체절감 목표를 $1.1B→$1.3B+로 상향, 2028년까지 누적 EBITDA 개선 $3B+ 제시</li>
+      <li><b>가격 모멘텀</b> — 중동 공급 충격 이후 폴리에틸렌 가격이 4월 이후 누적 최대 100%까지 인상, "10년래 보기 드문 폭"(경영진 발언)</li>
+      <li><b>신임 CEO</b> — 2026-07-01부로 Karen S. Carter(前 COO) 취임, Jim Fitterling은 이사회 의장(Executive Chair)으로 이동 — 경영 연속성 확보</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>3Q26 가이던스 QoQ 둔화</b> — 회사 자체 가이던스가 영업EBITDA $2.3B→$1.7B로, 6월 가격 하락분 반영·계절적 마진 압축·정비비용 ~$2천만 추가</li>
+      <li><b>중국 리스크</b> — 미국의 폴리에틸렌 대중 수출 비중이 가장 커, 일부 하우스(JPMorgan 등)는 "석유화학업체 중 가장 어려운 처지"로 지목·중국 재고 재적재 지연 시 가격 되돌림 우려</li>
+      <li><b>레버리지</b> — 총부채/EBITDA가 2026년 초 한때 4.9배까지 상승(2022년 1.9배 대비), 신용등급 2단계 연속 강등·부정적 전망 지속</li>
+      <li><b>애널리스트 쏠림</b> — 컨센서스가 Hold에 쏠려(다수 20명 중 Hold 다수·Strong Buy 소수) 있어, 뚜렷한 방향성 합의는 아직 부재</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권 중하단</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="DOW 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$43</text>
+      <text x="46" y="102" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$31</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$21</text>
+      <polyline points="64,150 130,168 190,158 250,120 310,90 370,72 430,66 490,78 550,84 610,92 660,80 700,96 740,104 780,108 820,116 860,110 905,112" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="590" y="82" width="315" height="46" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="747" y="76" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $28.00–$34.00(6~8월)</text>
+      <line x1="590" y1="88" x2="905" y2="88" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="84" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 34.00</text>
+      <line x1="590" y1="126" x2="905" y2="126" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="140" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 28.00</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 42.74 · LOW 20.65(1월 매크로 저점)</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$42.74</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$34.00</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$30.50</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$28.00</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$20.65</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$34 돌파 시</b> → 컨센서스 평균 목표가 부근인 $35~36, 나아가 JPMorgan 목표가 $40권 재도전 가능. <b style="color:var(--down)">$28 이탈 시</b> → 1월 매크로發 저점권($20~24) 재시험 리스크. 방아쇠: 3Q26 폴리에틸렌 가격 추이·중국 재고 재적재 여부·10월 3Q26 실적.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>가격 되돌림 리스크</b> — 3Q26 가이던스대로 EBITDA가 $1.7B로 QoQ 둔화되면 "사이클 바닥 통과" 서사가 다시 흔들릴 수 있음.</li>
+    <li><b>신용등급 추가 강등</b> — 부정적 전망(negative outlook) 지속 중, 레버리지가 재차 확대되면 투자등급 하단(BBB-/Baa3) 이탈 우려.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">2026-08-31</td><td>분기 배당($0.35) 배당락 · 9/11 지급</td></tr>
+    <tr><td class="d">2026-10-22(추정)</td><td><b>3Q26 실적 발표</b>(공식 미확정) — 가이던스 EBITDA $1.7B 달성 여부·폴리에틸렌 가격 추이·"Transform to Outperform" 진행 상황</td></tr>
+    <tr><td class="d">분기 중</td><td>중국 폴리에틸렌 재고 재적재 속도·미·중 통상 이슈, 신용등급 재검토 이벤트 상존</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-08-28 종가 및 공개된 2Q26(2026-07-23 발표) 실적 기준으로, 소스 간 편차가 있는 항목(EV/EBITDA, ROE, FCF 수익률 등 트레일링 지표는 2025년 손실 분기가 혼재돼 소스별 산출값 차이가 큼)은 병기하거나 보수적으로 처리했습니다. 3Q26 실적 발표일은 공식 확정 전 추정치입니다. 실제와 차이가 있을 수 있으며, 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://stockanalysis.com/stocks/dow/forecast/">stockanalysis(애널리스트 컨센서스)</a> · <a href="https://www.gurufocus.com/term/forward-pe-ratio/DOW">GuruFocus(선행 PER)</a> · <a href="https://www.gurufocus.com/term/enterprise-value-to-ebitda/DOW">GuruFocus(EV/EBITDA)</a> · <a href="https://investors.dow.com/en/news/news-details/2026/Dow-Chair-and-CEO-Jim-Fitterling-to-Become-Executive-Chair-Karen-S--Carter-Appointed-Chief-Executive-Officer/default.aspx">Dow IR(CEO 교체)</a> · <a href="https://www.stocktitan.net/sec-filings/DOW/8-k-dow-inc-reports-material-event-2eea5bf1099f.html">StockTitan(2Q26 8-K)</a> · <a href="https://www.tikr.com/blog/dows-dividend-fell-to-0-35-a-share-after-five-quarters-stuck-at-0-70">TIKR(배당 삭감 연혁)</a> · <a href="https://www.spglobal.com/ratings/en/regulatory/article/-/view/type/HTML/id/3518878">S&amp;P Global Ratings(신용등급 강등)</a></div>
+    <div class="nextp">다음 발행 · 2026-09-06(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>

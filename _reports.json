@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-08-30 22:00 KST",
+"next_publish": "2026-09-06 22:00 KST",
 "reports": [
+{
+"no": 18,
+"ticker": "DOW",
+"company": "Dow Inc.",
+"date": "2026-08-30",
+"file": "DOW_2026-08-30.html",
+"price": "$30.50",
+"tldr": "선행 PER 10.6배로 업종 대비 -45% 할인 vs 2Q26 폭발적 반등(조정영업EBITDA $2.3B·EPS $1.44 서프라이즈)에도 신용등급 2회 연속 강등(S&P BBB-·Moody's Baa3, 부정적 전망)·배당 반토막(연 $1.40) 잔존 · 3Q26 가이던스는 EBITDA $1.7B로 QoQ 둔화 · 10/22(추정) 3Q26 실적 · $28~$34 박스권 중하단",
+"value": "완만한 저평가",
+"growth": "반등 조짐·논쟁",
+"trend": "박스권 중하단"
+},
 {
 "no": 17,
 "ticker": "PSKY",
