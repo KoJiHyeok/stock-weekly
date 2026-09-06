@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-09-06 22:00 KST",
+"next_publish": "2026-09-13 22:00 KST",
 "reports": [
+{
+"no": 19,
+"ticker": "GDDY",
+"company": "GoDaddy Inc.",
+"date": "2026-09-06",
+"file": "GDDY_2026-09-06.html",
+"price": "$101.31",
+"tldr": "Airo(AI 웹사이트 빌더) 연환산 예약이 한 분기 만에 5배($10M→$50M) 성장 vs 구글 AI 오버뷰 검색침투율이 48%까지 확산되며 도메인·호스팅 사업의 구조적 디스카운트 논쟁 재점화 · 2Q26 매출 $1.30B(+7%)·조정EPS $1.83 서프라이즈에도 보수적 가이던스+Wells Fargo 하향(PT $80→$76)으로 정규장+시간외 합산 약 -14~17% 급락 · 10/29(추정) 3Q26 실적 · $93~109 신규 박스권 형성 초기",
+"value": "완만한 저평가",
+"growth": "진짜 논쟁",
+"trend": "박스권 형성 초기"
+},
 {
 "no": 18,
 "ticker": "DOW",
