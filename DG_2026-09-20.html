@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · DG · Dollar General Corporation</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">DG</span>
+    <span class="exch">NYSE</span>
+    <span class="co">Dollar General Corporation</span>
+    <span class="hmeta">WEEKLY EQUITY · No.21<br>기준 2026·09·18 · 작성 09·20</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$122.41</div>
+      <div class="chg">▼ 전일 대비 −2.03% (−$2.54)</div>
+      <div class="pxn">시총 $27.0B · EV 약 $41~42B</div>
+      <div class="rbar"><span class="fill" style="width:43.3%"></span><span class="mk" style="left:43.3%"></span></div>
+      <div class="rlab"><span>$95.11</span><span>52W RANGE · 저점대비 +28.7% · 고점대비 −22.6%</span><span>$158.23</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">15.7×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">12.0×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">8.0%</div></div>
+      <div class="stat"><div class="l">ROE / ROIC</div><div class="v">18.9 / 7.7%</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">HOLD</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$135</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">저소득층 트레이드다운 수혜로 2Q26 EPS +33%·가이던스 상향(턴어라운드 진행형) vs 이미 YTD +25%대 반영된 밸류·CEO 교체(2027년) 리스크. <span class="fc">$117~134 박스권 하단, 지지선 재시험 구간.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">관망 · 턴어라운드 진행형</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">완만한 저평가</div><div class="meter"><span style="width:58%"></span></div><div class="d">선행 PER 15.7배 · GF Value $121.45 대비 현재가는 사실상 적정가 부근.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">턴어라운드 · 논쟁</div><div class="meter"><span style="width:66%"></span></div><div class="d">2Q26 EPS +33.3% 서프라이즈·가이던스 상향 vs 관세환급 일회성·저소득 소비 압박.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 · 하단 지지 테스트</div><div class="meter"><span style="width:34%;background:var(--sub)"></span></div><div class="d">$117.51~$134.13 박스 하단부. 최근 거래일 −2.03%로 지지대 재시험.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">완만한 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">트레일링 / 선행 PER</div><div class="v a">16.7 / 15.7×</div><div class="n">GuruFocus GF Value $121.45</div></div>
+    <div class="mc"><div class="l">EV/EBITDA · EV/FCF</div><div class="v a">12.0× · 18.4×</div><div class="n">할인점 업종 평균권</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">$2.16B</div><div class="n">FCF/주당 $9.96 · 수익률 8.0%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v">18.9 / 7.7%</div><div class="n">부채비율(D/E) 1.79 반영</div></div>
+  </div>
+  <div class="key">딥밸류는 아니다 — 현재가는 <b>GF Value·10년 평균 PER 근방</b>에서 "적정가 vs 완만한 저평가" 사이 논쟁 구간.</div>
+  <ul class="pts">
+    <li>배당수익률 약 <span class="fc">1.9%(연 $2.36)</span>, 5년 배당 CAGR 약 10.4%로 완만한 배당 성장 지속.</li>
+    <li>FY26 <span class="fc">자본지출 $1.4~1.5B</span>로 신규 출점·리모델링(약 4,730건)을 진행하며 저PER 대비 재투자 여력은 확보된 편.</li>
+    <li>ROIC 7.7%는 ROE 18.9% 대비 크게 낮아 레버리지(D/E 1.79)가 자기자본이익률을 끌어올리는 구조 — 순수 자본효율성은 업종 상위권이 아님.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">밸류에이션 자체가 트리거는 아니다 — <b>실적 서프라이즈가 반복 확인돼야 15~16배에서 18배권(피어 상단)으로 재평가</b>될 여지가 생긴다. 반대로 성장 논쟁이 베어 쪽으로 기울면 12~13배 재하향 위험도 상존.</div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">턴어라운드 · 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">2Q26 순매출</div><div class="v a">$11.29B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+5.2%</div></div>
+    <div class="ec"><div class="l">동일점포매출</div><div class="v a">+3.5%</div></div>
+    <div class="ec"><div class="l">희석 EPS</div><div class="v a">$2.48</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v a">상승(+5%대)</div></div>
+  </div>
+  <div class="key">2026-08-27 발표한 2Q26(7/31 마감 분기) 실적은 매출·이익 모두 <b>큰 폭 서프라이즈</b> — 순이익 $550.3M(+33.8%YoY), 희석 EPS $2.48(컨센서스 약 $2.00~2.01 대비 +24%p 상회), 매출총이익률 32.6%(+127bp), 영업이익 $769.2M(+29.2%YoY, 영업이익률 약 6.8%). 다만 관세 환급분이 마진 개선에 약 81bp·EPS에 약 $0.25 기여한 일회성 요인이라는 점이 논쟁의 핵심.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>트래픽+티켓 동반 성장</b> — 고객 트래픽 +2.0%·평균 구매액 +1.5%, 소비재·비소비재 4개 카테고리 전부 플러스</li>
+      <li><b>비소비재 가속</b> — 동일점포 비소비재 +4.5%(완구 강세 + 중·고소득층 트레이드다운)로 소비재·비소비재 양쪽 점유율 확대</li>
+      <li><b>FY26 가이던스 상향</b> — 매출성장 약 4.0~4.3%, 동일점포매출 +2.5~2.9%, 희석EPS $7.80~$8.00</li>
+      <li><b>매장 리뉴얼 프로그램 순항</b> — 상반기 신규 321개점·리모델링 2,757개점(Project Renovate 1,324 + Project Elevate 1,422) 집행, 연간 약 4,730건 계획 중 순항</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>일회성 관세환급 의존</b> — 이번 분기 마진 개선의 상당 부분이 반복되지 않을 관세 환급분에서 기인</li>
+      <li><b>저소득 고객 압박 지속</b> — 경영진(Todd Vasos)이 핵심 고객층의 재정 부담과 소비 패턴 변화를 직접 경고</li>
+      <li><b>CEO 교체 불확실성</b> — 2026년 3월 발표대로 2027-01-01 Todd Vasos→Jerry "JJ" Fleeman 승계 예정, 전략 연속성 관찰 필요</li>
+      <li><b>내부자 매도 신호</b> — 최근 12개월 내부자 순매도(매수 없음)로 "매장 턴어라운드" 메시지와 다소 배치되는 신호(단, 사외이사 매수 증가 사례도 병존)</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권 하단</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="DG 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$158</text>
+      <text x="46" y="102" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$126</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$95</text>
+      <polyline points="64,53 150,93 230,140 300,170 370,130 440,77 510,22 580,46 640,79 700,118 760,88 820,100 870,105 905,106" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="640" y="79" width="270" height="39" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="775" y="74" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $117.51–$134.13</text>
+      <line x1="640" y1="81" x2="910" y2="81" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="76" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 132.33</text>
+      <line x1="640" y1="103" x2="910" y2="103" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="99" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 122.89</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 158.23(02/26)</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도. 가격 레벨은 실제값. 52주 저점 $95.11은 2025-11-07 기록.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$158.23</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$132.33</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$122.41</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$122.89</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$95.11</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx">현재가($122.41)는 최근 1개월 박스($117.51~$134.13)의 지지대 하단을 살짝 밑도는 위치 — <b class="fc">$122.89~125 재탈환 후 저항 $132~134 돌파 시</b> 컨센서스 평균 목표가 $135권, 나아가 Argus 상단 목표가 $170권까지 재평가 여지. <b style="color:var(--down)">$117.51 이탈 시</b> 다음 지지는 뚜렷한 레벨 없이 8월 저점대 및 52주 저점 $95.11 방향 재하락 위험. 방아쇠: 홀리데이 시즌 트레이드다운 지속 여부·관세 정책·12/4 3Q26 실적.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>관세환급 되돌림</b> — 3Q26부터 관세 환급 기여분이 소멸되면 마진 서프라이즈 재현 여부가 핵심 관찰 포인트.</li>
+    <li><b>경영진 승계</b> — 2027-01-01 CEO 교체(Vasos→Fleeman) 전후 전략 연속성·시장 신뢰 변화 모니터링 필요.</li>
+    <li><b>저소득 소비자 체력</b> — 관세·고용시장 둔화가 트레이드다운 수요를 넘어서는 지출 위축으로 번질 경우 comp 성장 둔화 리스크.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">2026-12-04(금) 개장 전</td><td><b>3Q FY2026 실적</b> — comp 성장 지속 여부·관세환급 소멸 후 마진·홀리데이 시즌 가이던스</td></tr>
+    <tr><td class="d">4Q 진행 중</td><td>FY26 신규 출점 약 450개(미국)+10개(멕시코)·리모델링(Renovate/Elevate) 총 약 4,730건 집행 진도</td></tr>
+    <tr><td class="d">2027-01-01(예정)</td><td>CEO 승계 — Todd Vasos → Jerry "JJ" Fleeman</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-09-18(금) 종가 및 공개된 2Q FY2026(2026-08-27 발표) 실적·가이던스 기준으로, 실제와 차이가 있을 수 있습니다. 확보하지 못한 세부 항목은 N/A로 표기했습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://stockanalysis.com/stocks/dg/">stockanalysis</a> · <a href="https://www.gurufocus.com/stock/DG/summary">GuruFocus</a> · <a href="https://www.nasdaq.com/press-release/dollar-general-corporation-reports-second-quarter-2026-results-2026-08-27">Dollar General 2Q26 실적 발표(Nasdaq 게재)</a> · <a href="https://finance.yahoo.com/markets/stocks/articles/dollar-general-q2-2026-earnings-175159974.html">Yahoo Finance 2Q26 실적 반응</a> · <a href="https://www.ad-hoc-news.de/boerse/news/corporate-news/dollar-general-stock-holds-a-consensus-hold-as-analysts-target-usd-135/70127351">애널리스트 컨센서스·목표가</a> · <a href="https://www.dailypolitical.com/2026/09/06/dollar-general-nysedg-price-target-raised-to-170-00.html">Argus 목표가 상향</a></div>
+    <div class="nextp">다음 발행 · 2026-09-27(일) 22:00 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-09-20 22:00 KST",
+"next_publish": "2026-09-27 22:00 KST",
 "reports": [
+{
+"no": 21,
+"ticker": "DG",
+"company": "Dollar General Corporation",
+"date": "2026-09-20",
+"file": "DG_2026-09-20.html",
+"price": "$122.41",
+"tldr": "저소득층 트레이드다운 수혜로 2Q26 EPS +33.3%(희석 EPS $2.48)·가이던스 상향(FY26 EPS $7.80~8.00) vs 관세환급 일회성 기여(마진 +81bp·EPS +$0.25)·저소득 고객 지출압박·2027년 CEO 교체(Vasos→Fleeman) 불확실성 · 12/4(추정) 3Q26 실적 · $117.51~134.13 박스권 하단, 지지선($122.89) 재시험 구간",
+"value": "완만한 저평가",
+"growth": "턴어라운드·논쟁",
+"trend": "박스권 하단·지지 테스트"
+},
 {
 "no": 20,
 "ticker": "HSY",
