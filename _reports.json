@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-09-27 22:00 KST",
+"next_publish": "2026-10-04 22:00 KST",
 "reports": [
+{
+"no": 22,
+"ticker": "UNH",
+"company": "UnitedHealth Group Incorporated",
+"date": "2026-09-27",
+"file": "UNH_2026-09-27.html",
+"price": "$376.59",
+"tldr": "선행 PER 16.1배(트레일링 24.2배)로 컨센서스 평균 목표가 대비 +26% 괴리 vs 2Q26 메디컬코스트비율 86.7%(전년 89.4%)로 개선되며 FY26 조정EPS 가이던스를 $19.50~20.00으로 상향 vs 옵텀-보험 수직계열화 DOJ 반독점·형사수사 확대(Claritev 민사조사 포함) 논쟁 · 10/13(화) 3Q26 실적 · $354.66~404.33 박스권, 7월 고점($461.62) 이후 하락추세",
+"value": "완만한 저평가",
+"growth": "회복세·규제 논쟁",
+"trend": "박스권 하단·하락추세"
+},
 {
 "no": 21,
 "ticker": "DG",
