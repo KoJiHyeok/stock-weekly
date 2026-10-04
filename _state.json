@@ -3,16 +3,16 @@
   "market": "US",
   "design": "terminal-dark-single-green",
   "style_template_file": "PYPL_2026-06-03.html",
-  "covered_tickers": ["PYPL", "PFE", "QCOM", "CTSH", "PDD", "CMCSA", "ADBE", "GILD", "DEO", "UPS", "CHTR", "NFLX", "MAT", "F", "STZ", "CI", "PSKY", "DOW", "GDDY", "HSY", "DG", "UNH"],
+  "covered_tickers": ["PYPL", "PFE", "QCOM", "CTSH", "PDD", "CMCSA", "ADBE", "GILD", "DEO", "UPS", "CHTR", "NFLX", "MAT", "F", "STZ", "CI", "PSKY", "DOW", "GDDY", "HSY", "DG", "UNH", "BMY"],
   "current_pick": null,
-  "last_published_no": 22,
-  "last_published": "UNH (2026-09-27)",
-  "next_publish": "2026-10-04 22:00 KST",
+  "last_published_no": 23,
+  "last_published": "BMY (2026-10-04)",
+  "next_publish": "2026-10-11 22:00 KST",
   "deploy": {
     "host": "GitHub Pages",
     "repo": "KoJiHyeok/stock-weekly",
     "upload_url": "https://github.com/KoJiHyeok/stock-weekly/upload/main",
     "site_url": "https://kojihyeok.github.io/stock-weekly/"
   },
-  "note": "발행 완료 종목을 covered_tickers에 누적. 다음 종목은 주중 스크리너가 결정(발굴 중). repo가 단일 진실원. 다음 발행은 No.23."
+  "note": "발행 완료 종목을 covered_tickers에 누적. 다음 종목은 주중 스크리너가 결정(발굴 중). repo가 단일 진실원. 다음 발행은 No.24."
 }
