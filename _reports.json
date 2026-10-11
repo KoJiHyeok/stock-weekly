@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-10-11 22:00 KST",
+"next_publish": "2026-10-18 22:30 KST",
 "reports": [
+{
+"no": 24,
+"ticker": "APTV",
+"company": "Aptiv PLC",
+"date": "2026-10-11",
+"file": "APTV_2026-10-11.html",
+"price": "$43.80",
+"tldr": "선행 PER 7.5~7.8배(FY26 조정EPS 가이던스 $5.60~5.80 기준) 역대급 저평가 vs 2Q26 조정EPS $1.63 서프라이즈에도 FY26 가이던스 2연속 하향(매출 $12.6~12.8B)·3Q26 가이던스 EPS $1.25~1.35로 컨센서스($1.60~1.61) 대폭 하회, JPMorgan·Morgan Stanley·Deutsche Bank 등급 하향 vs ADAS·소프트웨어 콘텐츠당 매출 확대(연 $200억+ 신규수주)로 Goldman·Barclays 등은 매수 유지 · 10/29(목) 3Q26 실적 · $43.37~48.27 신저가권, 52주 고점($88.93) 대비 -51%",
+"value": "저평가",
+"growth": "하향 압력·논쟁",
+"trend": "신저가권·바닥 미확인"
+},
 {
 "no": 23,
 "ticker": "BMY",
