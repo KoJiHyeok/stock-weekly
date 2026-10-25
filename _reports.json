@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-10-25 22:30 KST",
+"next_publish": "2026-11-01 22:30 KST",
 "reports": [
+{
+"no": 26,
+"ticker": "VZ",
+"company": "Verizon Communications Inc.",
+"date": "2026-10-25",
+"file": "VZ_2026-10-25.html",
+"price": "$44.66",
+"tldr": "선행 PER 8.9배·FCF수익률 11.6%·배당 6.3%로 밸류에이션은 싸졌지만, 10/8(추정) SpaceX·Grain Management의 800MHz 저대역 스펙트럼 인수 발표發 'Starlink Mobile' 경쟁 공포로 9/18 이후 배당포함 -6.8% 급락 · 2Q26 조정EPS $1.30(컨센서스 $1.27 상회)에 가이던스 2연속 상향(조정EPS $4.99~5.04·FCF $21.5B+)에도 매출은 컨센서스 하회(-0.7%YoY) · 포스트페이드 순증 184K(5년 내 최대)·광대역 순증 348K · 10/26(월) 3Q26 실적 · 9월 피크($51.29) 대비 -12.9%, 10월 저점($42.78) 후 $43~46권 박스권 다지기, 52주 레인지 $38.39~51.68",
+"value": "완만한 저평가",
+"growth": "가이던스 상향·경쟁공포 논쟁",
+"trend": "급락후 박스권 다지기"
+},
 {
 "no": 25,
 "ticker": "LW",
