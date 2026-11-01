@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · CE · Celanese Corporation</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--sub);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">CE</span>
+    <span class="exch">NYSE</span>
+    <span class="co">Celanese Corporation</span>
+    <span class="hmeta">WEEKLY EQUITY · No.27<br>기준 2026·10·30(금 종가) · 작성 11·01</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$49.28</div>
+      <div class="chg">당일등락 N/A · 휴장(일) · 10/30(금) 종가 기준</div>
+      <div class="pxn">시총 약 $5.4B · EV 약 $16.0B(순부채 $10.64B 가산)</div>
+      <div class="rbar"><span class="fill" style="width:39.8%"></span><span class="mk" style="left:39.8%"></span></div>
+      <div class="rlab"><span>$35.13</span><span>52W RANGE · 하단 40%</span><span>$70.70</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">8.2×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA(선행)</div><div class="v a">8.6×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">~14%</div></div>
+      <div class="stat"><div class="l">ROE/ROIC</div><div class="v" style="color:var(--down)">음수</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">매수~중립 혼재</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$63</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">선행 PER 8.2배·FCF수익률 약 14%로 싸지만, Lanaken 공장 폐쇄 손상상각으로 트레일링 지표는 전부 왜곡·레버리지(순부채 $10.6B)는 여전히 부담 · <span class="fc">11/2(월) 장마감 후 3Q26 실적이 이번 주 최대 변곡점.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">실적 대기 · 저평가 논쟁</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">저평가 (중)</div><div class="meter"><span style="width:68%"></span></div><div class="d">선행 PER 8.2배·EV/EBITDA 8.6배. 단, 트레일링은 손상상각으로 무의미.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">팽팽한 논쟁</div><div class="meter"><span style="width:48%;background:var(--sub)"></span></div><div class="d">Q2 EPS $2.45 서프라이즈 vs 3Q 가이던스 컨센서스 대폭 하회.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">박스권 상단 시도</div><div class="meter"><span style="width:40%;background:var(--sub)"></span></div><div class="d">$35~48권 다지기 후 $49권 돌파 시도, 실적 대기.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">저평가 논쟁</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">8.2×</div><div class="n">FY26 조정EPS 가이던스 $6.00 기준</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">8.6×(선행)</div><div class="n">트레일링은 손상상각으로 왜곡(일부 소스 35~126×)</div></div>
+    <div class="mc"><div class="l">잉여현금흐름</div><div class="v">$700~800M</div><div class="n">FY26 가이던스, FCF수익률 약 14%</div></div>
+    <div class="mc"><div class="l">ROE / ROIC</div><div class="v" style="color:var(--down)">약 −22% / 혼재</div><div class="n">트레일링 GAAP 손실 반영, 선행 기준은 양전 추정</div></div>
+  </div>
+  <div class="key">현재 가격엔 <b>"Lanaken 폐쇄 손상상각發 GAAP 손실"</b>이 과도하게 할인돼 있을 가능성 — 단, 레버리지가 진짜 리스크.</div>
+  <ul class="pts">
+    <li>트레일링 PER은 Lanaken 아세테이트토우 공장 폐쇄 관련 일회성 손상상각으로 <b>음수(-4.5~-10 수준, 소스 혼재)</b>라 신뢰 낮음 — 선행 PER 8.2배가 더 의미 있는 지표.</li>
+    <li>순부채 <span class="fc">$10.64B</span>(2Q26 기준, 회사 공시)로 EV의 대부분을 차지 — 연말 목표 net debt/EBITDA 약 4.8배(2026년 중 한때 5배 상회), 장기 목표 3.0배.</li>
+    <li>배당은 분기 $0.03(연 $0.12, 수익률 약 0.25%)로 2024년(연 $2.80) 대비 <b>약 -95% 삭감</b> — 트레일링 손실 구간이라 전통적 배당성향 지표는 의미 없음.</li>
+    <li>2022·2024년 텀론은 2025년 말 전액 상환·종료, 2030년 만기 $1.75B 리볼버로 재편 — 단기 리파이낸싱 리스크는 낮은 편.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">레버리지가 계획대로 <b>4.8배→3.0배</b>로 축소되고 FCF 가이던스($700~800M)가 유지되면 컨센서스 목표가(~$63) 방향의 재평가 여지. <b>단, 레버리지 축소가 지연되거나 신용등급이 추가 강등되면 지금의 저평가는 밸류트랩으로 귀결된다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">팽팽한 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">2Q26 매출</div><div class="v a">$2.75B</div></div>
+    <div class="ec"><div class="l">QoQ</div><div class="v a">+18%</div></div>
+    <div class="ec"><div class="l">조정EPS</div><div class="v a">$2.45</div></div>
+    <div class="ec"><div class="l">3Q26 가이던스</div><div class="v">$1.35~1.75</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v" style="color:var(--down)">−6.3%</div></div>
+  </div>
+  <div class="key">2Q는 <b>3년 내 최대 실적</b>으로 비트했지만, 시장은 <b>약한 3Q 가이던스</b>에 즉각 반응 — "회복 vs 역풍"이 매 분기 교차하는 구간.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>2Q26 조정EPS $2.45</b> — 컨센서스 상회, 회사 기준 약 3년 내 최대</li>
+      <li><b>세그먼트 개선</b> — Acetyl Chain EBITDA $385M(마진 29%), Engineered Materials EBITDA $335M(마진 23%)</li>
+      <li><b>Lanaken 폐쇄 가속</b> — 2026년 3분기 중 조기 종료, 연 $20~25M 절감 + 2027년 "더 깨끗한" 비용구조</li>
+      <li><b>가격 인상 지속</b> — 3월·5월 아세틸체인 전방위 가격 인상 단행</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>3Q26 가이던스 쇼크</b> — 조정EPS $1.35~1.75(중간값 $1.55)로 당시 컨센서스($1.79) 대폭 하회</li>
+      <li><b>재고조정 역풍</b> — Lanaken 폐쇄 조기화로 하반기 재고조정 부담 확대(회사 발언)</li>
+      <li><b>중국發 공급과잉</b> — 아세틸·엔지니어드소재 전반의 구조적 공급과잉 미해소</li>
+      <li><b>레버리지</b> — 2025년 11월 Moody's·S&amp;P 동반 추가 강등 전력, 재강등 리스크 상존</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">박스권 상단 시도</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="CE 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$71</text>
+      <text x="46" y="128" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$48</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$35</text>
+      <polyline points="64,30 130,52 190,78 250,96 310,118 370,150 420,162 470,160 520,152 580,140 630,132 680,120 730,112 780,108 830,102 870,98 905,96" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="580" y="96" width="330" height="56" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="745" y="92" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $35~48 상단 돌파 시도</text>
+      <line x1="580" y1="98" x2="910" y2="98" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="94" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">다음 매물대 55</text>
+      <line x1="580" y1="128" x2="910" y2="128" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="124" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 44.56</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 70.70</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도(52주 고점→8월 저점→10월 반등 흐름을 단순화). 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$70.70</div></div>
+    <div class="lv"><div class="l">다음 매물대</div><div class="v r">~$55</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$49.28</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$44.56</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$35.13</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$49 상단 안착 시</b> → 5월 재조정 구간인 ~$55권 매물대 재시험 가능. <b style="color:var(--down)">$44.56 지지 이탈 시</b> → 8월 저점권 $35~40 재시험 가능. 방아쇠는 명확히 하나 — <b class="fc">11/2(월) 3Q26 실적</b>(가이던스 EPS $1.35~1.75 대비 결과 및 4Q26 가이던스).</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>밸류트랩 경계</b> — 3Q26 실적이 가이던스 하단이거나 4Q 가이던스가 추가 하향되면, 선행 PER 8배는 저평가가 아니라 구조적 역성장의 반영으로 재해석될 수 있음.</li>
+    <li><b>레버리지</b> — 순부채 $10.64B·연말 목표 net debt/EBITDA 약 4.8배가 계획대로 축소되지 않으면 신용등급 추가 강등(2025.11 Moody's·S&amp;P 동반 강등 전력) 가능.</li>
+    <li><b>Lanaken 재고조정</b> — 공장 폐쇄 조기화에 따른 하반기 재고조정 비용이 실제보다 컸는지 3Q 실적에서 확인 필요.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">11/2(월)</td><td><b>3Q26 실적 발표</b>(장마감 후) — 조정EPS 가이던스 $1.35~1.75 대비 결과, 세그먼트별 마진, 레버리지 궤도, Lanaken 폐쇄 완료 여부</td></tr>
+    <tr><td class="d">11/3(화)</td><td>3Q26 실적 컨퍼런스콜(오전 10시 ET) — CEO Scott Richardson·CFO Chuck Kyrish</td></tr>
+    <tr><td class="d">분기 중</td><td>Lanaken 폐쇄發 연 $20~25M 비용절감 효과 반영 개시, 아세틸체인 추가 가격 인상 여부</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-10-30(금) 종가 기준 공개치로 실제와 차이가 있을 수 있으며, 일부 밸류에이션·마진 지표는 소스 간 혼재(특히 손상상각 반영 트레일링 지표)가 있어 선행/조정 기준을 우선했습니다. 확보 불가 항목은 N/A로 표기했습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001306830">SEC EDGAR(8-K/10-Q, Celanese Corp)</a> · <a href="https://www.businesswire.com/news/home/20260730200927/en/">Celanese 2Q26 실적 발표(BusinessWire)</a> · <a href="https://www.businesswire.com/news/home/20251028957084/en/Celanese-Announces-Intent-to-Cease-Manufacturing-Operations-at-Its-Lanaken-Acetate-Tow-Facility">Lanaken 폐쇄 공시</a> · <a href="https://www.marketbeat.com/stocks/NYSE/CE/">MarketBeat</a> · <a href="https://stockanalysis.com/stocks/ce/">StockAnalysis</a> · <a href="https://www.ad-hoc-news.de/boerse/news/nebenwerte/bofa-raises-target-to-usd-63-for-celanese-stock/70376692">BofA 목표가 $63(Ad-hoc-news)</a> · <a href="https://www.nasdaq.com/articles/barclays-initiates-coverage-celanese-equal-weight">Barclays 커버리지 개시(Nasdaq)</a></div>
+    <div class="nextp">다음 발행 · 2026-11-08(일) 22:30 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
