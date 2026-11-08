@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-11-08 22:30 KST",
+"next_publish": "2026-11-15 22:30 KST",
 "reports": [
+{
+"no": 28,
+"ticker": "COLD",
+"company": "Americold Realty Trust, Inc.",
+"date": "2026-11-08",
+"file": "COLD_2026-11-08.html",
+"price": "$14.60",
+"tldr": "11/5(목) 3Q26 실적 — AFFO $0.35(전년比 보합)에도 FY26 AFFO 가이던스를 2연속 상향($1.31~1.33)하고 8/31 종결된 EQT 조인트벤처(부채 $1.15B 상환)로 순부채/EBITDA가 7.3배→6.2배로 한 턴 가까이 축소 vs 핵심수익 지표 Core FFO는 -18%($81.7M→$66.9M) 급감(3Q 순이익 $683.4M은 JV發 일회성 차익) · Global Warehouse 세임스토어 매출 +5.7%·NOI +6.0%, 점유율·처리량·가격 전부 개선 · 행동주의펀드 Ancora·Sieve Capital과 이사회 갈등 진행형(이사회는 의장 교체 요구 거부) · 배당수익률 6.3%(분기 $0.23 4연속 유지) · 52주 레인지 $10.10~16.88, $13~16권 박스 다지기",
+"value": "완만한 저평가(디레버리징 진행)",
+"growth": "회복세·Core FFO 급감 논쟁",
+"trend": "박스권 다지기(양호)"
+},
 {
 "no": 27,
 "ticker": "CE",
