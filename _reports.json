@@ -2,8 +2,20 @@
 "site": "WEEKLY EQUITY DESK",
 "subtitle": "미국주식 주간 리포트 · 기업가치 · 성장성 · 횡보",
 "next_pick": "발굴 중",
-"next_publish": "2026-11-15 22:30 KST",
+"next_publish": "2026-11-22 22:30 KST",
 "reports": [
+{
+"no": 29,
+"ticker": "ON",
+"company": "ON Semiconductor Corporation (onsemi)",
+"date": "2026-11-15",
+"file": "ON_2026-11-15.html",
+"price": "$71.06",
+"tldr": "11/2(월) 3Q26 실적 — 매출 $17.22억(+11%YoY)·비GAAP EPS $0.90으로 컨센서스 상회, AI 데이터센터 매출 $1.8억(+175%YoY·+39%QoQ)으로 급성장했지만 주가는 거의 무반응 — BofA(PT $138→$120)·Stifel($107→$90)·Truist·Citi·Mizuho·Wells Fargo가 '비트했지만 박스권 돌파 트리거 부재'를 이유로 목표가 동반 하향(KeyBanc·Susquehanna는 유지) · 10/1 Synaptics 인수를 $5.7B 전액현금 거래로 재조정(TAM 2030년 $243B 확대, 연 $200M 시너지) · 11/5(목) 나스닥 AI發 급락(-5.52%, SOX -9%)으로 반도체 섹터 전체 디레이팅 · 52주 레인지 $44.56~134.92, $60~80권 중하단 박스 다지기",
+"value": "뚜렷한 저평가(데이터 신뢰도 보통)",
+"growth": "AI 데이터센터 급성장 vs 자동차 둔화 논쟁",
+"trend": "중하단 박스 다지기"
+},
 {
 "no": 28,
 "ticker": "COLD",

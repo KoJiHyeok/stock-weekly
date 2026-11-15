@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEEKLY EQUITY · ON · ON Semiconductor (onsemi)</title>
+<style>
+  :root{
+    --bg:#0a0c11; --surf:#0f131b; --surf2:#141a26; --line:#1c2433;
+    --ink:#e6ebf4; --sub:#8590a4; --dim:#5a6377;
+    --acc:#35e08a; --acc-dim:#16402b; --acc-bg:rgba(53,224,138,.07); --down:#ff5d6c;
+    --sans:-apple-system,"Segoe UI","Noto Sans KR",Roboto,sans-serif;
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px);background-size:100% 3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 60px}
+  a{color:inherit;text-decoration:none}
+  b{font-weight:500;color:#fff}
+  .mono{font-family:var(--mono)}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+  .back{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:1px}
+  .back:hover{color:var(--acc)}
+  .tk{font-family:var(--mono);font-size:26px;font-weight:500;color:#fff;letter-spacing:1px}
+  .exch{font-family:var(--mono);font-size:10px;color:var(--acc);border:1px solid var(--acc-dim);border-radius:4px;padding:2px 7px}
+  .co{font-size:13px;color:var(--sub)}
+  .hmeta{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);line-height:1.6}
+
+  .quote{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .pxbox{flex:1 1 250px;border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:18px 20px}
+  .px{font-family:var(--mono);font-size:36px;font-weight:500;color:#fff;letter-spacing:.5px}
+  .chg{font-family:var(--mono);font-size:12px;color:var(--down);margin-top:3px}
+  .pxn{font-size:11.5px;color:var(--sub);margin-top:9px}
+  .rbar{margin-top:13px;height:7px;border-radius:4px;background:var(--surf2);position:relative;border:1px solid var(--line)}
+  .rbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--acc-dim),var(--acc))}
+  .rbar .mk{position:absolute;top:-3px;width:2px;height:11px;background:#fff;border-radius:2px}
+  .rlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:5px}
+  .statgrid{flex:1 1 330px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .stat{background:var(--surf);padding:12px 13px}
+  .stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-family:var(--mono);font-size:17px;color:#fff;margin-top:4px}
+  .stat .v.a{color:var(--acc)}
+
+  .tldr{display:flex;gap:13px;align-items:flex-start;margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;background:var(--surf);padding:15px 18px}
+  .tldr .t{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:1.5px;padding-top:3px}
+  .tldr .x{font-size:15px;color:#fff;line-height:1.5}
+
+  .sec{display:flex;align-items:center;gap:14px;margin:34px 0 16px}
+  .sec .n{font-family:var(--mono);font-size:12px;color:var(--acc)}
+  .sec .l{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--sub);text-transform:uppercase}
+  .sec .tag{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:2px 9px}
+  .sec .rule{flex:1;height:1px;background:var(--line)}
+
+  .verd{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .vc{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px 16px}
+  .vc .h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);text-transform:uppercase}
+  .vc .s{font-size:19px;font-weight:500;color:#fff;margin:7px 0}
+  .vc .d{font-size:12px;color:var(--sub);line-height:1.5}
+  .meter{height:5px;border-radius:3px;background:var(--surf2);margin:6px 0 9px;overflow:hidden}
+  .meter span{display:block;height:100%;background:var(--acc)}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .mc{background:var(--surf);padding:13px 15px}
+  .mc .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
+  .mc .v{font-family:var(--mono);font-size:20px;color:#fff;margin:4px 0 2px}
+  .mc .v.a{color:var(--acc)}
+  .mc .n{font-size:10.5px;color:var(--sub)}
+
+  .key{font-size:15px;color:#fff;line-height:1.55;border-left:2px solid var(--acc);padding-left:13px;margin:15px 0}
+  .pts{list-style:none;margin-top:4px}
+  .pts li{font-size:13px;color:var(--ink);padding-left:16px;position:relative;margin-bottom:8px;line-height:1.5}
+  .pts li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+  .pts li:last-child{margin-bottom:0}
+  .fc{color:var(--acc);font-weight:500}
+  .fcast{margin:15px 0 4px;border:1px solid var(--acc-dim);border-radius:12px;background:var(--acc-bg);padding:14px 16px}
+  .fcast .ft{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--acc);margin-bottom:7px}
+  .fcast .fx{font-size:13.5px;color:#eafff4;line-height:1.55}
+  .fcast .fx b{color:#fff}
+
+  .estrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:15px}
+  .ec{background:var(--surf);padding:11px 13px}
+  .ec .l{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-transform:uppercase}
+  .ec .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .ec .v.a{color:var(--acc)}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.bb{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+  .col h4{font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .col.bull h4{color:var(--acc)}
+  .col.bear h4{color:var(--down)}
+  .col ul{list-style:none;padding:12px 14px}
+  .col li{font-size:12px;color:var(--ink);padding-left:15px;position:relative;margin-bottom:9px;line-height:1.5}
+  .col li:last-child{margin-bottom:0}
+  .col.bull li::before{content:"+";position:absolute;left:0;color:var(--acc)}
+  .col.bear li::before{content:"–";position:absolute;left:0;color:var(--down)}
+
+  .chart{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:15px;margin-bottom:14px}
+  .lvls{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:6px}
+  .lv{background:var(--surf);padding:11px 12px;text-align:center}
+  .lv .l{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+  .lv .v{font-family:var(--mono);font-size:15px;color:#fff;margin-top:3px}
+  .lv .v.a{color:var(--acc)} .lv .v.r{color:var(--down)}
+
+  .cal{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  .cal td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cal tr:last-child td{border-bottom:none}
+  .cal .d{font-family:var(--mono);color:var(--acc);white-space:nowrap;width:1%;font-size:11px}
+
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+  .disc{font-size:11px;color:var(--sub);line-height:1.6;border-left:2px solid var(--down);padding-left:13px;max-width:780px}
+  .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:14px}
+  .src a{color:var(--sub)} .src a:hover{color:var(--acc)}
+  .nextp{font-family:var(--mono);font-size:11px;color:var(--sub);margin-top:14px}
+  .blink{display:inline-block;width:7px;height:12px;background:var(--acc);vertical-align:-1px;margin-left:5px;animation:bl 1.1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← DESK</a>
+    <span class="tk">ON</span>
+    <span class="exch">NASDAQ</span>
+    <span class="co">ON Semiconductor Corporation (onsemi)</span>
+    <span class="hmeta">WEEKLY EQUITY · No.29<br>기준 2026·11·13(금) 종가 · 작성 11·15</span>
+  </header>
+
+  <div class="quote">
+    <div class="pxbox">
+      <div class="px">$71.06</div>
+      <div class="chg">▼ 당일 −3.6%($2.67) · 11/13(금) 종가(Morningstar), 11/10(화) 종가 $69.61(MarketScreener)와 큰 틀에서 일치</div>
+      <div class="pxn">시총 약 $27.7B(추정, 유통주식수 약 3.90억주 기준) · EV 약 $28.3B(순부채 약 $0.6B 가산, 2Q26 기준 추정)</div>
+      <div class="rbar"><span class="fill" style="width:29.3%"></span><span class="mk" style="left:29.3%"></span></div>
+      <div class="rlab"><span>$44.56</span><span>52W RANGE · 하단 29%</span><span>$134.92</span></div>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="l">선행 PER</div><div class="v a">~24×</div></div>
+      <div class="stat"><div class="l">EV/EBITDA</div><div class="v a">~18×</div></div>
+      <div class="stat"><div class="l">FCF 수익률</div><div class="v a">~5.7%</div></div>
+      <div class="stat"><div class="l">ROE</div><div class="v">낮음(2~8%)</div></div>
+      <div class="stat"><div class="l">컨센서스</div><div class="v">혼조</div></div>
+      <div class="stat"><div class="l">평균 목표가</div><div class="v">~$100</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <span class="t">TL;DR</span>
+    <span class="x">11/2(월) 3Q26 실적 — 매출 $17.22억(+11%YoY)·비GAAP EPS $0.90으로 컨센서스 상회, AI 데이터센터 매출은 $1.8억(+175%YoY)로 급성장했지만 주가는 거의 무반응 — BofA·Stifel·Truist·Citi 등이 "비트했지만 박스권 돌파 트리거 부재"를 이유로 목표가를 동반 하향 · 10/1 Synaptics 인수를 $5.7B 전액현금 거래로 재조정(TAM 2030년 $243B 확대) · 11/5 나스닥 AI發 급락(-5.52%)으로 반도체 섹터 전체가 디레이팅. <span class="fc">52주 고점 대비 -47%, 저평가는 뚜렷하나 돌파 신호는 아직.</span></span>
+  </div>
+
+  <div class="sec"><span class="n">00</span><span class="l">한눈에</span><span class="tag">중하단 박스 · AI 성장 vs 섹터 디레이팅</span><span class="rule"></span></div>
+  <div class="verd">
+    <div class="vc"><div class="h">① 기업가치</div><div class="s" style="color:var(--acc)">뚜렷한 저평가</div><div class="meter"><span style="width:74%"></span></div><div class="d">평균목표가(~$100) 대비 -29%, 단 밸류에이션 데이터 소스 간 혼재로 신뢰도는 보통.</div></div>
+    <div class="vc"><div class="h">② 성장 가능성</div><div class="s">팽팽한 논쟁</div><div class="meter"><span style="width:52%;background:var(--sub)"></span></div><div class="d">AI 데이터센터 +175%YoY vs 자동차 재고조정 지속, 비트에도 무반응.</div></div>
+    <div class="vc"><div class="h">③ 주가 흐름</div><div class="s">중하단 박스 다지기</div><div class="meter"><span style="width:48%;background:var(--sub)"></span></div><div class="d">$60~80권 다지기, 11/5 섹터 급락 이후 방향성 미확정.</div></div>
+  </div>
+
+  <div class="sec"><span class="n">01</span><span class="l">기업가치 · Valuation</span><span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">뚜렷한 저평가</span><span class="rule"></span></div>
+  <div class="mgrid">
+    <div class="mc"><div class="l">선행 PER</div><div class="v a">~24×</div><div class="n">소스 혼재(20~26배), 보수적으로 중앙값 적용</div></div>
+    <div class="mc"><div class="l">EV/EBITDA</div><div class="v a">~18×</div><div class="n">소스 혼재(15~21배)</div></div>
+    <div class="mc"><div class="l">FCF 마진</div><div class="v">~24%</div><div class="n">비GAAP 기준, FCF 수익률 약 5.7% 추정</div></div>
+    <div class="mc"><div class="l">애널 목표가 괴리</div><div class="v a">+35~50%</div><div class="n">평균 ~$100(Barchart, 3Q26 실적 후 집계)</div></div>
+  </div>
+  <div class="key">52주 고점 대비 <b>-47%</b> 눌림목 구간에서 AI 성장 스토리가 숫자로 확인되고 있음에도, 시장은 <b>"박스권 돌파 트리거 부재"</b>로 아직 재평가하지 않는 상태.</div>
+  <ul class="pts">
+    <li>애널리스트 평균 목표가 <span class="fc">~$100</span>(Barchart 집계)는 현재가 대비 +35~50% 괴리 — 단, KeyBanc(Overweight 유지)·Susquehanna(Buy, PT $150 유지) vs BofA(PT $138→$120)·Stifel(PT $107→$90)·Truist·Citi·Mizuho·Wells Fargo(동반 하향)로 애널 간 전망이 크게 갈려 괴리 수치의 신뢰도는 제한적.</li>
+    <li><b>배당 없음</b> — 자사주 매입 중심 주주환원(2025년 FCF의 약 100%를 매입에 투입, 2025.11 $6B 매입 승인).</li>
+    <li>시총·EV·순부채는 2Q26(7/3/26 기준) 공시 수치(현금+단기투자 약 $3.86B, 총부채 약 $4.46B)를 토대로 추정 계산한 값으로, 3Q26(11/2) 공시 상세 밸런스시트는 교차확인 미비 — 3Q26 보도자료는 현금+단기투자 약 $4.4B·총유동성 $5.9B(리볼빙 $1.5B 포함)만 확인됨.</li>
+  </ul>
+  <div class="fcast"><div class="ft">전망 · OUTLOOK</div><div class="fx">AI 데이터센터 매출 비중이 계속 확대되며 다음 분기 가이던스가 재차 컨센서스를 상회하면 <b>평균목표가(~$100)권으로 멀티플 재평가</b> 가능. <b>단, 반도체 섹터 전체의 디레이팅(2026.11.5 나스닥 -5.52%)이 지속되거나 자동차 재고조정이 장기화되면 저평가는 재평가 트리거가 아닌 구조적 수요 둔화의 반영으로 재해석될 수 있다.</b></div></div>
+
+  <div class="sec"><span class="n">02</span><span class="l">주가 성장 가능성 · Growth</span><span class="tag">팽팽한 논쟁</span><span class="rule"></span></div>
+  <div class="estrip">
+    <div class="ec"><div class="l">3Q26 매출</div><div class="v a">$1.722B</div></div>
+    <div class="ec"><div class="l">YoY</div><div class="v a">+11%</div></div>
+    <div class="ec"><div class="l">비GAAP EPS</div><div class="v a">$0.90</div></div>
+    <div class="ec"><div class="l">AI 데이터센터</div><div class="v a">$180M</div></div>
+    <div class="ec"><div class="l">발표 후</div><div class="v">무반응·소폭 하락</div></div>
+  </div>
+  <div class="key">실적·가이던스 모두 <b>컨센서스 상회</b>했지만, 시장은 "숫자는 좋지만 박스권을 벗어날 만큼 충분하지 않다"는 평가로 반응 — 비트와 목표가 하향이 동시에 벌어지는 드문 구도.</div>
+  <div class="bb">
+    <div class="col bull"><h4>▲ BULL</h4><ul>
+      <li><b>AI 데이터센터 매출 $180M</b> — QoQ +39%·YoY +175%, 2030년 목표를 $3B 이상으로 상향, 2026년 전망 ~$620M</li>
+      <li><b>3Q26 비트</b> — 매출 $17.22억(+11%YoY, 컨센서스 $17.1억 상회)·비GAAP EPS $0.90(컨센서스 $0.88 상회), 비GAAP 매출이익률 41.2%</li>
+      <li><b>4Q26 가이던스</b>도 컨센서스 상회(매출 $17.15~18.15억, 비GAAP EPS $0.95~1.07)</li>
+      <li><b>Synaptics 인수</b>(10/1 전액현금 $5.7B로 재조정) — HMI·센싱·Edge AI 역량 추가, TAM $30B 확대(2030년 $243B), 연 $200M 시너지, 비GAAP EPS 즉시 희석방지 효과</li>
+    </ul></div>
+    <div class="col bear"><h4>▼ BEAR</h4><ul>
+      <li><b>"비트했지만 목표가 하향"</b> — BofA(PT $138→$120)·Stifel($107→$90)·Truist·Citi·Mizuho·Wells Fargo 동반 하향, 골드만삭스는 "최근 트레이딩 레인지를 벗어날 만큼 충분하지 않다"고 평가</li>
+      <li><b>자동차 부문</b> — 재고조정이 지속되며 전통 수요(자동차·산업)는 여전히 약세, AI發 성장이 이를 상쇄하는 구도가 지속될지는 다음 분기 확인 필요</li>
+      <li><b>반도체 섹터 디레이팅</b> — 11/5(목) 나스닥 -5.52%(19개월래 최대 하락, 교정구간 진입)·필라델피아반도체지수(SOX) 약 -9%, AI 인프라 지출·규제 우려發 섹터 전체 밸류에이션 압축 — ON 개별 이슈가 아닌 매크로 변수</li>
+      <li><b>Synaptics 인수 불확실성</b> — 경쟁 비승인 제안(2026.9.2) 발생 이력, 마감 목표가 2027년 중반으로 장기, 주주·규제 승인 조건부</li>
+    </ul></div>
+  </div>
+
+  <div class="sec"><span class="n">03</span><span class="l">횡보 분석 · Price Action</span><span class="tag" style="color:var(--down);border-color:#4a1d24">중하단 박스 다지기</span><span class="rule"></span></div>
+  <div class="chart">
+    <svg viewBox="0 0 940 200" style="width:100%;height:auto" role="img" aria-label="ON 52주 가격 개략도와 박스권">
+      <line x1="54" y1="22" x2="54" y2="170" stroke="#1c2433"/>
+      <line x1="54" y1="170" x2="910" y2="170" stroke="#1c2433"/>
+      <text x="46" y="28" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$135</text>
+      <text x="46" y="100" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$90</text>
+      <text x="46" y="173" fill="#5a6377" font-size="11" text-anchor="end" font-family="monospace">$45</text>
+      <polyline points="64,30 150,47 230,88 300,121 370,162 440,137 510,104 580,129 640,116 700,131 760,127 820,129 870,127 905,127" fill="none" stroke="#35e08a" stroke-width="2"/>
+      <rect x="600" y="112" width="310" height="33" fill="rgba(53,224,138,.08)" stroke="#16402b" stroke-dasharray="3 3"/>
+      <text x="755" y="106" fill="#35e08a" font-size="11" text-anchor="middle" font-family="monospace">박스권 $60–$80</text>
+      <line x1="600" y1="112" x2="910" y2="112" stroke="#ff5d6c" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="107" fill="#ff5d6c" font-size="10" text-anchor="end" font-family="monospace">저항 80.00</text>
+      <line x1="600" y1="145" x2="910" y2="145" stroke="#35e08a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="908" y="157" fill="#35e08a" font-size="10" text-anchor="end" font-family="monospace">지지 60.00</text>
+      <text x="64" y="18" fill="#8590a4" font-size="10" font-family="monospace">52W HIGH 134.92(2026년초 AI랠리) · 52W LOW 44.56</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px">※ 곡선은 개략도(2026년초 AI랠리 고점→연중 급락→$60~80권 다지기 흐름을 단순화). 레벨은 실제값.</div>
+  </div>
+  <div class="lvls">
+    <div class="lv"><div class="l">52주 고점</div><div class="v">$134.92</div></div>
+    <div class="lv"><div class="l">저항</div><div class="v r">$80.00</div></div>
+    <div class="lv"><div class="l">현재가</div><div class="v a">$71.06</div></div>
+    <div class="lv"><div class="l">지지</div><div class="v a">$60.00</div></div>
+    <div class="lv"><div class="l">52주 저점</div><div class="v">$44.56</div></div>
+  </div>
+  <div class="fcast"><div class="ft">전망 · 시나리오</div><div class="fx"><b class="fc">$80 돌파 시</b> → 애널 평균목표가대($95~105)권 재시험 가능. <b style="color:var(--down)">$60 지지 이탈 시</b> → 52주 저점 $44.56 재시험 가능. 방아쇠는 <b class="fc">AI 데이터센터 매출 비중 확대 지속·자동차 재고조정 종료 시점·반도체 섹터 디레이팅 완화 여부</b>.</div></div>
+
+  <div class="sec"><span class="n">04</span><span class="l">리스크 &amp; 일정 · Catalysts</span><span class="tag">모니터링</span><span class="rule"></span></div>
+  <ul class="pts" style="margin-bottom:14px">
+    <li><b>섹터 디레이팅 리스크</b> — AI 인프라 지출·규제 우려發 반도체 섹터 전체 밸류에이션 압축이 지속되면 개별 펀더멘털과 무관하게 추가 하락 가능.</li>
+    <li><b>인수 실행 리스크</b> — Synaptics 인수가 2027년 중반 마감 전까지 규제·주주 승인 지연 또는 경쟁 제안 재등장 시 불확실성 장기화.</li>
+    <li><b>자동차 수요</b> — 재고조정 종료 시점이 계속 지연되면 AI發 성장이 전사 실적을 끌어올리는 데 더 오랜 시간이 소요.</li>
+  </ul>
+  <table class="cal">
+    <tr><td class="d">2027년 2월(추정)</td><td><b>4Q26·FY26 실적 발표</b>(정확한 날짜 미확정) — 4Q26 가이던스($17.15~18.15억, EPS $0.95~1.07) 달성 여부, AI 데이터센터 매출 전망($620M) 달성 경로, 자동차 재고조정 종료 신호</td></tr>
+    <tr><td class="d">진행 중 ~2027년 중반</td><td>Synaptics 인수 마감 절차 — 주주 승인·규제 승인·$200M 시너지 집행 계획 구체화</td></tr>
+    <tr><td class="d">진행 중</td><td>반도체 섹터 전반의 밸류에이션 디레이팅 지속 여부(AI 인프라 지출·규제 환경 변화)</td></tr>
+  </table>
+
+  <footer>
+    <div class="disc"><b style="color:var(--down)">고지.</b> 정보 제공용이며 투자자문이 아닙니다. 수치는 2026-11-13(금) 종가 및 2026-11-02 3Q26 실적 공시 기준 공개치로 실제와 차이가 있을 수 있으며, 소스 간 혼재가 있는 항목(선행PER·EV/EBITDA·ROE·시총·목표가 등)은 보수적으로 취급했습니다. 확보 불가 항목은 N/A로 표기했습니다. 모든 판단·책임은 투자자 본인에게 있습니다.</div>
+    <div class="src">SOURCES · <a href="https://www.onsemi.com/company/newsroom/news-and-insights/onsemi-reports-third-quarter-2026-results">onsemi 3Q26 실적 발표(공식)</a> · <a href="https://zacks.com/stock/news/3021949/on-q3-earnings-beat-estimates-strong-ai-data-center-aids-top-line">Zacks(3Q26 비트·AI 데이터센터)</a> · <a href="https://benzinga.com/z/41598277">Benzinga(3Q26 후 애널 목표가 revision)</a> · <a href="https://www.onsemi.com/company/newsroom/news-and-insights/onsemi-and-synaptics-announce-revised-merger-agreement">onsemi·Synaptics 수정 합병계약 발표(공식)</a> · <a href="https://www.morningstar.com/stocks/xnas/on/quote">Morningstar(가격·레인지)</a> · <a href="https://stockanalysis.com/stocks/on/statistics/">StockAnalysis(밸류에이션 통계)</a> · <a href="https://investor.onsemi.com/resources/investor-faqs">onsemi IR FAQ(배당정책)</a> · <a href="https://eurasiabusinessnews.com/2026/11/05/stock-market-today-nasdaq-sinks-5-as-ai-selloff-hits-chip-and-data-center-stocks/">Eurasia Business News(11/5 나스닥·반도체 섹터 급락)</a></div>
+    <div class="nextp">다음 발행 · 2026-11-22(일) 22:30 KST · 다음 종목 발굴 중<span class="blink"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>
